@@ -17,7 +17,7 @@
   },
   "parameters": {
     "path": "/workspace/target/release/joker-token-usage-insights",
-    "operation": "disassemble",
+    "operation": "machine_code_listing",
     "follow_debug_links": false,
     "provider_executable": "objdump",
     "command_arguments": [
