@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joker Token 戰情室</title>
+  <meta name="description" content="Local dashboard for reviewing AI CLI token usage, estimated cost, cache usage, and session timelines.">
+  <meta property="og:title" content="Joker Token 戰情室">
+  <meta property="og:description" content="Local dashboard for AI CLI token usage and session analysis.">
+  <meta property="og:type" content="website">
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/static/favicon-v2.ico">
+  <!-- Google Fonts: IBM Plex Sans & Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Prevent flash of theme mode -->
+  <script>
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+  </script>
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="/static/styles.css?v=17">
+  <!-- Chart.js for beautiful charts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Marked.js for rendering markdown response -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <!-- DOMPurify to sanitize rendered markdown -->
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.3/dist/purify.min.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">跳到主要內容</a>
+  <button id="sidebar-toggle-btn" class="sidebar-toggle-btn sidebar-edge-toggle" title="收合側邊欄（快速鍵：⌘B / Ctrl+B）" aria-label="收合側邊欄（快速鍵：⌘B / Ctrl+B）">
+    <span class="toggle-icon"><span class="icon-glyph icon-chevron-left" aria-hidden="true"></span></span>
+  </button>
+  <div class="app-container">
+    <!-- Sidebar: Date selector & Overview Cards -->
+    <aside class="app-sidebar">
+      <div class="brand">
+        <div class="logo"><img id="brand-logo-img" src="/static/favicon-v2.png" /></div>
+        <div class="title-group">
+          <h1 data-i18n="brand_title">Joker Token 戰情室</h1>
+        </div>
+        <button id="sidebar-close-btn" class="sidebar-close-btn" title="關閉側邊欄" aria-label="關閉側邊欄"><span class="icon-glyph icon-close" aria-hidden="true"></span></button>
+      </div>
+
+      <!-- Section 0: Assistant Selector -->
+      <div class="sidebar-section agent-selector-section">
+        <h3 data-i18n="select_assistant_label">Agent 類型</h3>
+        <div class="assistant-badges-container" id="assistant-badges-container">
+          <button class="assistant-badge-btn active" data-value="antigravity" title="Antigravity CLI" aria-label="Antigravity CLI">
+            <img class="assistant-logo" src="/static/antigravity.webp" alt="Antigravity" />
+            <span class="agent-name-tooltip">Antigravity CLI</span>
+          </button>
+          <button class="assistant-badge-btn" data-value="copilot" title="GitHub Copilot CLI" aria-label="GitHub Copilot CLI">
+            <img class="assistant-logo" src="/static/githubcopilot.webp" alt="Copilot" />
+            <span class="agent-name-tooltip">GitHub Copilot CLI</span>
+          </button>
+          <button class="assistant-badge-btn" data-value="codex" title="Codex CLI" aria-label="Codex CLI">
+            <img class="assistant-logo" src="/static/codex.webp" alt="Codex" />
+            <span class="agent-name-tooltip">Codex CLI</span>
+          </button>
+          <button class="assistant-badge-btn" data-value="claude" title="Claude Code" aria-label="Claude Code">
+            <img class="assistant-logo" src="/static/claude-code-logo.svg" alt="Claude Code" />
+            <span class="agent-name-tooltip">Claude Code</span>
+          </button>
+          <button class="assistant-badge-btn" data-value="cursor" title="Cursor" aria-label="Cursor">
+            <img class="assistant-logo" src="/static/cursor-logo.svg" alt="Cursor" />
+            <span class="agent-name-tooltip">Cursor</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs (Hidden, logic runs in background) -->
+      <div class="sidebar-section" style="display: none !important;">
+        <div class="tabs-nav">
+          <button class="nav-tab active" id="tab-btn-daily" data-i18n="tab_daily">每日</button>
+          <button class="nav-tab" id="tab-btn-monthly" data-i18n="tab_monthly">月度</button>
+          <button class="nav-tab" id="tab-btn-yearly" data-i18n="tab_yearly">年度</button>
+        </div>
+      </div>
+
+      <!-- Section 1: Daily Selector (for daily tab) -->
+      <div class="sidebar-section" id="daily-selector-section">
+        <h3 data-i18n="select_date">選擇日期</h3>
+        <div class="date-selector-wrapper" style="display: flex; flex-direction: column; gap: 10px; width: 100%;">
+          <div style="display: flex; gap: 8px; width: 100%; align-items: stretch;">
+            <div class="hover-dropdown tab-hover-dropdown" style="flex: 0 0 75px; min-width: 75px;">
+              <div class="hover-dropdown-trigger" style="height: 100%; display: flex; align-items: center; justify-content: space-between; border-radius: 12px; padding: 12px 10px; background: var(--bg-select); border: 1px solid var(--glass-border); color: var(--text-primary); font-family: var(--font-body); font-weight: 500;">
+                <span class="tab-dropdown-label">每日</span>
+                <span class="dropdown-caret"><span class="icon-glyph icon-chevron-down" aria-hidden="true"></span></span>
+              </div>
+              <div class="hover-dropdown-options">
+                <div class="hover-dropdown-option" data-value="daily" data-i18n="tab_daily">每日</div>
+                <div class="hover-dropdown-option" data-value="monthly" data-i18n="tab_monthly">月度</div>
+                <div class="hover-dropdown-option" data-value="yearly" data-i18n="tab_yearly">年度</div>
+              </div>
+            </div>
+            <input type="date" id="date-select" class="premium-date-input" style="flex: 1.5; min-width: 120px; margin: 0; box-sizing: border-box;">
+          </div>
+          <div style="display: flex; gap: 8px; width: 100%;">
+            <button id="btn-prev-day" class="today-btn" style="flex: 1; padding: 12px 8px;" title="前一天" aria-label="前一天"><span class="icon-glyph icon-chevron-left" aria-hidden="true"></span></button>
+            <button id="btn-today" class="today-btn" style="flex: 2; padding: 12px 8px;">
+              <span data-i18n="today_btn">今日</span>
+            </button>
+            <button id="btn-next-day" class="today-btn" style="flex: 1; padding: 12px 8px;" title="後一天" aria-label="後一天"><span class="icon-glyph icon-chevron-right" aria-hidden="true"></span></button>
+            <button id="btn-reload-daily" class="reload-btn" style="width: 45px; height: auto;" data-i18n-title="reload_data" title="重新載入數據" aria-label="重新載入數據"><span class="icon-glyph icon-refresh" aria-hidden="true"></span></button>
+          </div>
+        </div>
+        
+        <!-- Live Monitor Toggle -->
+        <div class="live-monitor-container">
+          <div class="live-status-row">
+            <span class="live-label"><span class="live-status-dot" aria-hidden="true"></span><span data-i18n="live_refresh">即時自動刷新</span></span>
+            <label class="switch-toggle">
+              <input type="checkbox" id="live-toggle">
+              <span class="slider-round"></span>
+            </label>
+          </div>
+          <div class="live-settings" id="live-settings-panel" style="display: none;">
+            <div class="setting-row">
+              <span data-i18n="refresh_interval">刷新頻率:</span>
+              <select id="live-interval" class="mini-select">
+                <option value="5000">5 <span data-i18n="seconds">秒</span></option>
+                <option value="10000" selected>10 <span data-i18n="seconds">秒</span></option>
+                <option value="30000">30 <span data-i18n="seconds">秒</span></option>
+              </select>
+            </div>
+            <div class="live-indicator-wrapper">
+              <div class="live-indicator">
+                <span class="ping-dot"></span>
+                <span class="live-indicator-text" id="live-status-text" data-i18n="status_preparing">準備中...</span>
+              </div>
+              <div class="progress-bar-container">
+                <div class="progress-bar-fill" id="refresh-progress"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2: Monthly Selector (hidden by default) -->
+      <div class="sidebar-section hidden" id="monthly-selector-section">
+        <h3 data-i18n="select_month">選擇月份</h3>
+        <div class="date-selector-wrapper" style="display: flex; flex-direction: column; gap: 10px; width: 100%;">
+          <div style="display: flex; gap: 8px; width: 100%; align-items: stretch;">
+            <div class="hover-dropdown tab-hover-dropdown" style="flex: 0 0 75px; min-width: 75px;">
+              <div class="hover-dropdown-trigger" style="height: 100%; display: flex; align-items: center; justify-content: space-between; border-radius: 12px; padding: 12px 10px; background: var(--bg-select); border: 1px solid var(--glass-border); color: var(--text-primary); font-family: var(--font-body); font-weight: 500;">
+                <span class="tab-dropdown-label">月度</span>
+                <span class="dropdown-caret"><span class="icon-glyph icon-chevron-down" aria-hidden="true"></span></span>
+              </div>
+              <div class="hover-dropdown-options">
+                <div class="hover-dropdown-option" data-value="daily" data-i18n="tab_daily">每日</div>
+                <div class="hover-dropdown-option" data-value="monthly" data-i18n="tab_monthly">月度</div>
+                <div class="hover-dropdown-option" data-value="yearly" data-i18n="tab_yearly">年度</div>
+              </div>
+            </div>
+            <select id="month-select" class="premium-select" style="flex: 1.5; min-width: 120px; margin: 0; box-sizing: border-box;">
+              <option value="" disabled selected data-i18n="loading">載入中...</option>
+            </select>
+          </div>
+          <div style="display: flex; gap: 8px; width: 100%;">
+            <button id="btn-prev-month" class="today-btn" style="flex: 1; padding: 12px 8px;" data-i18n-title="prev_month_btn" title="上個月" aria-label="上個月"><span class="icon-glyph icon-chevron-left" aria-hidden="true"></span></button>
+            <button id="btn-this-month" class="today-btn" style="flex: 2; padding: 12px 8px;">
+              <span data-i18n="this_month_btn">今月</span>
+            </button>
+            <button id="btn-next-month" class="today-btn" style="flex: 1; padding: 12px 8px;" data-i18n-title="next_month_btn" title="下個月" aria-label="下個月"><span class="icon-glyph icon-chevron-right" aria-hidden="true"></span></button>
+            <button id="btn-reload-monthly" class="reload-btn" style="width: 45px; height: auto;" data-i18n-title="reload_data" title="重新載入數據" aria-label="重新載入數據"><span class="icon-glyph icon-refresh" aria-hidden="true"></span></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2.5: Yearly Selector (hidden by default) -->
+      <div class="sidebar-section hidden" id="yearly-selector-section">
+        <h3 data-i18n="select_year">選擇年份</h3>
+        <div class="date-selector-wrapper" style="display: flex; flex-direction: column; gap: 10px; width: 100%;">
+          <div style="display: flex; gap: 8px; width: 100%; align-items: stretch;">
+            <div class="hover-dropdown tab-hover-dropdown" style="flex: 0 0 75px; min-width: 75px;">
+              <div class="hover-dropdown-trigger" style="height: 100%; display: flex; align-items: center; justify-content: space-between; border-radius: 12px; padding: 12px 10px; background: var(--bg-select); border: 1px solid var(--glass-border); color: var(--text-primary); font-family: var(--font-body); font-weight: 500;">
+                <span class="tab-dropdown-label">年度</span>
+                <span class="dropdown-caret"><span class="icon-glyph icon-chevron-down" aria-hidden="true"></span></span>
+              </div>
+              <div class="hover-dropdown-options">
+                <div class="hover-dropdown-option" data-value="daily" data-i18n="tab_daily">每日</div>
+                <div class="hover-dropdown-option" data-value="monthly" data-i18n="tab_monthly">月度</div>
+                <div class="hover-dropdown-option" data-value="yearly" data-i18n="tab_yearly">年度</div>
+              </div>
+            </div>
+            <select id="year-select" class="premium-select" style="flex: 1.5; min-width: 120px; margin: 0; box-sizing: border-box;">
+              <option value="" disabled selected data-i18n="loading">載入中...</option>
+            </select>
+          </div>
+          <div style="display: flex; gap: 8px; width: 100%;">
+            <button id="btn-prev-year" class="today-btn" style="flex: 1; padding: 12px 8px;" data-i18n-title="prev_year_btn" title="上一年" aria-label="上一年"><span class="icon-glyph icon-chevron-left" aria-hidden="true"></span></button>
+            <button id="btn-this-year" class="today-btn" style="flex: 2; padding: 12px 8px;">
+              <span data-i18n="this_year_btn">今年</span>
+            </button>
+            <button id="btn-next-year" class="today-btn" style="flex: 1; padding: 12px 8px;" data-i18n-title="next_year_btn" title="下一年" aria-label="下一年"><span class="icon-glyph icon-chevron-right" aria-hidden="true"></span></button>
+            <button id="btn-reload-yearly" class="reload-btn" style="width: 45px; height: auto;" data-i18n-title="reload_data" title="重新載入數據" aria-label="重新載入數據"><span class="icon-glyph icon-refresh" aria-hidden="true"></span></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 1.5: Codex CLI Settings (visible only when Codex is selected and daily tab is active) -->
+      <div class="sidebar-section hidden" id="codex-control-panel">
+        <h3 style="display: flex; align-items: center; gap: 4px; width: 100%;">
+          <span data-i18n="codex_control_title">Codex 憑證</span>
+          <span id="codex-auth-tip" style="cursor: help; opacity: 0.8; font-size: 11px;" data-i18n-title="codex_auth_tip_title" title="提示：您可以在 ~/.codex/auth/ 目錄下放入多個不同的 JSON 憑證檔（例如 (a)auth.json、(b)auth.json），並透過下拉選單在看板上即時切換套用，系統將自動覆蓋並套用至 ~/.codex/auth.json。"><span class="icon-glyph icon-help" aria-hidden="true"></span></span>
+        </h3>
+        
+        <!-- Auth Switcher -->
+        <div style="margin-bottom: 12px; display: flex; flex-direction: column; gap: 6px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; font-size: 12px; width: 100%; overflow: hidden;">
+            <span style="color: var(--text-muted); white-space: nowrap;" data-i18n="codex_select_auth_label">憑證帳號：</span>
+            <span id="codex-auth-switcher-status" style="font-size: 11px; color: var(--accent-cyan); font-weight: 600; max-width: 130px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: right;" title="">--</span>
+          </div>
+          <div style="display: flex; gap: 8px; width: 100%; align-items: center;">
+            <select id="codex-auth-select" class="premium-select-mini" style="flex: 1; height: 36px; padding: 6px 28px 6px 12px; font-size: 13px; margin: 0;">
+              <option value="" disabled selected data-i18n="codex_auth_loading">正在讀取 ~/.codex/auth ...</option>
+            </select>
+            <button id="btn-codex-auth-switch" class="today-btn" style="padding: 0 12px; font-size: 13px; height: 36px; margin: 0; border-radius: 8px; font-family: var(--font-body);" data-i18n="codex_btn_switch">
+              切換
+            </button>
+          </div>
+        </div>
+
+        <!-- Rate Limits -->
+        <div style="display: flex; flex-direction: column; gap: 8px; border-top: 1px solid var(--glass-border); padding-top: 12px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2px;">
+            <span style="font-size: 12px; font-weight: 600; color: var(--text-secondary); display: flex; align-items: center; gap: 4px;">
+              <span data-i18n="codex_rate_limit_title">API 額度限制</span>
+              <span id="codex-rate-limit-tip" style="cursor: help; opacity: 0.8; font-size: 11px;" data-i18n-title="codex_rate_limit_tip_title" title="提示：此處顯示的 API 額度剩餘數據來源是最後一次本地會話的日誌紀錄，而非向伺服器發起即時線上查詢。"><span class="icon-glyph icon-help" aria-hidden="true"></span></span>
+            </span>
+            <span class="text-muted" style="font-size: 10px;" id="codex-rate-limit-updated">更新: --</span>
+          </div>
+          
+          <!-- Primary Limit -->
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 2px;">
+              <span style="color: var(--text-muted);" data-i18n="codex_primary_label">五小時內剩餘 (Primary)</span>
+              <span id="codex-rate-limit-primary-val" style="font-weight: 500;">--</span>
+            </div>
+            <div style="height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; width: 100%;">
+              <div id="codex-rate-limit-primary-bar" style="width: 0%; height: 100%; background: var(--accent-cyan); transition: width 0.5s ease-out;"></div>
+            </div>
+            <span class="sub-label" id="codex-rate-limit-primary-reset" style="font-size: 9px; display: block; text-align: right; margin-top: 2px; color: var(--text-muted);">下次重置: --</span>
+          </div>
+          
+          <!-- Secondary Limit -->
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 2px;">
+              <span style="color: var(--text-muted);" data-i18n="codex_secondary_label">一週內剩餘 (Secondary)</span>
+              <span id="codex-rate-limit-secondary-val" style="font-weight: 500;">--</span>
+            </div>
+            <div style="height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; width: 100%;">
+              <div id="codex-rate-limit-secondary-bar" style="width: 0%; height: 100%; background: var(--neon-gold); transition: width 0.5s ease-out;"></div>
+            </div>
+            <span class="sub-label" id="codex-rate-limit-secondary-reset" style="font-size: 9px; display: block; text-align: right; margin-top: 2px; color: var(--text-muted);">下次重置: --</span>
+          </div>
+        </div>
+
+        <!-- Codex Resets -->
+        <div id="codex-resets-section" style="display: flex; flex-direction: column; gap: 8px; border-top: 1px solid var(--glass-border); padding-top: 12px; margin-top: 12px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2px;">
+            <span style="font-size: 12px; font-weight: 600; color: var(--text-secondary); display: flex; align-items: center; gap: 4px;">
+              <span data-i18n="codex_resets_title">手動重置額度</span>
+            </span>
+            <button id="btn-codex-resets-refresh" class="reload-btn" style="width: 20px; height: 20px; min-width: 20px; padding: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; margin: 0; border-radius: 50%;" data-i18n-title="codex_resets_refresh_title" title="即時查詢 Codex 重置額度" aria-label="即時查詢 Codex 重置額度"><span class="icon-glyph icon-refresh" aria-hidden="true"></span></button>
+          </div>
+          
+          <div style="display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 2px;">
+            <span style="color: var(--text-muted);" data-i18n="codex_resets_available_label">可用重置次數</span>
+            <span id="codex-resets-available-val" style="font-weight: 600; color: var(--accent-cyan);">--</span>
+          </div>
+
+          <div id="codex-resets-list" style="display: flex; flex-direction: column; gap: 6px; max-height: 150px; overflow-y: auto; padding-right: 4px;">
+            <!-- Reset credits will be dynamically rendered here -->
+          </div>
+          
+          <span class="sub-label" id="codex-resets-updated" style="font-size: 9px; display: block; text-align: right; color: var(--text-muted);">更新: --</span>
+        </div>
+      </div>
+
+      <!-- Quick Stats (daily only) -->
+      <div class="sidebar-section quick-stats" id="quick-stats-section">
+        <h3 data-i18n="quick_stats_title">當日彙整指標</h3>
+        <div class="stat-card mini">
+          <span class="label" data-i18n="stat_total_sessions">總 Session 數</span>
+          <span class="value" id="mini-sessions">-</span>
+        </div>
+        <div class="stat-card mini">
+          <span class="label" data-i18n="stat_total_tokens">總 Token 消耗</span>
+          <span class="value" id="mini-tokens">-</span>
+          <span class="sub-label" id="mini-cache">快取讀取: -</span>
+        </div>
+        <div class="stat-card mini">
+          <span class="label" data-i18n="col_cost">估算費用 (美金)</span>
+          <span class="value" id="mini-cost">-</span>
+        </div>
+        <div class="stat-card mini">
+          <span class="label" data-i18n="stat_api_duration">累積 API 耗時</span>
+          <span class="value" id="mini-duration">-</span>
+        </div>
+        <div class="stat-card mini">
+          <span class="label" data-i18n="stat_total_requests">總請求次數</span>
+          <span class="value" id="mini-requests">-</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="app-main" id="main-content">
+      <header class="main-header">
+        <div class="header-title-container" style="display: flex; align-items: center; gap: 16px;">
+          <div class="header-info">
+            <h2 id="current-date-title">
+              <span class="title-text" data-i18n="select_date_prompt">請選擇日期以載入數據</span>
+            </h2>
+            <p class="description" data-i18n="header_description">一站式監控與分析您本地終端 AI Agent 的 Token 消耗與會話詳細數據</p>
+          </div>
+        </div>
+        <div class="header-controls" style="display: flex; align-items: center; gap: 10px;">
+          <button id="btn-export-usage-day" class="icon-btn has-tooltip" data-i18n-title="btn_export_day_title" title="匯出當日資料" aria-label="匯出當日資料">
+            <span class="control-svg-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 3v11" />
+                <path d="M8 10l4 4 4-4" />
+                <path d="M4 20h16" />
+              </svg>
+            </span>
+            <span class="sr-only" data-i18n="btn_export_day">匯出</span>
+          </button>
+          <button id="btn-import-usage-day" class="icon-btn has-tooltip" data-i18n-title="btn_import_day_title" title="匯入當日資料" aria-label="匯入當日資料">
+            <span class="control-svg-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 21V10" />
+                <path d="M8 14l4-4 4 4" />
+                <path d="M4 4h16" />
+              </svg>
+            </span>
+            <span class="sr-only" data-i18n="btn_import_day">匯入</span>
+          </button>
+          <input id="usage-day-import-input" type="file" accept="application/json,.json" style="display: none;" />
+          <button id="lang-toggle-btn" class="flag-lang-btn has-tooltip" title="切換語言" aria-label="切換語言">
+            <span id="lang-toggle-icon" class="control-svg-icon" aria-hidden="true">
+            </span>
+            <span id="lang-toggle-text" class="sr-only" data-i18n="btn_language">語言</span>
+          </button>
+          <button id="btn-pricing-sheet" class="icon-btn has-tooltip" data-i18n-title="btn_pricing_sheet" title="費用標準" aria-label="費用標準"><span class="icon-glyph icon-currency" aria-hidden="true"></span></button>
+          <button id="btn-setup-guide" class="icon-btn has-tooltip" data-i18n-title="setup_guide_title" title="前置作業啟用教學" aria-label="前置作業啟用教學"><span class="icon-glyph icon-help" aria-hidden="true"></span></button>
+          <button id="btn-sync-db" class="icon-btn has-tooltip" data-i18n-title="sync_db_title" title="立即手動同步日誌檔到 SQLite 資料庫" aria-label="立即手動同步日誌檔到 SQLite 資料庫"><span class="icon-glyph icon-sync" aria-hidden="true"></span></button>
+          <button id="theme-toggle-btn" class="icon-btn has-tooltip" data-i18n-title="theme_toggle_title_dark" title="切換主題" aria-label="切換主題"><span class="icon-glyph icon-theme" aria-hidden="true"></span></button>
+          <a id="github-repo-btn" class="icon-btn has-tooltip" href="https://github.com/jokersosmart/joker_TokenUsageInsights" target="_blank" rel="noopener noreferrer" data-i18n-title="github_repo_title" title="GitHub Repo">
+            <span class="icon-glyph icon-github" aria-hidden="true"></span>
+          </a>
+        </div>
+      </header>
+
+      <!-- Empty State Placeholder -->
+      <div id="empty-state-container" class="hidden"></div>
+
+
+
+      <!-- Daily View Container -->
+      <div id="daily-view-container">
+
+        <!-- Dashboard Grid: Statistics & Charts -->
+        <section class="dashboard-grid">
+          <!-- Metric Cards -->
+          <div class="stat-card highlight">
+            <div class="card-icon"><span class="icon-glyph icon-total" aria-hidden="true"></span></div>
+            <div class="stat-info">
+              <span class="label" data-i18n="total_tokens_label">總消耗 Token</span>
+              <span class="value" id="stat-total-tokens">0</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="card-icon"><span class="icon-glyph icon-input" aria-hidden="true"></span></div>
+            <div class="stat-info">
+              <span class="label" id="stat-input-label" data-i18n="input_tokens_label">輸入 Token</span>
+              <span class="value" id="stat-input-tokens">0</span>
+              <span class="sub-label hidden" id="stat-input-reasoning" data-i18n="reasoning_tokens_label">推理 Token</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="card-icon"><span class="icon-glyph icon-cache" aria-hidden="true"></span></div>
+            <div class="stat-info">
+              <span class="label" id="stat-cache-read-label" data-i18n="chart_cache_label">快取讀取 Token</span>
+              <span class="value" id="stat-cache-read-tokens">0</span>
+              <span class="sub-label hidden" id="stat-cache-write"></span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="card-icon"><span class="icon-glyph icon-output" aria-hidden="true"></span></div>
+            <div class="stat-info">
+              <span class="label" id="stat-output-label" data-i18n="output_tokens_label">輸出 Token</span>
+              <span class="value" id="stat-output-tokens">0</span>
+            </div>
+          </div>
+
+          <div class="stat-card highlight-gold">
+            <div class="card-icon"><span class="icon-glyph icon-cost" aria-hidden="true"></span></div>
+            <div class="stat-info">
+              <span class="label" data-i18n="estimated_cost_label">估算費用 (美金)</span>
+              <span class="value" id="stat-total-cost">$0.00</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Charts Section -->
+        <section class="charts-section">
+          <div class="chart-container glass-card">
+            <h3 data-i18n="chart_daily_title">Token 消耗趨勢與快取狀況</h3>
+            <div class="canvas-wrapper">
+              <canvas id="tokenChart"></canvas>
+            </div>
+          </div>
+        </section>
+
+        <!-- Session List Section -->
+        <section class="sessions-section glass-card">
+          <div class="section-header">
+            <h3 data-i18n="sessions_table_title">今日會話列表 (Sessions)</h3>
+            <span class="session-count-badge" id="session-count">0 Sessions</span>
+          </div>
+          <div class="table-wrapper">
+            <table class="premium-table">
+              <thead>
+                <tr>
+                  <th class="sortable" data-sort="session_name"><span data-i18n="col_session">會話</span> <span class="sort-icon"></span></th>
+                  <th class="sortable" data-sort="assistant_type" id="col-assistant-header"><span data-i18n="col_assistant">Agent</span> <span class="sort-icon"></span></th>
+                  <th class="sortable model-column" data-sort="model"><span data-i18n="col_model">Model</span> <span class="sort-icon"></span></th>
+                  <th class="sortable" data-sort="max_turn_no"><span data-i18n="col_turns">Turn 數</span> <span class="sort-icon"></span></th>
+                  <th class="sortable" data-sort="total_input_tokens"><span data-i18n="col_input">輸入</span> <span class="sort-icon"></span></th>
+                  <th class="sortable" data-sort="total_output_tokens"><span data-i18n="col_output">輸出</span> <span class="sort-icon"></span></th>
+                  <th class="sortable" data-sort="total_reasoning_tokens"><span data-i18n="col_reasoning">推理</span> <span class="sort-icon"></span></th>
+                  <th class="sortable" data-sort="total_cache_read_tokens"><span data-i18n="col_cache">快取</span> <span class="sort-icon"></span></th>
+                  <th class="sortable" data-sort="total_tokens"><span data-i18n="col_total">總計</span> <span class="sort-icon"></span></th>
+                  <th class="sortable" data-sort="cost_usd"><span data-i18n="col_cost">估算費用 (美金)</span> <span class="sort-icon"></span></th>
+                  <th class="sortable" data-sort="duration_ms"><span data-i18n="col_duration">耗時</span> <span class="sort-icon"></span></th>
+                  <th class="sortable" data-sort="timestamp"><span data-i18n="col_time">時間</span> <span class="sort-icon"></span></th>
+                </tr>
+              </thead>
+              <tbody id="session-list-body">
+                <tr>
+                  <td colspan="12" class="placeholder-text" data-i18n="placeholder_select_date">請先在左側選擇一個日期</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      <!-- Monthly View Container (hidden by default) -->
+      <div id="monthly-view-container" class="hidden">
+        <!-- Monthly Metrics Grid -->
+        <section class="dashboard-grid">
+          <div class="stat-card highlight">
+            <div class="card-icon"><span class="icon-glyph icon-calendar" aria-hidden="true"></span></div>
+            <div class="stat-info">
+              <span class="label" data-i18n="monthly_tokens_label">月總消耗 Token</span>
+              <span class="value" id="monthly-stat-total-tokens">0</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="card-icon"><span class="icon-glyph icon-input" aria-hidden="true"></span></div>
+            <div class="stat-info">
+              <span class="label" data-i18n="monthly_input_label">月輸入 Token</span>
+              <span class="value" id="monthly-stat-input-tokens">0</span>
+              <span class="sub-label" id="monthly-stat-input-pct">佔比: 0%</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="card-icon"><span class="icon-glyph icon-cache" aria-hidden="true"></span></div>
+            <div class="stat-info">
+              <span class="label" data-i18n="monthly_cache_input_label">月快取輸入 Token</span>
+              <span class="value" id="monthly-stat-cache-input-tokens">0</span>
+              <span class="sub-label" id="monthly-stat-cache-input-pct">佔比: 0%</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="card-icon"><span class="icon-glyph icon-output" aria-hidden="true"></span></div>
+            <div class="stat-info">
+              <span class="label" data-i18n="monthly_output_label">月輸出 Token</span>
+              <span class="value" id="monthly-stat-output-tokens">0</span>
+              <span class="sub-label" id="monthly-stat-output-pct">佔比: 0%</span>
+            </div>
+          </div>
+
+          <div class="stat-card highlight-gold">
+            <div class="card-icon"><span class="icon-glyph icon-cost" aria-hidden="true"></span></div>
+            <div class="stat-info">
+              <span class="label" data-i18n="estimated_cost_label">估算費用 (美金)</span>
+              <span class="value" id="monthly-stat-total-cost">$0.00</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Monthly Charts Section -->
+        <section class="charts-section">
+          <div class="chart-container glass-card">
+            <div class="chart-title-row">
+              <h3 data-i18n="chart_monthly_title">單月每日 Token 消耗與會話數趨勢</h3>
+              <div class="chart-title-stat" aria-live="polite">
+                <span class="chart-title-stat-label" data-i18n="monthly_sessions_label">月總會話數</span>
+                <span class="chart-title-stat-value" id="monthly-chart-total-sessions">0</span>
+              </div>
+            </div>
+            <div class="canvas-wrapper">
+              <canvas id="monthlyTokenChart"></canvas>
+            </div>
+          </div>
+        </section>
+
+        <!-- Monthly Daily Summary -->
+        <section class="monthly-daily-summary-section" style="margin-top: 24px;">
+          <div class="glass-card">
+            <div class="section-header">
+              <h3 style="margin-bottom: 0px;" data-i18n="monthly_daily_summary_title">當月每日彙總</h3>
+            </div>
+            <div class="table-wrapper" style="margin-top: 18px;">
+              <table class="premium-table">
+                <thead>
+                  <tr>
+                    <th class="sortable" data-sort="date" data-table="monthly"><span data-i18n="col_date">日期</span> <span class="sort-icon"></span></th>
+                    <th class="sortable" data-sort="input" data-table="monthly"><span data-i18n="col_input">輸入</span> <span class="sort-icon"></span></th>
+                    <th class="sortable" data-sort="output" data-table="monthly"><span data-i18n="col_output">輸出</span> <span class="sort-icon"></span></th>
+                    <th class="sortable" data-sort="reasoning" data-table="monthly"><span data-i18n="col_reasoning">推理</span> <span class="sort-icon"></span></th>
+                    <th class="sortable" data-sort="cache" data-table="monthly"><span data-i18n="col_cache">快取</span> <span class="sort-icon"></span></th>
+                    <th class="sortable" data-sort="total" data-table="monthly"><span data-i18n="col_total">總計</span> <span class="sort-icon"></span></th>
+                    <th class="sortable" data-sort="cost" data-table="monthly"><span data-i18n="col_cost">估算費用 (美金)</span> <span class="sort-icon"></span></th>
+                  </tr>
+                </thead>
+                <tbody id="monthly-daily-summary-body">
+                  <tr>
+                    <td colspan="7" class="placeholder-text" data-i18n="placeholder_no_daily_summary">無每日彙總數據</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Monthly Breakdown Grid -->
+        <section class="monthly-breakdown-grid">
+          <!-- Top Projects -->
+          <div class="glass-card">
+            <div class="section-header">
+              <h3 style="margin-bottom: 0px;" data-i18n="monthly_projects_title">最常活動的專案目錄</h3>
+            </div>
+            <div class="table-wrapper" style="margin-top: 18px;">
+              <table class="premium-table">
+                <thead>
+                  <tr>
+                    <th data-i18n="col_rank">排名</th>
+                    <th data-i18n="col_project_cwd">工作路徑 (CWD)</th>
+                    <th data-i18n="col_sessions_count">會話數</th>
+                    <th data-i18n="col_total">總 Token</th>
+                  </tr>
+                </thead>
+                <tbody id="monthly-projects-body">
+                  <tr>
+                    <td colspan="4" class="placeholder-text" data-i18n="placeholder_no_projects">無專案數據</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Top Models -->
+          <div class="glass-card">
+            <div class="section-header">
+              <h3 style="margin-bottom: 0px;" data-i18n="monthly_models_title">使用的模型佔比</h3>
+            </div>
+            <div class="table-wrapper" style="margin-top: 18px;">
+              <table class="premium-table">
+                <thead>
+                  <tr>
+                    <th data-i18n="col_rank">排名</th>
+                    <th data-i18n="col_model">使用的模型</th>
+                    <th data-i18n="col_sessions_count">會話數</th>
+                    <th data-i18n="col_total">總 Token</th>
+                    <th data-i18n="col_cost">估算費用 (美金)</th>
+                  </tr>
+                </thead>
+                <tbody id="monthly-models-body">
+                  <tr>
+                    <td colspan="5" class="placeholder-text" data-i18n="placeholder_no_models">無模型數據</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Yearly View Container (hidden by default) -->
+      <div id="yearly-view-container" class="hidden">
+        <!-- Yearly Metrics Grid -->
+        <section class="dashboard-grid">
+          <div class="stat-card highlight">
+            <div class="card-icon"><span class="icon-glyph icon-calendar" aria-hidden="true"></span></div>
+            <div class="stat-info">
+              <span class="label" data-i18n="yearly_tokens_label">年總消耗 Token</span>
+              <span class="value" id="yearly-stat-total-tokens">0</span>
+              <span class="sub-label" id="yearly-stat-cache-read">快取讀取: -</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="card-icon"><span class="icon-glyph icon-input" aria-hidden="true"></span></div>
+            <div class="stat-info">
+              <span class="label" data-i18n="yearly_input_label">年輸入 Token</span>
+              <span class="value" id="yearly-stat-input-tokens">0</span>
+              <span class="sub-label" id="yearly-stat-input-pct">佔比: 0%</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="card-icon"><span class="icon-glyph icon-output" aria-hidden="true"></span></div>
+            <div class="stat-info">
+              <span class="label" data-i18n="yearly_output_label">年輸出 Token</span>
+              <span class="value" id="yearly-stat-output-tokens">0</span>
+              <span class="sub-label" id="yearly-stat-output-pct">佔比: 0%</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="card-icon"><span class="icon-glyph icon-sessions" aria-hidden="true"></span></div>
+            <div class="stat-info">
+              <span class="label" data-i18n="yearly_sessions_label">年總會話數</span>
+              <span class="value" id="yearly-stat-sessions">0</span>
+              <span class="sub-label" id="yearly-stat-requests">總請求: 0 次</span>
+            </div>
+          </div>
+
+          <div class="stat-card highlight-gold">
+            <div class="card-icon"><span class="icon-glyph icon-cost" aria-hidden="true"></span></div>
+            <div class="stat-info">
+              <span class="label" data-i18n="estimated_cost_label">估算費用 (美金)</span>
+              <span class="value" id="yearly-stat-total-cost">$0.00</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Yearly Charts Section -->
+        <section class="charts-section">
+          <div class="chart-container glass-card">
+            <h3 data-i18n="chart_yearly_title">單年每月 Token 消耗與會話數趨勢</h3>
+            <div class="canvas-wrapper">
+              <canvas id="yearlyTokenChart"></canvas>
+            </div>
+          </div>
+        </section>
+
+        <!-- Yearly Monthly Summary -->
+        <section class="monthly-daily-summary-section" style="margin-top: 24px;">
+          <div class="glass-card">
+            <div class="section-header">
+              <h3 style="margin-bottom: 0px;" data-i18n="yearly_monthly_summary_title">當年每月彙總</h3>
+            </div>
+            <div class="table-wrapper" style="margin-top: 18px;">
+              <table class="premium-table">
+                <thead>
+                  <tr>
+                    <th class="sortable" data-sort="month" data-table="yearly"><span data-i18n="col_month">月份</span> <span class="sort-icon"></span></th>
+                    <th class="sortable" data-sort="input" data-table="yearly"><span data-i18n="col_input">輸入</span> <span class="sort-icon"></span></th>
+                    <th class="sortable" data-sort="output" data-table="yearly"><span data-i18n="col_output">輸出</span> <span class="sort-icon"></span></th>
+                    <th class="sortable" data-sort="reasoning" data-table="yearly"><span data-i18n="col_reasoning">推理</span> <span class="sort-icon"></span></th>
+                    <th class="sortable" data-sort="cache" data-table="yearly"><span data-i18n="col_cache">快取</span> <span class="sort-icon"></span></th>
+                    <th class="sortable" data-sort="total" data-table="yearly"><span data-i18n="col_total">總計</span> <span class="sort-icon"></span></th>
+                    <th class="sortable" data-sort="cost" data-table="yearly"><span data-i18n="col_cost">估算費用 (美金)</span> <span class="sort-icon"></span></th>
+                  </tr>
+                </thead>
+                <tbody id="yearly-monthly-summary-body">
+                  <tr>
+                    <td colspan="7" class="placeholder-text" data-i18n="placeholder_no_monthly_summary">無每月彙總數據</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Yearly Breakdown Grid -->
+        <section class="monthly-breakdown-grid">
+          <!-- Top Projects -->
+          <div class="glass-card">
+            <div class="section-header">
+              <h3 style="margin-bottom: 0px;" data-i18n="yearly_projects_title">年度最常活動的專案目錄</h3>
+            </div>
+            <div class="table-wrapper" style="margin-top: 18px;">
+              <table class="premium-table">
+                <thead>
+                  <tr>
+                    <th data-i18n="col_rank">排名</th>
+                    <th data-i18n="col_project_cwd">工作路徑 (CWD)</th>
+                    <th data-i18n="col_sessions_count">會話數</th>
+                    <th data-i18n="col_total">總 Token</th>
+                  </tr>
+                </thead>
+                <tbody id="yearly-projects-body">
+                  <tr>
+                    <td colspan="4" class="placeholder-text" data-i18n="placeholder_no_projects">無專案數據</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Top Models -->
+          <div class="glass-card">
+            <div class="section-header">
+              <h3 style="margin-bottom: 0px;" data-i18n="yearly_models_title">使用的模型佔比</h3>
+            </div>
+            <div class="table-wrapper" style="margin-top: 18px;">
+              <table class="premium-table">
+                <thead>
+                  <tr>
+                    <th data-i18n="col_rank">排名</th>
+                    <th data-i18n="col_model">使用的模型</th>
+                    <th data-i18n="col_sessions_count">會話數</th>
+                    <th data-i18n="col_total">總 Token</th>
+                    <th data-i18n="col_cost">估算費用 (美金)</th>
+                  </tr>
+                </thead>
+                <tbody id="yearly-models-body">
+                  <tr>
+                    <td colspan="5" class="placeholder-text" data-i18n="placeholder_no_models">無模型數據</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- Session Timeline Modal / Drawer -->
+  <div class="drawer-overlay" id="timeline-drawer">
+    <div class="drawer-content">
+      <div class="drawer-header">
+        <div class="drawer-title-group">
+          <span class="category" data-i18n="drawer_category">會話對話重建</span>
+          <h2 id="drawer-session-name">Session Name</h2>
+          <span class="session-id" id="drawer-session-id">Session ID</span>
+        </div>
+        <button class="close-btn" id="close-drawer-btn" aria-label="關閉"><span class="icon-glyph icon-close" aria-hidden="true"></span></button>
+      </div>
+
+      <div class="drawer-body">
+        <!-- Session Metadata Cards -->
+        <div class="session-meta-grid">
+          <div class="meta-item span-2">
+            <span class="lbl" data-i18n="drawer_cwd">工作路徑</span>
+            <span class="val" id="meta-cwd">-</span>
+          </div>
+          <div class="meta-item">
+            <span class="lbl" data-i18n="drawer_repo">專案庫</span>
+            <span class="val" id="meta-repo">-</span>
+          </div>
+          <div class="meta-item">
+            <span class="lbl" data-i18n="drawer_branch">Git 分支</span>
+            <span class="val" id="meta-branch">-</span>
+          </div>
+          <div class="meta-item span-2">
+            <span class="lbl" data-i18n="drawer_model">Model</span>
+            <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 4px;">
+              <span class="val" id="meta-model" style="margin-top: 0;">-</span>
+              <span class="val" id="meta-effort" style="display: none; background: rgba(127, 142, 163, 0.15); color: #aeb9c8; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">-</span>
+            </div>
+          </div>
+          <div class="meta-item" id="drawer-meta-nickname-container" style="display: none;">
+            <span class="lbl">Agent Nickname</span>
+            <span class="val" id="meta-nickname">-</span>
+          </div>
+          <div class="meta-item" id="drawer-meta-role-container" style="display: none;">
+            <span class="lbl">Agent Role</span>
+            <span class="val" id="meta-role">-</span>
+          </div>
+        </div>
+
+        <!-- Session Token Stats Cards -->
+        <div class="session-stats-grid">
+          <div class="meta-item stat-item">
+            <span class="lbl" data-i18n="drawer_input">輸入</span>
+            <span class="val" id="meta-input">-</span>
+          </div>
+          <div class="meta-item stat-item">
+            <span class="lbl" data-i18n="drawer_output">輸出</span>
+            <span class="val" id="meta-output">-</span>
+          </div>
+          <div class="meta-item stat-item">
+            <span class="lbl" data-i18n="drawer_reasoning">推理</span>
+            <span class="val" id="meta-reasoning">-</span>
+          </div>
+          <div class="meta-item stat-item">
+            <span class="lbl" data-i18n="drawer_cache">快取</span>
+            <span class="val" id="meta-cache">-</span>
+          </div>
+          <div class="meta-item stat-item">
+            <span class="lbl" data-i18n="drawer_compaction">壓縮次數</span>
+            <span class="val" id="meta-compaction">-</span>
+          </div>
+          <div class="meta-item stat-item highlight">
+            <span class="lbl" data-i18n="drawer_total">總計</span>
+            <span class="val" id="meta-tokens">-</span>
+          </div>
+        </div>
+
+        <!-- Reconstructed Timeline -->
+        <div class="timeline-container" id="timeline-items">
+          <!-- Timeline bubbles will be dynamically rendered here -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Setup Guide Modal -->
+  <div class="modal-overlay" id="setup-guide-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <h2 id="setup-modal-title" data-i18n="setup_modal_title">Google Antigravity CLI 前置設定與啟用教學</h2>
+        </div>
+        <button class="close-btn" id="close-setup-modal-btn" aria-label="關閉"><span class="icon-glyph icon-close" aria-hidden="true"></span></button>
+      </div>
+      <!-- Status Line Setup Content (Antigravity & Copilot) -->
+      <div class="modal-body" id="setup-body-statusline">
+        <div class="modal-text">
+          <p id="setup-modal-intro" data-i18n="setup_modal_intro">本看板主要解析並呈現 Google Antigravity CLI 的 <strong>Status Line (狀態列)</strong> 所收集的 Token 數據。我們將使用 <code>~/.gemini/antigravity-cli/statusline-token.sh</code> 進行每日數據統計與會話紀錄。</p>
+        </div>
+
+        <!-- 步驟 1：複製專案到本地 -->
+        <div class="modal-section">
+          <h3 id="setup-step-clone" data-i18n="setup_step_clone"><span>01</span> 1. 複製專案到本地</h3>
+          <p class="modal-text" id="setup-step-clone-desc" data-i18n="setup_step_clone_desc">請先在終端機中執行以下指令複製專案並進入專案目錄，以取得腳本檔案：</p>
+          <div class="code-block-container">
+            <button class="copy-code-btn" data-i18n="btn_copy_cmd" title="複製指令">複製指令</button>
+            <pre><code>git clone https://github.com/jokersosmart/joker_TokenUsageInsights.git && cd joker_TokenUsageInsights</code></pre>
+          </div>
+        </div>
+
+        <!-- 步驟 2：確認 script 有執行權限 -->
+        <div class="modal-section">
+          <h3 id="setup-step-1" data-i18n="setup_step_1"><span>02</span> 2. 確認 script 有執行權限</h3>
+          <p class="modal-text" id="setup-step-1-desc" data-i18n="setup_step_1_desc">首先建立設定目錄，並將專案中的收集腳本複製至家目錄的 <code>.gemini/antigravity-cli</code> 目錄下，最後賦予執行權限：</p>
+          <div class="code-block-container">
+            <button class="copy-code-btn" data-i18n="btn_copy_cmd" title="複製指令">複製指令</button>
+            <pre><code id="code-setup-cmd">mkdir -p ~/.gemini/antigravity-cli && cp shell/antigravity/statusline-token.sh ~/.gemini/antigravity-cli/statusline-token.sh && chmod +x ~/.gemini/antigravity-cli/statusline-token.sh</code></pre>
+          </div>
+        </div>
+
+        <!-- 步驟 3：編輯設定檔 -->
+        <div class="modal-section">
+          <h3 id="setup-step-2" data-i18n="setup_step_2"><span>03</span> 3. 編輯設定檔</h3>
+          <p class="modal-text" id="setup-step-2-desc" data-i18n="setup_step_2_desc">編輯或新增 Antigravity CLI 的設定檔 <code>~/.gemini/antigravity-cli/settings.json</code>：</p>
+          <div class="code-block-container" style="margin-bottom: 8px;">
+            <button class="copy-code-btn" data-i18n="btn_copy_cmd" title="複製指令">複製指令</button>
+            <pre><code id="code-edit-settings">vi ~/.gemini/antigravity-cli/settings.json</code></pre>
+          </div>
+          <p class="modal-text" data-i18n="setup_step_2_desc2">在設定檔中加入以下 <code>statusLine</code> 設定內容：</p>
+          <div class="code-block-container">
+            <button class="copy-code-btn" id="btn-copy-json" data-i18n="btn_copy_config" title="複製配置">複製配置 JSON</button>
+            <pre><code id="code-setup-json">{
+  "statusLine": {
+    "type": "command",
+    "command": "$HOME/.gemini/antigravity-cli/statusline-token.sh",
+    "padding": 1
+  }
+}</code></pre>
+          </div>
+        </div>
+
+        <!-- 步驟 4：已經有其他設定時（不要覆蓋） -->
+        <div class="modal-section">
+          <h3 id="setup-step-3" data-i18n="setup_step_3"><span>04</span> 4. 已經有其他設定時（不要覆蓋）</h3>
+          <p class="modal-text" data-i18n="setup_step_3_desc">若您的 <code>settings.json</code> 中已經有其他現成設定，<strong>請勿整檔覆蓋</strong>，只需將 <code>statusLine</code> 屬性合併加入即可，例如：</p>
+          <div class="code-block-container">
+            <button class="copy-code-btn" id="btn-copy-json-merge" data-i18n="btn_copy_merge_example" title="複製合併範例">複製合併範例</button>
+            <pre><code id="code-setup-json-merge">{
+  "footer": {
+    "showDirectory": true,
+    "showBranch": true
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "$HOME/.gemini/antigravity-cli/statusline-token.sh",
+    "padding": 1
+  }
+}</code></pre>
+          </div>
+        </div>
+
+        <!-- 步驟 5：重開 CLI -->
+        <div class="modal-section">
+          <h3 id="setup-step-4" data-i18n="setup_step_4"><span>05</span> 5. 重開 Antigravity CLI</h3>
+          <p class="modal-text" id="setup-step-4-desc" data-i18n="setup_step_4_desc">設定完成並存檔後，請<strong>退出目前的 Antigravity CLI 聊天會話，並重新進入</strong>以套用全新設定。</p>
+        </div>
+
+        <!-- 步驟 6：檢查是否成功 -->
+        <div class="modal-section">
+          <h3 id="setup-step-5" data-i18n="setup_step_5"><span>06</span> 6. 檢查是否成功</h3>
+          <p class="modal-text" id="setup-step-5-desc" data-i18n="setup_step_5_desc">進入 Antigravity CLI 會話後，畫面底部應該會顯示由本專案腳本產生的狀態列，如：</p>
+          <div class="code-block-container" style="background: rgba(255,255,255,0.02);">
+            <pre style="color: var(--neon-green);"><code>Auto > GPT-5.3-Codex | #1 | in 22.8k | cache 22.0k/0 | out 61 | reasoning 29 | total 22.9k | ctx 9%</code></pre>
+          </div>
+          
+          <div style="margin-top: 10px;" class="modal-text">
+            <strong data-i18n="setup_troubleshooting">除錯與檢查 (Troubleshooting)：</strong>
+            <p style="margin-top: 6px; margin-left: 12px;" data-i18n="setup_troubleshoot_a"><strong>A. 若狀態列未正常出現，請先單獨測試腳本是否能正常執行：</strong></p>
+            <div class="code-block-container" style="margin-left: 12px; margin-top: 4px;">
+              <button class="copy-code-btn" data-i18n="btn_copy_cmd" title="複製">複製</button>
+              <pre><code id="code-troubleshoot-a">echo '{}' | ~/.gemini/antigravity-cli/statusline-token.sh</code></pre>
+            </div>
+            
+            <p style="margin-top: 8px; margin-left: 12px;" data-i18n="setup_troubleshoot_b"><strong>B. 請確認 <code>settings.json</code> 是合法的 JSON 格式：</strong></p>
+            <div class="code-block-container" style="margin-left: 12px; margin-top: 4px;">
+              <button class="copy-code-btn" data-i18n="btn_copy_cmd" title="複製">複製</button>
+              <pre><code id="code-troubleshoot-b">jq . ~/.gemini/antigravity-cli/settings.json</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Codex Setup Content -->
+      <div class="modal-body" id="setup-body-codex" style="display: none;">
+        <div class="modal-text">
+          <p data-i18n="codex_setup_modal_intro">本看板主要解析並呈現 Codex CLI 的本地會話事件與 Token 數據。Codex CLI 會自動將會話記錄在 <code>~/.codex/sessions</code> 目錄下，不需要額外設定腳本或狀態列。</p>
+        </div>
+
+        <div class="modal-section">
+          <h3 data-i18n="codex_setup_step_1"><span>01</span> 1. 確認 Codex CLI 已在使用</h3>
+          <p class="modal-text" data-i18n="codex_setup_step_1_desc">只要您在終端機中執行過 Codex CLI 進行對話，會話檔案就會自動生成在此目錄中。</p>
+        </div>
+
+        <div class="modal-section">
+          <h3 data-i18n="codex_setup_step_2"><span>02</span> 2. 偵測路徑狀態</h3>
+          <p class="modal-text" data-i18n="codex_setup_step_2_desc">目前偵測到的 Codex CLI 目錄為：<code id="lbl-detected-home-codex">~/.codex/sessions</code>。本系統會以極高效率對該目錄進行即時掃描與分析。</p>
+        </div>
+
+        <div class="modal-section">
+          <h3 data-i18n="codex_setup_step_3"><span>03</span> 3. 費用估算邏輯</h3>
+          <p class="modal-text" data-i18n="codex_setup_step_3_desc">費用會根據您的對話模型以 Token 數量為基準進行即時估算，排除快取部分後得出實際成本。</p>
+        </div>
+      </div>
+
+      <!-- Claude Code Setup Content -->
+      <div class="modal-body" id="setup-body-claude" style="display: none;">
+        <div class="modal-text">
+          <p data-i18n="claude_setup_modal_intro">本看板主要解析並呈現 Claude Code 的本地會話事件與 Token 數據。Claude Code 會自動將會話記錄在 <code>~/.claude/projects</code> 目錄下，不需要額外設定腳本或狀態列。</p>
+        </div>
+
+        <div class="modal-section">
+          <h3 data-i18n="claude_setup_step_1"><span>01</span> 1. 確認 Claude Code 已在使用</h3>
+          <p class="modal-text" data-i18n="claude_setup_step_1_desc">只要您在終端機中執行過 Claude Code 進行對話，會話檔案就會自動生成在此目錄中。</p>
+        </div>
+
+        <div class="modal-section">
+          <h3 data-i18n="claude_setup_step_2"><span>02</span> 2. 偵測路徑狀態</h3>
+          <p class="modal-text" data-i18n="claude_setup_step_2_desc">目前偵測到的 Claude Code 目錄為：<code id="lbl-detected-home-claude">~/.claude/projects</code>。本系統會以極高效率對該目錄進行即時掃描與分析。</p>
+        </div>
+
+        <div class="modal-section">
+          <h3 data-i18n="claude_setup_step_3"><span>03</span> 3. 費用估算邏輯</h3>
+          <p class="modal-text" data-i18n="claude_setup_step_3_desc">費用會根據您的對話模型以 Token 數量為基準進行即時估算，排除快取部分後得出實際成本。</p>
+        </div>
+      </div>
+
+      <!-- Cursor Setup Content -->
+      <div class="modal-body" id="setup-body-cursor" style="display: none;">
+        <div class="modal-text">
+          <p data-i18n="cursor_setup_modal_intro">本看板主要解析並呈現 Cursor 的本地會話事件。Cursor 會自動將會話記錄在 <code>~/.cursor/projects</code> 目錄下，不需要額外設定腳本或狀態列。</p>
+        </div>
+
+        <div class="modal-section">
+          <h3 data-i18n="cursor_setup_step_1"><span>01</span> 1. 確認 Cursor 已在使用</h3>
+          <p class="modal-text" data-i18n="cursor_setup_step_1_desc">只要您在 Cursor 中執行過對話或 Agent，會話檔案就會自動生成在專案的 agent-transcripts 目錄中。</p>
+        </div>
+
+        <div class="modal-section">
+          <h3 data-i18n="cursor_setup_step_2"><span>02</span> 2. 偵測路徑狀態</h3>
+          <p class="modal-text" data-i18n="cursor_setup_step_2_desc">目前偵測到的 Cursor 目錄為：<code id="lbl-detected-home-cursor">~/.cursor/projects</code>。本系統會以極高效率對該目錄進行即時掃描與分析。</p>
+        </div>
+
+        <div class="modal-section">
+          <h3 data-i18n="cursor_setup_step_3"><span>03</span> 3. 費用估算邏輯</h3>
+          <p class="modal-text" data-i18n="cursor_setup_step_3_desc">由於 Cursor 本地日誌不包含 Token 統計，費用會根據字數估算 Token 數量，再以標準模型價格為基準進行即時成本計算。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pricing Rates Modal -->
+  <div class="modal-overlay" id="pricing-modal">
+    <div class="modal-content" style="max-width: 800px;">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <h2 data-i18n="pricing_sheet_title">AI 模型費用標準表</h2>
+        </div>
+        <button class="close-btn" id="close-pricing-modal-btn" aria-label="關閉"><span class="icon-glyph icon-close" aria-hidden="true"></span></button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-text" style="margin-bottom: 16px;" data-i18n="pricing_intro">
+          此費用為本地估算，單價依據 <code>pricing.csv</code> 載入。單位為 1M Tokens (每百萬個 Token) 的美金價格。<br><strong style="color: var(--neon-gold, #fbbf24);">註：此為預估試算僅供參考。</strong>
+        </p>
+        <div class="table-wrapper">
+          <table class="premium-table">
+            <thead>
+              <tr>
+                <th>模型名稱 (Model Name)</th>
+                <th>部署類型 (Type)</th>
+                <th>單位 (Unit)</th>
+                <th>輸入價格 (Input Price)</th>
+                <th>快取輸入價格 (Cached Input)</th>
+                <th>輸出價格 (Output Price)</th>
+                <th>批次 API 價格 (Batch API)</th>
+              </tr>
+            </thead>
+            <tbody id="pricing-table-body">
+              <tr>
+                <td colspan="7" class="placeholder-text">載入中...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sidebar Overlay for mobile -->
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <!-- Frontend Javascript logic -->
+  <script type="module" src="/static/app.js?v=29"></script>
+</body>
+</html>
