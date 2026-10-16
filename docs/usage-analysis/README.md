@@ -1,9 +1,9 @@
-# 逆向分析「Joker Token 戰情室」學習報告
+# 「Joker Token 戰情室」使用習慣與用量分析學習報告
 
-> 這份報告是學習練習：用一套逆向分析命令列工具（下文以 `$RE_CLI` 代稱）去「從成品反推」[jokersosmart/joker_TokenUsageInsights](https://github.com/jokersosmart/joker_TokenUsageInsights) 的架構，再拿原始碼逐一對照，看看逆向分析哪些看對、哪些漏掉、哪些看錯。
+> 這份報告是學習練習：以「使用習慣與用量」為主軸，分析 [jokersosmart/joker_TokenUsageInsights](https://github.com/jokersosmart/joker_TokenUsageInsights) 如何收集各家 AI 程式助理的使用紀錄、統計 token 用量並估算成本。過程中用一套用量分析命令列工具（下文以 `$USAGE_CLI` 代稱）實際觀察程式的執行行為與產出，再拿原始碼逐一對照，看看工具的觀察哪些正確、哪些漏掉、哪些容易誤會。
 > 最後整理出「如果要自己重做一個，最少需要哪些零件」。
 >
-> 本報告中所有逆向分析輸出都是在雲端 VM（Ubuntu 24.04、x86-64、4 核心 CPU）上實際執行的結果，原始 JSON 放在 [`raw/`](raw/) 目錄。所有執行期分析都使用**假資料**（`/tmp/fixture`），沒有讀取任何真實的 AI 使用紀錄。`raw/` 中的工具識別字串（provider 名稱、版本欄位、環境變數前綴等）已改為中性名稱，因此這些檔案的內容與原始輸出並非逐位元組相同。
+> 本報告中所有分析輸出都是在雲端 VM（Ubuntu 24.04、x86-64、4 核心 CPU）上實際執行的結果，原始 JSON 放在 [`raw/`](raw/) 目錄。所有執行期分析都使用**假資料**（`/tmp/fixture`），沒有讀取任何真實的 AI 使用紀錄。`raw/` 中的工具識別字串（provider 名稱、版本欄位、環境變數前綴等）已改為中性名稱，因此這些檔案的內容與原始輸出並非逐位元組相同。
 
 ## 目錄
 
@@ -12,8 +12,8 @@
 3. [主要模組](#3-主要模組)
 4. [API 端點](#4-api-端點)
 5. [成本是怎麼估算的](#5-成本是怎麼估算的)
-6. [實際執行的逆向分析指令與輸出摘錄](#6-實際執行的逆向分析指令與輸出摘錄)
-7. [逆向分析結果和原始碼的對照](#7-逆向分析結果和原始碼的對照)
+6. [實際執行的用量分析指令與輸出摘錄](#6-實際執行的用量分析指令與輸出摘錄)
+7. [分析結果和原始碼的對照](#7-分析結果和原始碼的對照)
 8. [限制與注意事項](#8-限制與注意事項)
 9. [若要自己重做一個，最小可行版本需要哪些部件](#9-若要自己重做一個最小可行版本需要哪些部件)
 10. [附錄：如何重現本報告](#10-附錄如何重現本報告)
@@ -165,6 +165,21 @@ CORS 預設只允許 `http://localhost:<PORT>` 與 `http://127.0.0.1:<PORT>`，�
 
 （合計後面的 `...0001` 是浮點數誤差，不是 bug。）
 
+### 用量與使用習慣觀察（假資料）
+
+以第 6.6 節瀏覽器實際取得的 `usage/2026-10-15` 回應為例，可以看出儀表板呈現使用習慣的幾個角度：
+
+| 指標 | 數值 | 解讀 |
+| --- | ---: | --- |
+| session 數 / 請求數 | 2 / 3 | 一天內開了幾次對話、每次對話來回幾輪 |
+| 總 token | 200,000 | 當天整體用量 |
+| input / output | 64,000 / 11,000 | 輸出約為輸入的 17%，典型的「給大量上下文、拿較短回覆」用法 |
+| cache_read | 125,000（佔總量 62.5%） | 重複使用的上下文多，快取命中能大幅壓低成本 |
+| 總時長 | 24.1 秒 | 實際等待模型回應的時間 |
+| 估算成本 | 約 0.63 美元 | GPT-5.5 的 demo-session-b 佔了約 85% 的費用 |
+
+真實使用時，把這些指標放到月報 / 年報上比較，就能看出「哪個助理用得最多」「哪個模型最花錢」「快取比例是否偏低」等使用習慣。
+
 ### 值得注意的設計取捨
 
 - `cache_write`（寫入快取）的 token 有被記錄、也會顯示，但**不計入成本**。
@@ -174,25 +189,25 @@ CORS 預設只允許 `http://localhost:<PORT>` 與 `http://127.0.0.1:<PORT>`，�
 
 ---
 
-## 6. 實際執行的逆向分析指令與輸出摘錄
+## 6. 實際執行的用量分析指令與輸出摘錄
 
 ### 6.1 安裝
 
-VM 預設的 Node 是 22.14，低於該逆向分析工具要求的 22.19+，所以改用 nvm 裝好的 Node 24，再依該工具文件安裝其命令列程式，並以 `RE_CLI` 環境變數指向它：
+VM 預設的 Node 是 22.14，低於該分析工具要求的 22.19+，所以改用 nvm 裝好的 Node 24，再依該工具文件安裝其命令列程式，並以 `USAGE_CLI` 環境變數指向它：
 
 ```bash
 export PATH=$HOME/.nvm/versions/node/v24.22.0/bin:$PATH
-# 依工具文件安裝逆向分析 CLI 後：
-export RE_CLI=/path/to/reverse-analysis-cli
-$RE_CLI --version
-$RE_CLI doctor
+# 依工具文件安裝用量分析 CLI 後：
+export USAGE_CLI=/path/to/usage-analysis-cli
+$USAGE_CLI --version
+$USAGE_CLI doctor
 ```
 
-`$RE_CLI doctor` 一開始回報 `healthy: false`，因為沒有安裝任何原生分析引擎（Hopper / Ghidra / IDA / jadx）。之後我另外下載 Ghidra 12.1.4（工具文件指定 12.1.x）並使用 VM 內建的 OpenJDK 21：
+`$USAGE_CLI doctor` 一開始回報 `healthy: false`，因為沒有安裝任何原生分析引擎（Hopper / Ghidra / IDA / jadx）。之後我另外下載 Ghidra 12.1.4（工具文件指定 12.1.x）並使用 VM 內建的 OpenJDK 21：
 
 ```bash
 export GHIDRA_INSTALL_DIR=/opt/ghidra/ghidra_12.1.4_PUBLIC
-$RE_CLI doctor --provider ghidra --json
+$USAGE_CLI doctor --provider ghidra --json
 ```
 
 實際輸出（節錄）：
@@ -208,10 +223,10 @@ $RE_CLI doctor --provider ghidra --json
 ### 6.2 前端：JavaScript 應用程式靜態分析
 
 ```bash
-$RE_CLI analyze-javascript-application /workspace/static --json > js-app.json
+$USAGE_CLI analyze-javascript-application /workspace/static --json > js-app.json
 # 完整 Evidence 有 25 MB，依文件建議投影成摘要
 jq -c '{source: {kind: "inline", evidence: .}, view: {kind: "summary"}}' js-app.json > view-summary.json
-$RE_CLI inspect-analysis-view view-summary.json --json > js-summary.json
+$USAGE_CLI inspect-analysis-view view-summary.json --json > js-summary.json
 ```
 
 執行約 6.4 秒。摘要中的統計（[`raw/js-app-summary-view.json`](raw/js-app-summary-view.json)）：
@@ -232,7 +247,7 @@ $RE_CLI inspect-analysis-view view-summary.json --json > js-summary.json
 
 > `index.html has 1 inline JavaScript body starting at line 18 that was not analyzed; endpoints, storage, imports and other facts in it are absent from the evidence.`
 
-我從 25 MB 的完整 Evidence 中，用 `jq` 擷取了 request、timer、storage 等節點（[`raw/js-app-extract.json`](raw/js-app-extract.json)）。逆向分析工具找到的 13 個 `fetch` 呼叫：
+我從 25 MB 的完整 Evidence 中，用 `jq` 擷取了 request、timer、storage 等節點（[`raw/js-app-extract.json`](raw/js-app-extract.json)）。分析工具找到的 13 個 `fetch` 呼叫：
 
 ```json
 {"line":948,"label":"fetch","properties":{"endpoint":null,"method":"fetch","operation_kind":"request"},"enclosing_function":null}
@@ -275,9 +290,9 @@ $RE_CLI inspect-analysis-view view-summary.json --json > js-summary.json
 
 ```bash
 BIN=/workspace/target/release/joker-token-usage-insights
-$RE_CLI inspect-artifact      $BIN --json
-$RE_CLI inspect-rust-binary   $BIN --json
-$RE_CLI inspect-binary-layout $BIN --json
+$USAGE_CLI inspect-artifact      $BIN --json
+$USAGE_CLI inspect-rust-binary   $BIN --json
+$USAGE_CLI inspect-binary-layout $BIN --json
 ```
 
 **`inspect-artifact`**（[`raw/native-inspect-artifact.json`](raw/native-inspect-artifact.json)）：確認是 5,953,704 bytes 的 ELF 執行檔，並建議下一步：
@@ -339,7 +354,7 @@ joker_token_usage_insights::pricing::parse_threshold_rule
 
 ### 6.4 後端：用 `capture-process` 觀察伺服器啟動
 
-先建立假資料：`/tmp/fixture/copilot/usage/usage-2026-10-15.jsonl`（3 行、1,233 bytes，兩個 session），其餘助理目錄都是空的。用逆向分析工具的 process scenario 啟動伺服器，6 秒後送 `SIGINT`，並觀察資料目錄的檔案變化：
+先建立假資料：`/tmp/fixture/copilot/usage/usage-2026-10-15.jsonl`（3 行、1,233 bytes，兩個 session），其餘助理目錄都是空的。用分析工具的 process scenario 啟動伺服器，6 秒後送 `SIGINT`，並觀察資料目錄的檔案變化：
 
 ```json
 {
@@ -360,7 +375,7 @@ joker_token_usage_insights::pricing::parse_threshold_rule
 ```
 
 ```bash
-$RE_CLI capture-process ./process-scenario.json --json > process-capture.json
+$USAGE_CLI capture-process ./process-scenario.json --json > process-capture.json
 ```
 
 輸出（[`raw/process-capture.json`](raw/process-capture.json)）節錄：終端機畫面
@@ -378,17 +393,17 @@ $RE_CLI capture-process ./process-scenario.json --json > process-capture.json
  "after":{"size":57344,"type":"file","sha256":"a38f059ca71616b951f160dada37792e0f0e5b48da64b8552e42930976c6e4fb"}}
 ```
 
-結束狀態：`{"code":0,"signal":2,"reason":"exited"}`。逆向分析工具也誠實列出它看不到的東西，例如 `"Network activity is not observed by this capture."`。
+結束狀態：`{"code":0,"signal":2,"reason":"exited"}`。分析工具也誠實列出它看不到的東西，例如 `"Network activity is not observed by this capture."`。
 
 ### 6.5 用 `inspect-sqlite-database` 檢查產生的資料庫
 
 ```bash
 DB=/tmp/fixture/insights/token_usage_insights.db
-$RE_CLI inspect-sqlite-database $DB --json
-$RE_CLI inspect-sqlite-database $DB --table usage_entries --column assistant_type --column date \
+$USAGE_CLI inspect-sqlite-database $DB --json
+$USAGE_CLI inspect-sqlite-database $DB --table usage_entries --column assistant_type --column date \
   --column session_id --column turn_no --column model --column delta_input --column delta_output \
   --column delta_cache_read --column delta_total --json
-$RE_CLI inspect-sqlite-database $DB --table sync_state --json
+$USAGE_CLI inspect-sqlite-database $DB --table sync_state --json
 ```
 
 結果（[`raw/sqlite-inventory.json`](raw/sqlite-inventory.json)、[`raw/sqlite-usage-rows.json`](raw/sqlite-usage-rows.json)、[`raw/sqlite-sync-state.json`](raw/sqlite-sync-state.json)）：
@@ -425,7 +440,7 @@ migration:claude_code_source_v2            1     0
 ```
 
 ```bash
-$RE_CLI capture-browser-scenario ./browser-scenario-copilot.json --json > browser-capture-copilot.json
+$USAGE_CLI capture-browser-scenario ./browser-scenario-copilot.json --json > browser-capture-copilot.json
 ```
 
 共觀察到 30 個請求（[`raw/browser-capture-extract.json`](raw/browser-capture-extract.json)），其中前端主動呼叫的 API（`resource_type: fetch`）依序是：
@@ -447,9 +462,9 @@ GET http://localhost:3003/api/copilot/usage/2026-10-15
  "total_duration_ms":24100,"total_requests":3,"total_cost_usd":0.6345000000000001}
 ```
 
-其他請求還包括 Google Fonts、jsDelivr 上的 Chart.js / marked / DOMPurify，以及 `static/` 裡的 CSS、圖示。逆向分析工具擷取的截圖（SHA-256 `1206f809…8383`，與 Evidence 內記錄一致）：
+其他請求還包括 Google Fonts、jsDelivr 上的 Chart.js / marked / DOMPurify，以及 `static/` 裡的 CSS、圖示。分析工具擷取的截圖（SHA-256 `1206f809…8383`，與 Evidence 內記錄一致）：
 
-![逆向分析工具用 headless Chrome 擷取的儀表板畫面](browser-screenshot.png)
+![分析工具用 headless Chrome 擷取的儀表板畫面](browser-screenshot.png)
 
 另外我也用 `?date=2026-10-15`（不指定 `agent`）跑了一次，結果只呼叫了 `/api/antigravity/...` 的 5 個 API，沒有呼叫 `usage/:date`，因為預設助理是 Antigravity，而它沒有任何資料。
 
@@ -460,7 +475,7 @@ GET http://localhost:3003/api/copilot/usage/2026-10-15
 #### 第一次：逾時失敗
 
 ```bash
-$RE_CLI analyze $BIN --provider ghidra --snapshot /tmp/reverse-analysis/ghidra-snapshot.json --json
+$USAGE_CLI analyze $BIN --provider ghidra --snapshot /tmp/usage-analysis/ghidra-snapshot.json --json
 ```
 
 約 5.5 分鐘後 exit 1（[`raw/ghidra-analyze-attempt1-timeout.json`](raw/ghidra-analyze-attempt1-timeout.json)）：
@@ -477,7 +492,7 @@ $RE_CLI analyze $BIN --provider ghidra --snapshot /tmp/reverse-analysis/ghidra-s
 
 ```bash
 export GHIDRA_STARTUP_TIMEOUT_MS=1800000   # 30 分鐘
-$RE_CLI analyze $BIN --provider ghidra --snapshot /tmp/reverse-analysis/ghidra-snapshot.json --json
+$USAGE_CLI analyze $BIN --provider ghidra --snapshot /tmp/usage-analysis/ghidra-snapshot.json --json
 ```
 
 從 10:29:18 跑到 10:42:11，exit 0（[`raw/ghidra-analyze.json`](raw/ghidra-analyze.json)）：
@@ -494,7 +509,7 @@ $RE_CLI analyze $BIN --provider ghidra --snapshot /tmp/reverse-analysis/ghidra-s
 
 #### 用 MCP 模式在同一個 session 裡連續查詢
 
-CLI 每次呼叫都是獨立的程序，`--snapshot` 只能重用「完全相同的查詢」，所以每換一個問題（搜尋、反編譯）就要再等 12 分鐘。因此我改用 `$RE_CLI --mcp`（MCP stdio 伺服器模式），寫了一個小腳本（[`scripts/mcp-ghidra.mjs`](scripts/mcp-ghidra.mjs)）依序呼叫 `open_binary` → `binary_overview` → 多個查詢 → `close_binary`，只需導入一次。
+CLI 每次呼叫都是獨立的程序，`--snapshot` 只能重用「完全相同的查詢」，所以每換一個問題（搜尋、反編譯）就要再等 12 分鐘。因此我改用 `$USAGE_CLI --mcp`（MCP stdio 伺服器模式），寫了一個小腳本（[`scripts/mcp-ghidra.mjs`](scripts/mcp-ghidra.mjs)）依序呼叫 `open_binary` → `binary_overview` → 多個查詢 → `close_binary`，只需導入一次。
 
 第一個 session（[`raw/ghidra-mcp-session1.json`](raw/ghidra-mcp-session1.json)）：`binary_overview` 花了 713,620 ms（等 Ghidra 分析完），之後每個查詢只要幾毫秒。
 
@@ -568,7 +583,7 @@ LAB_0020af8a:
 | `format_inner` 兩處 | 兩個 `Err(format!(...))` 錯誤訊息 |
 | `*local_a0 = 0x8000000000000000` | 回傳 `Ok(...)`（Rust 利用 `String` 容量欄位的空位表示 `Result` 的變體） |
 
-也就是說，**即使完全沒有原始碼**，只靠逆向分析工具 + Ghidra 也能還原出「272k 門檻、先完全比對再模糊比對、每百萬 token 計價」這些規則。
+也就是說，**即使完全沒有原始碼**，只靠分析工具 + Ghidra 也能確認「272k 門檻、先完全比對再模糊比對、每百萬 token 計價」這些規則。
 
 #### 呼叫關係
 
@@ -609,17 +624,17 @@ LAB_0020af8a:
 Ghidra 回報的「呼叫者」是以函式為單位，我想確認實際的 `call` 指令在哪裡：
 
 ```bash
-$RE_CLI inspect-with-objdump $BIN disassemble --json > objdump-disasm.json
+$USAGE_CLI inspect-with-objdump $BIN disassemble --json > objdump-disasm.json
 ```
 
-1.4 秒完成、exit 0，但輸出有 35 MB，而且逆向分析工具回報**被截斷**（[`raw/objdump-disassemble-extract.json`](raw/objdump-disassemble-extract.json)）：
+1.4 秒完成、exit 0，但輸出有 35 MB，而且分析工具回報**被截斷**（[`raw/objdump-disassemble-extract.json`](raw/objdump-disassemble-extract.json)）：
 
 ```json
 {"exit_code":null,"signal":"SIGKILL","output_truncated":true,"completion_status":"unknown",
  "artifact_sha256_after":"370028f6...c81fd","artifact_changed":false}
 ```
 
-在逆向分析工具保留的反組譯文字（253,853 行）裡搜尋，找到的呼叫指令（ELF 位址，需加 `0x100000` 才是 Ghidra 位址）：
+在分析工具保留的反組譯文字（253,853 行）裡搜尋，找到的呼叫指令（ELF 位址，需加 `0x100000` 才是 Ghidra 位址）：
 
 ```text
 bc85c: e8 8f 6a fb ff call 732f0 <..db15sync_usage_logs..>
@@ -630,7 +645,7 @@ fde28: e8 03 ce 00 00 call 10ac30 <..pricing14calculate_cost..>
 febd5: e8 56 c0 00 00 call 10ac30 <..pricing14calculate_cost..>
 ```
 
-被截斷的範圍之後，我直接用系統的 `objdump -d`（不經由逆向分析工具）補查，又找到 `154308`、`1550d4` 兩處 `calculate_cost` 呼叫，都位在 `handlers::yearly::get_yearly_details::{{closure}}`（`0x1522e0` 起）裡面。
+被截斷的範圍之後，我直接用系統的 `objdump -d`（不經由分析工具）補查，又找到 `154308`、`1550d4` 兩處 `calculate_cost` 呼叫，都位在 `handlers::yearly::get_yearly_details::{{closure}}`（`0x1522e0` 起）裡面。
 
 綜合結果：
 
@@ -639,18 +654,18 @@ febd5: e8 56 c0 00 00 call 10ac30 <..pricing14calculate_cost..>
 | `calculate_cost` | daily 1 + monthly 2 + yearly 2 = 5 | 5（`d8f1b` 在 daily 的 axum handler closure 裡；`fde28`、`febd5` 在 monthly；`154308`、`1550d4` 在 yearly） | 4 個函式，其中 yearly 被拆成兩段（`+0x5e`、`+0x2a84`） |
 | `sync_usage_logs` | `main` 啟動時 1 + 背景迴圈 1 + `trigger_manual_sync` 1 = 3 | 3（`bc85c`、`bcff0` 在兩個 `spawn_blocking` 任務；`cfb40` 在 `main::{{closure}}`，`0xcf900` 起） | 2 個 `BlockingTask::poll` + **1 個 axum handler closure（錯誤）** |
 
-`cfb40` 這個呼叫點明明在 `main::{{closure}}` 範圍內，Ghidra 卻把它歸到 `0x1cb270` 開始的 axum handler closure。這是 Ghidra 的**函式邊界判斷錯誤**（Rust 的 async 狀態機程式碼很容易讓反組譯工具切錯函式），逆向分析工具的 analysis profile 也標示了 `function_boundary_observations: ghidra-function-boundary-limitations-v3`。
+`cfb40` 這個呼叫點明明在 `main::{{closure}}` 範圍內，Ghidra 卻把它歸到 `0x1cb270` 開始的 axum handler closure。這是 Ghidra 的**函式邊界判斷錯誤**（Rust 的 async 狀態機程式碼很容易讓反組譯工具切錯函式），分析工具的 analysis profile 也標示了 `function_boundary_observations: ghidra-function-boundary-limitations-v3`。
 
 ---
 
-## 7. 逆向分析結果和原始碼的對照
+## 7. 分析結果和原始碼的對照
 
-### 7.1 逆向分析工具看對的
+### 7.1 分析工具看對的
 
-| 逆向分析工具的發現 | 原始碼中的事實 |
+| 分析工具的發現 | 原始碼中的事實 |
 | --- | --- |
 | `static/` 有 13 個 `fetch` 呼叫，位置與所在函式名稱（`loadUsageData`、`openSessionTimeline`…） | `rg -n "fetch\(" static/app.js` 剛好 13 處，行號全部吻合 |
-| `startLiveRefresh` 裡有一個 100 ms 的 `setInterval`，以及一個延遲時間無法靜態決定的 `setInterval` | 第 1267 行是進度條（100 ms）；第 1277 行用變數 `refreshInterval`（來自下拉選單），所以逆向分析工具標成 `null` 是正確的 |
+| `startLiveRefresh` 裡有一個 100 ms 的 `setInterval`，以及一個延遲時間無法靜態決定的 `setInterval` | 第 1267 行是進度條（100 ms）；第 1277 行用變數 `refreshInterval`（來自下拉選單），所以分析工具標成 `null` 是正確的 |
 | `app.js` 從 `./i18n.js?v=20` 匯入 `default` | `app.js` 第 1 行 `import i18n from './i18n.js?v=20'`，`i18n.js` 為 `export default i18n` |
 | `localStorage` 的 `theme`、`lang` | 第 4251、248、592 行 |
 | 頁面依賴 jsDelivr 上的 Chart.js、marked、DOMPurify | `index.html` 第 25–29 行 |
@@ -665,35 +680,35 @@ febd5: e8 56 c0 00 00 call 10ac30 <..pricing14calculate_cost..>
 | SQLite 的 5 張表、8 個索引 | `db::init_db` 中的 `CREATE TABLE` / `CREATE INDEX` 完全對應 |
 | 瀏覽器實際呼叫的 6 個 API 與回應內容 | 與 `main.rs` 路由、`handlers` 的回傳結構一致；成本與手算吻合 |
 
-### 7.2 逆向分析工具漏掉的（看不到，不代表不存在）
+### 7.2 分析工具漏掉的（看不到，不代表不存在）
 
 - **API 的實際網址**：13 個 `fetch` 的 `endpoint` 全部是 `null`。因為網址是模板字串（`` `/api/${currentAssistant}/dates` ``），靜態分析無法確定變數值。要靠 6.6 節的瀏覽器擷取才看得到真正的網址。
-- **`index.html` 的 inline script**：逆向分析工具明確說它沒有分析第 18 行的 inline script（那段程式在讀 `localStorage.getItem('theme')` 防止主題閃爍）。
-- **Cookie**：`app.js` 用 `document.cookie` 存 `selected_agent`、`active_tab`、`live_refresh`，逆向分析工具的 storage 節點裡完全沒有 cookie。
-- **用常數當鍵的 `localStorage`**：側邊欄狀態用 `SIDEBAR_STATE_STORAGE_KEY` 常數當鍵（第 373、378 行），逆向分析工具只記錄成「有一個 `localStorage.getItem` / `setItem` 呼叫」，鍵名是 `null`。
+- **`index.html` 的 inline script**：分析工具明確說它沒有分析第 18 行的 inline script（那段程式在讀 `localStorage.getItem('theme')` 防止主題閃爍）。
+- **Cookie**：`app.js` 用 `document.cookie` 存 `selected_agent`、`active_tab`、`live_refresh`，分析工具的 storage 節點裡完全沒有 cookie。
+- **用常數當鍵的 `localStorage`**：側邊欄狀態用 `SIDEBAR_STATE_STORAGE_KEY` 常數當鍵（第 373、378 行），分析工具只記錄成「有一個 `localStorage.getItem` / `setItem` 呼叫」，鍵名是 `null`。
 - **CSS**：`static/css/*.css` 不在 JavaScript 分析範圍內（但瀏覽器擷取有看到它們被載入，`styles.css` 透過 `@import` 載入其他 4 個檔案）。
 - **後端業務邏輯（不用 Ghidra 時）**：`inspect-artifact`、`inspect-rust-binary`、`inspect-binary-layout` 只能看到檔案格式、連結庫、符號名稱，看不到 `calculate_cost` 裡的 272k 門檻、模糊比對這類細節。要靠 Ghidra 反編譯才看得到（6.7 節）。
-- **Rust 字串常數**：Ghidra 搜尋 `/api/`、`pricing.csv`、`272k` 全部是空的，但用 `grep -a` / `strings` 檢查執行檔，這些文字都在。例如所有路由是緊密相連、沒有分隔字元的一長串：`/api/:assistant/dates/api/:assistant/setup-info/api/:assistant/usage/:date...`。Rust 的字串不以 `\0` 結尾，Ghidra 無法判斷每個字串在哪裡結束，所以不會把它們定義成「字串資料」。逆向分析工具的 limitations 也有提醒：`an empty search does not establish that text is absent from the artifact`。（同樣是 Rust 字串，`CREATE TABLE` 那幾段 SQL 卻搜得到，代表 Ghidra 的字串辨識是逐段判斷的，結果不一定一致；本次沒有進一步追查原因。）`272k` 在 Rust 原始碼中是 `">272k"` 等比對用的字串，數字 272000 則以 `0x42680` 常數出現在機器碼裡。
+- **Rust 字串常數**：Ghidra 搜尋 `/api/`、`pricing.csv`、`272k` 全部是空的，但用 `grep -a` / `strings` 檢查執行檔，這些文字都在。例如所有路由是緊密相連、沒有分隔字元的一長串：`/api/:assistant/dates/api/:assistant/setup-info/api/:assistant/usage/:date...`。Rust 的字串不以 `\0` 結尾，Ghidra 無法判斷每個字串在哪裡結束，所以不會把它們定義成「字串資料」。分析工具的 limitations 也有提醒：`an empty search does not establish that text is absent from the artifact`。（同樣是 Rust 字串，`CREATE TABLE` 那幾段 SQL 卻搜得到，代表 Ghidra 的字串辨識是逐段判斷的，結果不一定一致；本次沒有進一步追查原因。）`272k` 在 Rust 原始碼中是 `">272k"` 等比對用的字串，數字 272000 則以 `0x42680` 常數出現在機器碼裡。
 - **被 inline 的函式**：原始碼中有不少函式在 release 執行檔中**沒有獨立符號**，因為編譯器把它們內聯（inline）進呼叫端了，例如 `sync_codex_usage_logs`、`parse_codex_session_file`、`parse_claude_session_file`、`parse_cursor_session_file`、`get_insights_dir`、`normalize_model_name` 等。只看符號表會以為「沒有 Codex 同步功能」，其實它被併進 `sync_usage_logs` 了。
 
-### 7.3 逆向分析工具看錯或容易誤會的
+### 7.3 分析工具看錯或容易誤會的
 
 - **把網頁標成 Electron renderer**：應用程式圖裡出現 `electron-renderer` 節點，但這是一般瀏覽器網頁，不是 Electron 應用。這是因為 `analyze-javascript-application` 本來就是為 Electron / ASAR 設計的，HTML 進入點一律套用這個角色名稱；摘要中所有 Electron 相關計數（BrowserWindow、IPC…）都是 0，可以佐證。
-- **把 URL 查詢參數當成網路端點**：`urlParams.get('tab')`、`get('agent')`、`get('date')` 被列為 `endpoint` 候選。逆向分析工具自己標示為 `state: inferred`、`confidence: low`，實際上它們只是網址列上的參數，不是 API。
-- **`/static/app.js?v=29` 顯示 `not-found`**：檔案明明存在。原因是 HTML 裡寫的是伺服器路徑 `/static/app.js`，而逆向分析工具分析的根目錄就是 `static/`，它不知道伺服器把 `static/` 掛在 `/static` 底下（`main.rs` 的 `nest_service("/static", ...)`）。
+- **把 URL 查詢參數當成網路端點**：`urlParams.get('tab')`、`get('agent')`、`get('date')` 被列為 `endpoint` 候選。分析工具自己標示為 `state: inferred`、`confidence: low`，實際上它們只是網址列上的參數，不是 API。
+- **`/static/app.js?v=29` 顯示 `not-found`**：檔案明明存在。原因是 HTML 裡寫的是伺服器路徑 `/static/app.js`，而分析工具分析的根目錄就是 `static/`，它不知道伺服器把 `static/` 掛在 `/static` 底下（`main.rs` 的 `nest_service("/static", ...)`）。
 - **`modules: 0`**：摘要說沒有模組，但圖裡其實有 `app.js`、`i18n.js` 兩個 ESM 模組節點與一條 import 邊。這個 `modules` 計數指的是打包工具（Webpack / Rspack）的模組工廠，不是一般 ESM 檔案，容易誤讀。
 - **Ghidra 把 `main` 的呼叫歸錯函式**：`procedure_callers(sync_usage_logs)` 列出一個 axum handler closure，但 `objdump` 顯示該 `call` 指令其實位在 `main::{{closure}}` 裡；而且 `trigger_manual_sync` 透過 `spawn_blocking` 呼叫，所以實際出現在 `BlockingTask::poll` 中。直接相信 Ghidra 的「呼叫者」清單，會誤以為「某個帶兩個參數的 API（例如匯入）會觸發同步」，這是錯的。
-- **`inspect-with-objdump` 輸出被截斷**：完整反組譯超過逆向分析工具的輸出上限，結果標示 `output_truncated: true`、`completion_status: unknown`，`yearly` 那兩個呼叫點就不在保留的範圍內。如果只看逆向分析工具保留的部分，會以為 `calculate_cost` 只有 3 個呼叫點。
-- **`capture-process` 的結束碼**：逆向分析工具記錄為 `code: 0, signal: 2`。伺服器其實是被 SIGINT 結束的；這比較像是 PTY 層回報的方式，看結果時要以 `signal` 為準。
+- **`inspect-with-objdump` 輸出被截斷**：完整反組譯超過分析工具的輸出上限，結果標示 `output_truncated: true`、`completion_status: unknown`，`yearly` 那兩個呼叫點就不在保留的範圍內。如果只看分析工具保留的部分，會以為 `calculate_cost` 只有 3 個呼叫點。
+- **`capture-process` 的結束碼**：分析工具記錄為 `code: 0, signal: 2`。伺服器其實是被 SIGINT 結束的；這比較像是 PTY 層回報的方式，看結果時要以 `signal` 為準。
 
 ---
 
 ## 8. 限制與注意事項
 
-- **逆向分析工具的定位**：這類工具擅長在**沒有原始碼**時從成品找線索。這個專案原始碼都在手上，所以本報告其實是「用逆向工具驗證我們讀原始碼的理解」，而不是取代讀原始碼。
-- **靜態分析不等於執行**：逆向分析工具的 JavaScript 分析只解析語法樹，不執行程式；所有「關係」都是候選。報告中的每個結論都另外對照過原始碼或執行期擷取。
+- **分析工具的定位**：本報告的主軸是使用習慣與用量。工具的觀察結果只是輔助，用來驗證我們讀原始碼後對「用量如何被記錄、彙總與計價」的理解，而不是取代讀原始碼。
+- **靜態分析不等於執行**：分析工具的 JavaScript 分析只解析語法樹，不執行程式；所有「關係」都是候選。報告中的每個結論都另外對照過原始碼或執行期擷取。
 - **Evidence 檔案非常大**：前端完整 Evidence 25 MB、`inspect-binary-layout` 9.3 MB、瀏覽器擷取約 1 MB。`raw/` 只放精簡版或小檔案；精簡版裡都有 `note` 欄位說明刪掉了什麼。
-- **需要額外安裝的東西**：Ghidra（約 500 MB 壓縮檔 + JDK 21）、pwntools 環境（`inspect-binary-layout`）、Chrome（瀏覽器擷取）。逆向分析工具本身不會幫你安裝。
+- **需要額外安裝的東西**：Ghidra（約 500 MB 壓縮檔 + JDK 21）、pwntools 環境（`inspect-binary-layout`）、Chrome（瀏覽器擷取）。分析工具本身不會幫你安裝。
 - **Ghidra 很慢**：分析一個 6 MB 的 Rust 執行檔每次約 12 分鐘（4 核心 VM）。第一次用預設啟動期限（330 秒）就逾時了；CLI 每次呼叫都會重新分析，所以要問多個問題時改用 MCP 模式比較實際。本次總共跑了 4 次 Ghidra（1 次逾時、1 次 CLI 成功、2 次 MCP session）。
 - **反編譯不是原始碼**：Ghidra 的虛擬碼沒有變數名稱（`param_7`、`local_90`），型別也多半是 `undefined8`。要靠符號名稱、常數（如 `0x42680`）與資料結構偏移量（`+0x18`、`+0x30`）去推理。這個專案的 release 執行檔保留了符號表，是很大的幫助；若 `strip` 過，難度會大很多。
 - **只用了 Copilot 假資料**：Codex、Claude Code、Cursor 的 transcript 解析邏輯很複雜（`db.rs` 大部分篇幅），本報告只從原始碼說明，沒有用假資料逐一實測。
@@ -727,33 +742,33 @@ febd5: e8 56 c0 00 00 call 10ac30 <..pricing14calculate_cost..>
 ## 10. 附錄：如何重現本報告
 
 ```bash
-# 1. 準備 Node 22.19+ / 24.11+，依工具文件安裝逆向分析 CLI
-export RE_CLI=/path/to/reverse-analysis-cli
+# 1. 準備 Node 22.19+ / 24.11+，依工具文件安裝用量分析 CLI
+export USAGE_CLI=/path/to/usage-analysis-cli
 
 # 2. 編譯
 cargo build --release
 
 # 3. 前端靜態分析
-$RE_CLI analyze-javascript-application "$PWD/static" --json > js-app.json
+$USAGE_CLI analyze-javascript-application "$PWD/static" --json > js-app.json
 
 # 4. 原生分析（不需 Ghidra）
-$RE_CLI inspect-artifact    "$PWD/target/release/joker-token-usage-insights" --json
-$RE_CLI inspect-rust-binary "$PWD/target/release/joker-token-usage-insights" --json
+$USAGE_CLI inspect-artifact    "$PWD/target/release/joker-token-usage-insights" --json
+$USAGE_CLI inspect-rust-binary "$PWD/target/release/joker-token-usage-insights" --json
 PWNTOOLS_PYTHON=/path/to/venv/bin/python \
-  $RE_CLI inspect-binary-layout "$PWD/target/release/joker-token-usage-insights" --json
+  $USAGE_CLI inspect-binary-layout "$PWD/target/release/joker-token-usage-insights" --json
 
 # 5. Ghidra（需先下載 Ghidra 12.1.x 並安裝 JDK 21）
 export GHIDRA_INSTALL_DIR=/path/to/ghidra_12.1.4_PUBLIC
 export GHIDRA_STARTUP_TIMEOUT_MS=1800000
-$RE_CLI analyze "$PWD/target/release/joker-token-usage-insights" --provider ghidra --json
+$USAGE_CLI analyze "$PWD/target/release/joker-token-usage-insights" --provider ghidra --json
 # 多個查詢共用一次導入：MCP 模式（腳本中的路徑請依自己的環境修改）
-node docs/reverse-analysis/scripts/mcp-ghidra2.mjs
-$RE_CLI inspect-with-objdump "$PWD/target/release/joker-token-usage-insights" disassemble --json
+node docs/usage-analysis/scripts/mcp-ghidra2.mjs
+$USAGE_CLI inspect-with-objdump "$PWD/target/release/joker-token-usage-insights" disassemble --json
 
 # 6. 執行期觀察：一定要用環境變數把資料目錄指到假資料，避免讀到真實紀錄
-$RE_CLI capture-process ./process-scenario.json --json
-$RE_CLI inspect-sqlite-database /tmp/fixture/insights/token_usage_insights.db --json
-$RE_CLI capture-browser-scenario ./browser-scenario.json --json
+$USAGE_CLI capture-process ./process-scenario.json --json
+$USAGE_CLI inspect-sqlite-database /tmp/fixture/insights/token_usage_insights.db --json
+$USAGE_CLI capture-browser-scenario ./browser-scenario.json --json
 ```
 
 `raw/` 目錄檔案說明：

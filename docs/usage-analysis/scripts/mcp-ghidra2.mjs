@@ -2,8 +2,8 @@ import { spawn } from 'node:child_process';
 import { writeFileSync } from 'node:fs';
 
 const BIN = '/workspace/target/release/joker-token-usage-insights';
-const OUT = '/tmp/reverse-analysis/mcp';
-const p = spawn(process.env.RE_CLI, ['--mcp'], { stdio: ['pipe', 'pipe', 'inherit'], env: process.env });
+const OUT = '/tmp/usage-analysis/mcp';
+const p = spawn(process.env.USAGE_CLI, ['--mcp'], { stdio: ['pipe', 'pipe', 'inherit'], env: process.env });
 let buf = '';
 const pending = new Map();
 let id = 0;
@@ -43,7 +43,7 @@ const findAddr = (m, needle) => {
   return hit[2] ?? hit[3];
 };
 
-await req('initialize', { protocolVersion: '2025-06-18', capabilities: {}, clientInfo: { name: 'reverse-analysis-report', version: '1' } });
+await req('initialize', { protocolVersion: '2025-06-18', capabilities: {}, clientInfo: { name: 'usage-analysis-report', version: '1' } });
 p.stdin.write(JSON.stringify({ jsonrpc: '2.0', method: 'notifications/initialized' }) + '\n');
 
 await call('01-open', 'open_binary', { path: BIN, provider_id: 'ghidra' });
