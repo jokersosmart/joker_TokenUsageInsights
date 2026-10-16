@@ -1,0 +1,16 @@
+{
+  "error": "Analysis failed",
+  "code": "provider_timeout",
+  "category": "timeout",
+  "message": "Analysis took too long. Try a smaller request, then run `doctor` if it continues.",
+  "details": {
+    "operation": "list_documents",
+    "timeout_ms": 330000,
+    "diagnostics": {
+      "target_path": "/workspace/target/release/joker-token-usage-insights",
+      "target_sha256": "370028f6399c521f1fc16f86d83973888e6fdc536f79b2fd44af90a2022c81fd",
+      "transport": "unix-socket",
+      "provider_version": "12.1.4"
+    }
+  }
+}

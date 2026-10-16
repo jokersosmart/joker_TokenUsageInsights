@@ -1,0 +1,53 @@
+{
+  "evidence_id": "ev_765aadc038afd55fb9e9f924522673d4cba1ba811ed76478a0fd13a42990901f",
+  "operation": "inspect_with_objdump",
+  "provider": {
+    "id": "gnu.objdump",
+    "name": "GNU objdump",
+    "version": null
+  },
+  "subject": {
+    "name": "joker-token-usage-insights",
+    "digest": {
+      "sha256": "370028f6399c521f1fc16f86d83973888e6fdc536f79b2fd44af90a2022c81fd"
+    },
+    "local_path": "/workspace/target/release/joker-token-usage-insights",
+    "format": "unknown",
+    "architecture": null
+  },
+  "parameters": {
+    "path": "/workspace/target/release/joker-token-usage-insights",
+    "operation": "machine_code_listing",
+    "follow_debug_links": false,
+    "provider_executable": "objdump",
+    "command_arguments": [
+      "-d",
+      "/workspace/target/release/joker-token-usage-insights"
+    ]
+  },
+  "normalized_result": {
+    "exit_code": null,
+    "signal": "SIGKILL",
+    "output_truncated": true,
+    "completion_status": "unknown",
+    "artifact_sha256_after": "370028f6399c521f1fc16f86d83973888e6fdc536f79b2fd44af90a2022c81fd",
+    "artifact_changed": false
+  },
+  "retained_stdout_lines": 253853,
+  "call_lines_in_tool_stdout": [
+    " bc85c: e8 8f 6a fb ff call 732f0 <_ZN26joker_token_usage_insights2db15sync_usage_logs17hcbd23c010fee44d8E>",
+    " bcff0: e8 fb 62 fb ff call 732f0 <_ZN26joker_token_usage_insights2db15sync_usage_logs17hcbd23c010fee44d8E>",
+    " cfb40: e8 ab 37 fa ff call 732f0 <_ZN26joker_token_usage_insights2db15sync_usage_logs17hcbd23c010fee44d8E>",
+    " d8f1b: e8 10 1d 03 00 call 10ac30 <_ZN26joker_token_usage_insights7pricing14calculate_cost17h0cb7b8234d7e4794E>",
+    " fde28: e8 03 ce 00 00 call 10ac30 <_ZN26joker_token_usage_insights7pricing14calculate_cost17h0cb7b8234d7e4794E>",
+    " febd5: e8 56 c0 00 00 call 10ac30 <_ZN26joker_token_usage_insights7pricing14calculate_cost17h0cb7b8234d7e4794E>"
+  ],
+  "note": "Projection of 35 MB inspect-with-objdump Evidence. call_lines_in_tool_stdout = grep of tool-retained stdout for calls to calculate_cost / sync_usage_logs. Plain `objdump -d` (outside the analysis tool) additionally finds calculate_cost calls at 0x154308 and 0x1550d4, beyond the truncated range.",
+  "plain_objdump_calculate_cost_calls": [
+    " d8f1b: call 10ac30 <_ZN26joker_token_usage_insights7pricing14calculate_cost17h0cb7b8234d7e4794E>",
+    " fde28: call 10ac30 <_ZN26joker_token_usage_insights7pricing14calculate_cost17h0cb7b8234d7e4794E>",
+    " febd5: call 10ac30 <_ZN26joker_token_usage_insights7pricing14calculate_cost17h0cb7b8234d7e4794E>",
+    " 154308: call 10ac30 <_ZN26joker_token_usage_insights7pricing14calculate_cost17h0cb7b8234d7e4794E>",
+    " 1550d4: call 10ac30 <_ZN26joker_token_usage_insights7pricing14calculate_cost17h0cb7b8234d7e4794E>"
+  ]
+}

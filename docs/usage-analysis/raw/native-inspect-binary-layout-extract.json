@@ -1,0 +1,240 @@
+{
+  "evidence_id": "ev_ce2cd60334e93262c7844d2f4d615e7102da62506dfc834699898c1e5cfb442c",
+  "operation": "inspect_binary_layout",
+  "provider": {
+    "id": "pwntools-elf",
+    "name": "pwntools ELF adapter",
+    "version": "pwntools@4.15.0;pyelftools@0.33;unicorn@2.1.2"
+  },
+  "subject": {
+    "name": "joker-token-usage-insights",
+    "digest": {
+      "sha256": "370028f6399c521f1fc16f86d83973888e6fdc536f79b2fd44af90a2022c81fd"
+    },
+    "local_path": "/workspace/target/release/joker-token-usage-insights",
+    "format": "elf",
+    "architecture": "x86_64"
+  },
+  "normalized_result": {
+    "architecture": {
+      "machine": "EM_X86_64",
+      "bits": 64,
+      "byte_order": "little"
+    },
+    "format": "elf",
+    "image_type": "ET_DYN",
+    "entry_point": {
+      "reported_value": "0x566e0",
+      "meaning": "linked-virtual-address",
+      "execution_status": "unknown"
+    },
+    "mitigations": {
+      "evidence_kind": "inferred",
+      "position_independent": true,
+      "nx_indicator": true,
+      "executable_stack_indicator": false,
+      "stack_canary_indicator": false,
+      "relro": "Full"
+    },
+    "runtime_load_base": null,
+    "needed_libraries": [
+      "libgcc_s.so.1",
+      "libm.so.6",
+      "libc.so.6",
+      "ld-linux-x86-64.so.2"
+    ],
+    "interpreters": [
+      "/lib64/ld-linux-x86-64.so.2"
+    ],
+    "sections": [
+      {
+        "name": "",
+        "size": "0x0",
+        "type": "SHT_NULL"
+      },
+      {
+        "name": ".interp",
+        "size": "0x1c",
+        "type": "SHT_PROGBITS"
+      },
+      {
+        "name": ".note.gnu.property",
+        "size": "0x20",
+        "type": "SHT_NOTE"
+      },
+      {
+        "name": ".note.gnu.build-id",
+        "size": "0x24",
+        "type": "SHT_NOTE"
+      },
+      {
+        "name": ".note.ABI-tag",
+        "size": "0x20",
+        "type": "SHT_NOTE"
+      },
+      {
+        "name": ".gnu.hash",
+        "size": "0xe0",
+        "type": "SHT_GNU_HASH"
+      },
+      {
+        "name": ".dynsym",
+        "size": "0x10c8",
+        "type": "SHT_DYNSYM"
+      },
+      {
+        "name": ".dynstr",
+        "size": "0x991",
+        "type": "SHT_STRTAB"
+      },
+      {
+        "name": ".gnu.version",
+        "size": "0x166",
+        "type": "SHT_GNU_versym"
+      },
+      {
+        "name": ".gnu.version_r",
+        "size": "0x1d0",
+        "type": "SHT_GNU_verneed"
+      },
+      {
+        "name": ".rela.dyn",
+        "size": "0x3c138",
+        "type": "SHT_RELA"
+      },
+      {
+        "name": ".rela.plt",
+        "size": "0x270",
+        "type": "SHT_RELA"
+      },
+      {
+        "name": ".init",
+        "size": "0x1b",
+        "type": "SHT_PROGBITS"
+      },
+      {
+        "name": ".plt",
+        "size": "0x1b0",
+        "type": "SHT_PROGBITS"
+      },
+      {
+        "name": ".plt.got",
+        "size": "0x98",
+        "type": "SHT_PROGBITS"
+      },
+      {
+        "name": ".text",
+        "size": "0x390c45",
+        "type": "SHT_PROGBITS"
+      },
+      {
+        "name": ".fini",
+        "size": "0xd",
+        "type": "SHT_PROGBITS"
+      },
+      {
+        "name": ".rodata",
+        "size": "0x4c864",
+        "type": "SHT_PROGBITS"
+      },
+      {
+        "name": ".eh_frame_hdr",
+        "size": "0xd43c",
+        "type": "SHT_PROGBITS"
+      },
+      {
+        "name": ".eh_frame",
+        "size": "0x5c3cc",
+        "type": "SHT_PROGBITS"
+      },
+      {
+        "name": ".gcc_except_table",
+        "size": "0x1d850",
+        "type": "SHT_PROGBITS"
+      },
+      {
+        "name": ".tdata",
+        "size": "0xa0",
+        "type": "SHT_PROGBITS"
+      },
+      {
+        "name": ".tbss",
+        "size": "0xe0",
+        "type": "SHT_NOBITS"
+      },
+      {
+        "name": ".init_array",
+        "size": "0x10",
+        "type": "SHT_INIT_ARRAY"
+      },
+      {
+        "name": ".fini_array",
+        "size": "0x8",
+        "type": "SHT_FINI_ARRAY"
+      },
+      {
+        "name": ".data.rel.ro",
+        "size": "0x23ec8",
+        "type": "SHT_PROGBITS"
+      },
+      {
+        "name": ".dynamic",
+        "size": "0x220",
+        "type": "SHT_DYNAMIC"
+      },
+      {
+        "name": ".got",
+        "size": "0x1e58",
+        "type": "SHT_PROGBITS"
+      },
+      {
+        "name": ".data",
+        "size": "0x3770",
+        "type": "SHT_PROGBITS"
+      },
+      {
+        "name": ".bss",
+        "size": "0x5a0",
+        "type": "SHT_NOBITS"
+      },
+      {
+        "name": ".comment",
+        "size": "0x80",
+        "type": "SHT_PROGBITS"
+      },
+      {
+        "name": ".symtab",
+        "size": "0x405c0",
+        "type": "SHT_SYMTAB"
+      },
+      {
+        "name": ".strtab",
+        "size": "0x9f13a",
+        "type": "SHT_STRTAB"
+      },
+      {
+        "name": ".shstrtab",
+        "size": "0x13d",
+        "type": "SHT_STRTAB"
+      }
+    ],
+    "segments_count": 14,
+    "symbols_total": 11163,
+    "relocations_total": 10279,
+    "limitations": [
+      "PT_NULL payload fields are unused and retain their reported numbers without file-byte or permission claims. Zero-file-size segments provide no file bytes.",
+      "SHN_XINDEX symbol values remain unresolved in this upstream representation; an external index table does not establish a resolved index in this report.",
+      "Reported values preserve linked addresses, section offsets, TLS offsets, alignment and absolute values separately. Runtime load base and library paths are unknown.",
+      "Names are display strings plus raw bytes and file ranges where resolvable; section/table/entry indices preserve identity and duplicates. Name ranges include their terminating NUL; raw name bytes exclude it.",
+      "Ordinary relocation rows cover REL/RELA. RELR tables retain complete encoded bytes and upstream-decoded offsets as derived evidence; per-offset packed-word locations and implicit addends remain unknown. Relocation inventory completeness is unknown, including other encodings and missing section tables.",
+      "Relocation symbol index zero uses a zero symbol value without a table lookup. Positive indices reference validated original symbol-table entries; raw table and symbol indices remain reported.",
+      "Relocatable relocation targets with SHN_UNDEF or inactive SHT_NULL headers retain their reported section index/offset as unknown; they do not establish an associated target section.",
+      "GOT/PLT are derived upstream convenience maps; PLT inference can emulate selected instructions in Unicorn. They do not establish target runtime behavior; aliases may collapse and warnings may indicate incomplete coverage. Their completeness is unknown.",
+      "Mitigations are upstream static heuristics, not runtime protection. ET_DYN does not prove an executable; absent canary symbols do not prove every function unprotected.",
+      "This profile inspects ELF EXEC/DYN/REL layout only. It does not analyze recorded cores, resolve loaded libraries, launch the target as a host process or start a debugger.",
+      "Symbol/relocation inventories reflect original section tables. A sectionless image can still report dynamic dependency names; missing tables do not prove absence of dynamic symbols or relocations.",
+      "Effective owned Python resource soft limits: {\"address_space_bytes\": 3221225472, \"cpu_seconds\": 30, \"file_size_bytes\": 67108864}. Inherited tighter limits are retained."
+    ]
+  },
+  "note": "Projection of the 9.3 MB inspect-binary-layout Evidence; full symbol/relocation lists omitted."
+}
