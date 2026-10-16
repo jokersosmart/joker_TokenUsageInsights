@@ -1,0 +1,468 @@
+[
+  {
+    "tool": "open_binary",
+    "arguments": {
+      "path": "/workspace/target/release/joker-token-usage-insights",
+      "provider_id": "ghidra"
+    },
+    "elapsed_ms": 58,
+    "evidence_id": null,
+    "operation": null,
+    "normalized_result": null,
+    "limitations": null
+  },
+  {
+    "tool": "binary_overview",
+    "arguments": {},
+    "elapsed_ms": 713620,
+    "evidence_id": "ev_0913e2e85a2aee32a7e28fa2473ae010a353d6aab7d4844e283212058c464eef",
+    "operation": "binary_overview",
+    "normalized_result": {
+      "document": "target-370028f6399c.bin",
+      "image_base": "0x100000",
+      "segments": [
+        {
+          "name": "segment_2.1",
+          "start": "0x100000",
+          "end": "0x100350",
+          "length": 848,
+          "image_base": "0x100000",
+          "address_space": "ram"
+        },
+        {
+          "name": ".interp",
+          "start": "0x100350",
+          "end": "0x10036c",
+          "length": 28,
+          "image_base": "0x100000",
+          "address_space": "ram"
+        },
+        {
+          "name": ".note.gnu.property",
+          "start": "0x100370",
+          "end": "0x100390",
+          "length": 32,
+          "image_base": "0x100000",
+          "address_space": "ram"
+        },
+        {
+          "name": ".note.gnu.build-id",
+          "start": "0x100390",
+          "end": "0x1003b4",
+          "length": 36,
+          "image_base": "0x100000",
+          "address_space": "ram"
+        },
+        {
+          "name": ".note.ABI-tag",
+          "start": "0x1003b4",
+          "end": "0x1003d4",
+          "length": 32,
+          "image_base": "0x100000",
+          "address_space": "ram"
+        },
+        {
+          "name": ".gnu.hash",
+          "start": "0x1003d8",
+          "end": "0x1004b8",
+          "length": 224,
+          "image_base": "0x100000",
+          "address_space": "ram"
+        },
+        {
+          "name": ".dynsym",
+          "start": "0x1004b8",
+          "end": "0x101580",
+          "length": 4296,
+          "image_base": "0x100000",
+          "address_space": "ram"
+        },
+        {
+          "name": ".dynstr",
+          "start": "0x101580",
+          "end": "0x101f11",
+          "length": 2449,
+          "image_base": "0x100000",
+          "address_space": "ram"
+        },
+        {
+          "name": ".gnu.version",
+          "start": "0x101f12",
+          "end": "0x102078",
+          "length": 358,
+          "image_base": "0x100000",
+          "address_space": "ram"
+        },
+        {
+          "name": ".gnu.version_r",
+          "start": "0x102078",
+          "end": "0x102248",
+          "length": 464,
+          "image_base": "0x100000",
+          "address_space": "ram"
+        },
+        {
+          "name": ".rela.dyn",
+          "start": "0x102248",
+          "end": "0x13e380",
+          "length": 246072,
+          "image_base": "0x100000",
+          "address_space": "ram"
+        },
+        {
+          "name": ".rela.plt",
+          "start": "0x13e380",
+          "end": "0x13e5f0",
+          "length": 624,
+          "image_base": "0x100000",
+          "address_space": "ram"
+        },
+        {
+          "name": ".init",
+          "start": "0x13f000",
+          "end": "0x13f01b",
+          "length": 27,
+          "image_base": "0x100000",
+          "address_space": "ram"
+        },
+        {
+          "name": ".plt",
+          "start": "0x13f020",
+          "end": "0x13f1d0",
+          "length": 432,
+          "image_base": "0x100000",
+          "address_space": "ram"
+        },
+        {
+          "name": ".plt.got",
+          "start": "0x13f1d0",
+          "end": "0x13f268",
+          "length": 152,
+          "image_base": "0x100000",
+          "address_space": "ram"
+        },
+        {
+          "name": ".text",
+          "start": "0x13f270",
+          "end": "0x4cfeb5",
+          "length": 3738693,
+          "image_base": "0x100000",
+          "address_space": "ram"
+        },
+        {
+          "name": ".fini",
+          "start": "0x4cfeb8",
+          "end": "0x4cfec5",
+          "length": 13,
+          "image_base": "0x100000",
+          "address_space": "ram"
+        },
+        {
+          "name": ".rodata",
+          "start": "0x4d0000",
+          "end": "0x51c864",
+          "length": 313444,
+          "image_base": "0x100000",
+          "address_space": "ram"
+        },
+        {
+          "name": ".eh_frame_hdr",
+          "start": "0x51c864",
+          "end": "0x529ca0",
+          "length": 54332,
+          "image_base": "0x100000",
+          "address_space": "ram"
+        },
+        {
+          "name": ".eh_frame",
+          "start": "0x529ca0",
+          "end": "0x58606c",
+          "length": 377804,
+          "image_base": "0x100000",
+          "address_space": "ram"
+        },
+        {
+          "name": ".gcc_except_table",
+          "start": "0x58606c",
+          "end": "0x5a38bc",
+          "length": 120912,
+          "image_base": "0x100000",
+          "address_space": "ram"
+        },
+        {
+          "name": ".tdata",
+          "start": "0x5a4008",
+          "end": "0x5a40a8",
+          "length": 160,
+          "image_base": "0x100000",
+          "address_space": "ram"
+        },
+        {
+          "name": ".init_array",
+          "start": "0x5a40a8",
+          "end": "0x5a40b8",
+          "length": 16,
+          "image_base": "0x100000",
+          "address_space": "ram"
+        },
+        {
+          "name": ".fini_array",
+          "start": "0x5a40b8",
+          "end": "0x5a40c0",
+          "length": 8,
+          "image_base": "0x100000",
+          "address_space": "ram"
+        },
+        {
+          "name": ".data.rel.ro",
+          "start": "0x5a40c0",
+          "end": "0x5c7f88",
+          "length": 147144,
+          "image_base": "0x100000",
+          "address_space": "ram"
+        },
+        {
+          "name": ".dynamic",
+          "start": "0x5c7f88",
+          "end": "0x5c81a8",
+          "length": 544,
+          "image_base": "0x100000",
+          "address_space": "ram"
+        },
+        {
+          "name": ".got",
+          "start": "0x5c81a8",
+          "end": "0x5ca000",
+          "length": 7768,
+          "image_base": "0x100000",
+          "address_space": "ram"
+        },
+        {
+          "name": ".data",
+          "start": "0x5ca000",
+          "end": "0x5cd770",
+          "length": 14192,
+          "image_base": "0x100000",
+          "address_space": "ram"
+        },
+        {
+          "name": ".bss",
+          "start": "0x5cd770",
+          "end": "0x5cdd10",
+          "length": 1440,
+          "image_base": "0x100000",
+          "address_space": "ram"
+        },
+        {
+          "name": "EXTERNAL",
+          "start": "0x5ce000",
+          "end": "0x5ce590",
+          "length": 1424,
+          "image_base": "0x100000",
+          "address_space": "ram"
+        },
+        {
+          "name": ".comment",
+          "start": ".comment:0x0",
+          "end": ".comment:0x80",
+          "length": 128,
+          "image_base": "0x100000",
+          "address_space": ".comment"
+        },
+        {
+          "name": ".shstrtab",
+          "start": ".shstrtab:0x0",
+          "end": ".shstrtab:0x13d",
+          "length": 317,
+          "image_base": "0x100000",
+          "address_space": ".shstrtab"
+        },
+        {
+          "name": ".strtab",
+          "start": ".strtab:0x0",
+          "end": ".strtab:0x9f13a",
+          "length": 651578,
+          "image_base": "0x100000",
+          "address_space": ".strtab"
+        },
+        {
+          "name": ".symtab",
+          "start": ".symtab:0x0",
+          "end": ".symtab:0x405c0",
+          "length": 263616,
+          "image_base": "0x100000",
+          "address_space": ".symtab"
+        },
+        {
+          "name": "_elfSectionHeaders",
+          "start": "_elfSectionHeaders:0x0",
+          "end": "_elfSectionHeaders:0x880",
+          "length": 2176,
+          "image_base": "0x100000",
+          "address_space": "_elfSectionHeaders"
+        }
+      ],
+      "segment_count": 35,
+      "procedure_count": 7381,
+      "string_count": 11840
+    },
+    "limitations": [
+      "Derived by a composed workflow.",
+      "A headless Ghidra session contains exactly one imported Program, unlike Hopper's multi-document GUI session.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Charset is reported, while a non-missing terminator cannot distinguish a present terminator from a fixed or Pascal layout.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "External functions and local thunks are distinct; procedure metadata identifies both and preserves a thunk target when Ghidra resolves one.",
+      "Memory-block end addresses are exclusive; permissions come from Ghidra MemoryBlock flags rather than inference from section names.",
+      "Only Ghidra-defined string Data is observed; packed or undefined string bytes may be absent. Completeness applies to that inventory, and an empty search does not establish that text is absent from the artifact. If an address is known, use read_bytes and xrefs to inspect bytes and references.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results."
+    ]
+  },
+  {
+    "tool": "search_procedures",
+    "arguments": {
+      "pattern": "calculate_cost"
+    },
+    "elapsed_ms": 11,
+    "evidence_id": "ev_e3135d241cf46d1c14e8ceb3cef3accd75662a7e322c1ec463a8a03d263cee88",
+    "operation": "search_procedures",
+    "normalized_result": [
+      {
+        "address": "0x20ac30",
+        "value": "joker_token_usage_insights::pricing::calculate_cost"
+      }
+    ],
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Regex mode uses Java Pattern semantics. Matcher or compiler stack exhaustion returns a resource constraint without closing the session; literal mode avoids regex recursion and returns complete matching values."
+    ]
+  },
+  {
+    "tool": "search_procedures",
+    "arguments": {
+      "pattern": "sync_usage_logs"
+    },
+    "elapsed_ms": 5,
+    "evidence_id": "ev_e08fe864716368bd0d8f93c7dcb2516e0e1e8ef40ed3f62799791cd234e76142",
+    "operation": "search_procedures",
+    "normalized_result": [
+      {
+        "address": "0x1732f0",
+        "value": "joker_token_usage_insights::db::sync_usage_logs"
+      }
+    ],
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Regex mode uses Java Pattern semantics. Matcher or compiler stack exhaustion returns a resource constraint without closing the session; literal mode avoids regex recursion and returns complete matching values."
+    ]
+  },
+  {
+    "tool": "search_strings",
+    "arguments": {
+      "pattern": "/api/"
+    },
+    "elapsed_ms": 10,
+    "evidence_id": "ev_4034b1d0b9c1fed8ad03028757b8ad13e418edcd1e0cad3519c55f4e589a6e14",
+    "operation": "search_strings",
+    "normalized_result": [],
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Only Ghidra-defined string Data is observed; packed or undefined string bytes may be absent. Completeness applies to that inventory, and an empty search does not establish that text is absent from the artifact. If an address is known, use read_bytes and xrefs to inspect bytes and references.",
+      "Regex mode uses Java Pattern semantics. Matcher or compiler stack exhaustion returns a resource constraint without closing the session; literal mode avoids regex recursion and returns complete matching values."
+    ]
+  },
+  {
+    "tool": "search_strings",
+    "arguments": {
+      "pattern": "pricing.csv"
+    },
+    "elapsed_ms": 56,
+    "evidence_id": "ev_7406db32f31168164a9886333e1b29f69f949de1d9be2f7e92df1103807a7be4",
+    "operation": "search_strings",
+    "normalized_result": [],
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Only Ghidra-defined string Data is observed; packed or undefined string bytes may be absent. Completeness applies to that inventory, and an empty search does not establish that text is absent from the artifact. If an address is known, use read_bytes and xrefs to inspect bytes and references.",
+      "Regex mode uses Java Pattern semantics. Matcher or compiler stack exhaustion returns a resource constraint without closing the session; literal mode avoids regex recursion and returns complete matching values."
+    ]
+  },
+  {
+    "tool": "search_strings",
+    "arguments": {
+      "pattern": "CREATE TABLE IF NOT EXISTS"
+    },
+    "elapsed_ms": 6,
+    "evidence_id": "ev_0914e093ba75fdb0d5c351a0eb5ab99958e5b3e76a9de971e02bf4302cec3f32",
+    "operation": "search_strings",
+    "normalized_result": [
+      {
+        "address": "0x4d208a",
+        "value": "CREATE TABLE IF NOT EXISTS usage_entries (\n            id INTEGER PRIMARY KEY AUTOINCREMENT,\n            assistant_type TEXT NOT NULL, -- 'antigravity', 'copilot', 'codex', 'claude', 'cursor'\n            timestamp TEXT NOT NULL,\n            date TEXT NOT NULL,\n            session_id TEXT NOT NULL,\n            session_name TEXT,\n            transcript_path TEXT,\n            cwd TEXT,\n            version TEXT,\n            turn_no INTEGER NOT NULL,\n            model TEXT,\n            model_id TEXT,\n            model_signature TEXT,\n            \n            -- Token Statistics\n            tokens_input INTEGER,\n            tokens_output INTEGER,\n            tokens_cache_read INTEGER,\n            tokens_cache_write INTEGER,\n            tokens_reasoning INTEGER,\n            tokens_total INTEGER,\n            \n            -- Delta Token Statistics\n            delta_input INTEGER,\n            delta_output INTEGER,\n            delta_cache_read INTEGER,\n            delta_cache_write INTEGER,\n            delta_reasoning INTEGER,\n            delta_total INTEGER,\n            \n            -- Duration and Request Count\n            duration_ms INTEGER,\n            premium_requests INTEGER,\n\n            -- Codex-specific fields\n            parent_session_id TEXT,\n            agent_nickname TEXT,\n            agent_role TEXT,\n            reasoning_effort TEXT\n        )"
+      },
+      {
+        "address": "0x4d2947",
+        "value": "CREATE TABLE IF NOT EXISTS sync_state (\n            filename TEXT PRIMARY KEY,\n            last_synced_size INTEGER NOT NULL,\n            last_synced_time INTEGER NOT NULL\n        )"
+      },
+      {
+        "address": "0x4d29fc",
+        "value": "CREATE TABLE IF NOT EXISTS cursor_model_signatures (\n            source_id TEXT NOT NULL,\n            signature TEXT NOT NULL,\n            model TEXT NOT NULL,\n            is_ambiguous INTEGER NOT NULL DEFAULT 0,\n            PRIMARY KEY (source_id, signature)\n        )"
+      },
+      {
+        "address": "0x4d2b09",
+        "value": "CREATE TABLE IF NOT EXISTS cursor_session_metadata (\n            source_id TEXT NOT NULL,\n            session_id TEXT NOT NULL,\n            cwd TEXT,\n            mode TEXT,\n            PRIMARY KEY (source_id, session_id)\n        )"
+      },
+      {
+        "address": "0x4edeaa",
+        "value": "CREATE TABLE IF NOT EXISTS %Q.'%q_stat'(id INTEGER PRIMARY KEY, value BLOB);"
+      }
+    ],
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Only Ghidra-defined string Data is observed; packed or undefined string bytes may be absent. Completeness applies to that inventory, and an empty search does not establish that text is absent from the artifact. If an address is known, use read_bytes and xrefs to inspect bytes and references.",
+      "Regex mode uses Java Pattern semantics. Matcher or compiler stack exhaustion returns a resource constraint without closing the session; literal mode avoids regex recursion and returns complete matching values."
+    ]
+  },
+  {
+    "tool": "search_strings",
+    "arguments": {
+      "pattern": "272k"
+    },
+    "elapsed_ms": 5,
+    "evidence_id": "ev_e18ce171961a9c7eaf84418ac948c1dc7ce4f77283d977ed58cd7a93dd7bd56c",
+    "operation": "search_strings",
+    "normalized_result": [],
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Only Ghidra-defined string Data is observed; packed or undefined string bytes may be absent. Completeness applies to that inventory, and an empty search does not establish that text is absent from the artifact. If an address is known, use read_bytes and xrefs to inspect bytes and references.",
+      "Regex mode uses Java Pattern semantics. Matcher or compiler stack exhaustion returns a resource constraint without closing the session; literal mode avoids regex recursion and returns complete matching values."
+    ]
+  },
+  {
+    "tool": "close_binary",
+    "arguments": {},
+    "elapsed_ms": 790,
+    "evidence_id": null,
+    "operation": null,
+    "normalized_result": null,
+    "limitations": null
+  }
+]

@@ -1,0 +1,1689 @@
+{
+  "evidence_id": "ev_979e6c1976f4bb2fca2dc7591c3885580333e447fa0b4596514f1458a84ace1b",
+  "operation": "capture_browser_scenario",
+  "provider": {
+    "id": "tool-playwright-browser-scenario",
+    "name": "Playwright browser scenario capture provider",
+    "version": "1"
+  },
+  "scenario": {
+    "start_origin": "http://localhost:3003",
+    "action_count": 1,
+    "secret_references": [],
+    "network_content": {
+      "request_body": false,
+      "response_body": true,
+      "header_values": false
+    },
+    "event_families": [
+      "network"
+    ]
+  },
+  "browser": {
+    "mode": "launch",
+    "process_ownership": "provider-owned",
+    "cleanup": "terminated-owned-process",
+    "product": "Chromium",
+    "version": "154.0.8037.92"
+  },
+  "requests": [
+    {
+      "transaction_id": "request-1",
+      "method": "GET",
+      "resource_type": "document",
+      "url": "http://localhost:3003/?agent=copilot&tab=daily&date=2026-10-15"
+    },
+    {
+      "transaction_id": "request-2",
+      "method": "GET",
+      "resource_type": "stylesheet",
+      "url": "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+    },
+    {
+      "transaction_id": "request-3",
+      "method": "GET",
+      "resource_type": "stylesheet",
+      "url": "http://localhost:3003/static/styles.css?v=17"
+    },
+    {
+      "transaction_id": "request-4",
+      "method": "GET",
+      "resource_type": "script",
+      "url": "https://cdn.jsdelivr.net/npm/chart.js"
+    },
+    {
+      "transaction_id": "request-5",
+      "method": "GET",
+      "resource_type": "script",
+      "url": "https://cdn.jsdelivr.net/npm/marked/marked.min.js"
+    },
+    {
+      "transaction_id": "request-6",
+      "method": "GET",
+      "resource_type": "script",
+      "url": "https://cdn.jsdelivr.net/npm/dompurify@3.2.3/dist/purify.min.js"
+    },
+    {
+      "transaction_id": "request-7",
+      "method": "GET",
+      "resource_type": "image",
+      "url": "http://localhost:3003/static/favicon-v2.png"
+    },
+    {
+      "transaction_id": "request-8",
+      "method": "GET",
+      "resource_type": "image",
+      "url": "http://localhost:3003/static/antigravity.webp"
+    },
+    {
+      "transaction_id": "request-9",
+      "method": "GET",
+      "resource_type": "image",
+      "url": "http://localhost:3003/static/githubcopilot.webp"
+    },
+    {
+      "transaction_id": "request-10",
+      "method": "GET",
+      "resource_type": "image",
+      "url": "http://localhost:3003/static/codex.webp"
+    },
+    {
+      "transaction_id": "request-11",
+      "method": "GET",
+      "resource_type": "image",
+      "url": "http://localhost:3003/static/claude-code-logo.svg"
+    },
+    {
+      "transaction_id": "request-12",
+      "method": "GET",
+      "resource_type": "image",
+      "url": "http://localhost:3003/static/cursor-logo.svg"
+    },
+    {
+      "transaction_id": "request-13",
+      "method": "GET",
+      "resource_type": "script",
+      "url": "http://localhost:3003/static/app.js?v=29"
+    },
+    {
+      "transaction_id": "request-14",
+      "method": "GET",
+      "resource_type": "stylesheet",
+      "url": "http://localhost:3003/static/css/variables.css"
+    },
+    {
+      "transaction_id": "request-15",
+      "method": "GET",
+      "resource_type": "stylesheet",
+      "url": "http://localhost:3003/static/css/timeline.css?v=2"
+    },
+    {
+      "transaction_id": "request-16",
+      "method": "GET",
+      "resource_type": "stylesheet",
+      "url": "http://localhost:3003/static/css/components.css"
+    },
+    {
+      "transaction_id": "request-17",
+      "method": "GET",
+      "resource_type": "stylesheet",
+      "url": "http://localhost:3003/static/css/redesign.css?v=16"
+    },
+    {
+      "transaction_id": "request-18",
+      "method": "GET",
+      "resource_type": "font",
+      "url": "https://fonts.gstatic.com/s/ibmplexsans/v23/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxeKYY.woff2"
+    },
+    {
+      "transaction_id": "request-19",
+      "method": "GET",
+      "resource_type": "font",
+      "url": "https://fonts.gstatic.com/s/ibmplexmono/v20/-F6qfjptAgt5VM-kVkqdyU8n3vAOwlBFgg.woff2"
+    },
+    {
+      "transaction_id": "request-20",
+      "method": "GET",
+      "resource_type": "font",
+      "url": "https://fonts.gstatic.com/s/ibmplexmono/v20/-F63fjptAgt5VM-kVkqdyU8n1i8q1w.woff2"
+    },
+    {
+      "transaction_id": "request-21",
+      "method": "GET",
+      "resource_type": "font",
+      "url": "https://fonts.gstatic.com/s/ibmplexmono/v20/-F6qfjptAgt5VM-kVkqdyU8n3pQPwlBFgg.woff2"
+    },
+    {
+      "transaction_id": "request-22",
+      "method": "GET",
+      "resource_type": "font",
+      "url": "https://fonts.gstatic.com/s/ibmplexmono/v20/-F6qfjptAgt5VM-kVkqdyU8n3twJwlBFgg.woff2"
+    },
+    {
+      "transaction_id": "request-23",
+      "method": "GET",
+      "resource_type": "script",
+      "url": "http://localhost:3003/static/i18n.js?v=20"
+    },
+    {
+      "transaction_id": "request-24",
+      "method": "GET",
+      "resource_type": "fetch",
+      "url": "http://localhost:3003/api/copilot/dates"
+    },
+    {
+      "transaction_id": "request-25",
+      "method": "GET",
+      "resource_type": "fetch",
+      "url": "http://localhost:3003/api/copilot/months"
+    },
+    {
+      "transaction_id": "request-26",
+      "method": "GET",
+      "resource_type": "fetch",
+      "url": "http://localhost:3003/api/copilot/years"
+    },
+    {
+      "transaction_id": "request-27",
+      "method": "GET",
+      "resource_type": "fetch",
+      "url": "http://localhost:3003/api/copilot/setup-info"
+    },
+    {
+      "transaction_id": "request-28",
+      "method": "GET",
+      "resource_type": "fetch",
+      "url": "http://localhost:3003/api/copilot/pricing"
+    },
+    {
+      "transaction_id": "request-29",
+      "method": "GET",
+      "resource_type": "image",
+      "url": "http://localhost:3003/static/flags/tw.svg"
+    },
+    {
+      "transaction_id": "request-30",
+      "method": "GET",
+      "resource_type": "fetch",
+      "url": "http://localhost:3003/api/copilot/usage/2026-10-15"
+    },
+    {
+      "transaction_id": "request-31",
+      "method": "GET",
+      "resource_type": "other",
+      "url": "http://localhost:3003/static/favicon-v2.ico"
+    }
+  ],
+  "responses": [
+    {
+      "transaction_id": "request-1",
+      "status": 200
+    },
+    {
+      "transaction_id": "request-3",
+      "status": 200
+    },
+    {
+      "transaction_id": "request-7",
+      "status": 200
+    },
+    {
+      "transaction_id": "request-8",
+      "status": 200
+    },
+    {
+      "transaction_id": "request-13",
+      "status": 200
+    },
+    {
+      "transaction_id": "request-10",
+      "status": 200
+    },
+    {
+      "transaction_id": "request-9",
+      "status": 200
+    },
+    {
+      "transaction_id": "request-2",
+      "status": 200
+    },
+    {
+      "transaction_id": "request-5",
+      "status": 200
+    },
+    {
+      "transaction_id": "request-6",
+      "status": 200
+    },
+    {
+      "transaction_id": "request-11",
+      "status": 200
+    },
+    {
+      "transaction_id": "request-4",
+      "status": 200
+    },
+    {
+      "transaction_id": "request-12",
+      "status": 200
+    },
+    {
+      "transaction_id": "request-16",
+      "status": 200
+    },
+    {
+      "transaction_id": "request-17",
+      "status": 200
+    },
+    {
+      "transaction_id": "request-14",
+      "status": 200
+    },
+    {
+      "transaction_id": "request-15",
+      "status": 200
+    },
+    {
+      "transaction_id": "request-23",
+      "status": 200
+    },
+    {
+      "transaction_id": "request-18",
+      "status": 200
+    },
+    {
+      "transaction_id": "request-20",
+      "status": 200
+    },
+    {
+      "transaction_id": "request-19",
+      "status": 200
+    },
+    {
+      "transaction_id": "request-22",
+      "status": 200
+    },
+    {
+      "transaction_id": "request-21",
+      "status": 200
+    },
+    {
+      "transaction_id": "request-29",
+      "status": 200
+    },
+    {
+      "transaction_id": "request-27",
+      "status": 200
+    },
+    {
+      "transaction_id": "request-24",
+      "status": 200
+    },
+    {
+      "transaction_id": "request-28",
+      "status": 200
+    },
+    {
+      "transaction_id": "request-25",
+      "status": 200
+    },
+    {
+      "transaction_id": "request-26",
+      "status": 200
+    },
+    {
+      "transaction_id": "request-30",
+      "status": 200
+    },
+    {
+      "transaction_id": "request-31",
+      "status": 200
+    }
+  ],
+  "api_response_bodies": [
+    {
+      "url": "http://localhost:3003/api/copilot/dates",
+      "sha256": "08ee71cc8d638ac090f3498ee6af7116f02dda859fb3dc8b5c2a3c19ab8e6a7f",
+      "bytes": null,
+      "json": {
+        "dates": [
+          "2026-10-15"
+        ]
+      }
+    },
+    {
+      "url": "http://localhost:3003/api/copilot/months",
+      "sha256": "37a3957a3092aaaa68d6d062b72896eba02d8c022aa7d904e7e6b46b50d0672c",
+      "bytes": null,
+      "json": {
+        "months": [
+          "2026-10"
+        ]
+      }
+    },
+    {
+      "url": "http://localhost:3003/api/copilot/years",
+      "sha256": "b58ef152c296df3f244bb3cc93bb9b043a34d54fe08a1fcf47016863966bb588",
+      "bytes": null,
+      "json": {
+        "years": [
+          "2026"
+        ]
+      }
+    },
+    {
+      "url": "http://localhost:3003/api/copilot/setup-info",
+      "sha256": "d047b5aebb478e22e54e18fbaf58fa7a554f65585da062fe0a593a9456d83a94",
+      "bytes": null,
+      "json": {
+        "platform": "linux",
+        "workspace_dir": "/workspace",
+        "home_dir": "/home/ubuntu",
+        "antigravity": {
+          "dir_path": "/tmp/fixture/antigravity",
+          "data_path": "/tmp/fixture/antigravity/usage",
+          "exists": false,
+          "script_path": "/tmp/fixture/antigravity/statusline-token.sh",
+          "source_script_path": "/workspace/shell/antigravity/statusline-token.sh",
+          "settings_path": "/tmp/fixture/antigravity/settings.json"
+        },
+        "copilot": {
+          "dir_path": "/tmp/fixture/copilot",
+          "data_path": "/tmp/fixture/copilot/usage",
+          "exists": false,
+          "script_path": "/tmp/fixture/copilot/statusline-token.sh",
+          "source_script_path": "/workspace/shell/copilot/statusline-token.sh",
+          "settings_path": "/tmp/fixture/copilot/settings.json"
+        },
+        "codex": {
+          "dir_path": "/tmp/fixture/codex",
+          "data_path": "/tmp/fixture/codex/sessions",
+          "exists": false,
+          "script_path": "",
+          "source_script_path": "",
+          "settings_path": ""
+        },
+        "claude": {
+          "dir_path": "/tmp/fixture/claude",
+          "data_path": "/tmp/fixture/claude/projects",
+          "exists": false,
+          "script_path": "",
+          "source_script_path": "",
+          "settings_path": ""
+        },
+        "cursor": {
+          "dir_path": "/tmp/fixture/cursor",
+          "data_path": "/tmp/fixture/cursor/projects",
+          "exists": false,
+          "script_path": "",
+          "source_script_path": "",
+          "settings_path": ""
+        }
+      }
+    },
+    {
+      "url": "http://localhost:3003/api/copilot/pricing",
+      "sha256": "217e8f87709133b7f00a8fa1d466c2ac0abede4b3c0ec23dac28b5c19f1b0835",
+      "bytes": null,
+      "json": [
+        {
+          "model_name": "Gemini 3.5 Flash",
+          "deployment_type": "Google AI",
+          "unit": "1M Tokens",
+          "input_price": 1.5,
+          "cache_input_price": 0.375,
+          "output_price": 9.0,
+          "batch_api_price": "0.75/0.1875/4.50"
+        },
+        {
+          "model_name": "Gemini 3.5 Flash (Medium)",
+          "deployment_type": "Google AI",
+          "unit": "1M Tokens",
+          "input_price": 1.5,
+          "cache_input_price": 0.375,
+          "output_price": 9.0,
+          "batch_api_price": "0.75/0.1875/4.50"
+        },
+        {
+          "model_name": "Gemini 3.5 Flash (High)",
+          "deployment_type": "Google AI",
+          "unit": "1M Tokens",
+          "input_price": 1.5,
+          "cache_input_price": 0.375,
+          "output_price": 9.0,
+          "batch_api_price": "0.75/0.1875/4.50"
+        },
+        {
+          "model_name": "Gemini 3.5 Flash (Low)",
+          "deployment_type": "Google AI",
+          "unit": "1M Tokens",
+          "input_price": 1.5,
+          "cache_input_price": 0.375,
+          "output_price": 9.0,
+          "batch_api_price": "0.75/0.1875/4.50"
+        },
+        {
+          "model_name": "Gemini 3.1 Pro (Low) (<272k)",
+          "deployment_type": "Google AI",
+          "unit": "1M Tokens",
+          "input_price": 2.0,
+          "cache_input_price": 0.5,
+          "output_price": 12.0,
+          "batch_api_price": "1.00/0.25/6.00"
+        },
+        {
+          "model_name": "Gemini 3.1 Pro (Low) (>272k)",
+          "deployment_type": "Google AI",
+          "unit": "1M Tokens",
+          "input_price": 4.0,
+          "cache_input_price": 1.0,
+          "output_price": 18.0,
+          "batch_api_price": "2.00/0.50/9.00"
+        },
+        {
+          "model_name": "Gemini 3.1 Pro (Low)",
+          "deployment_type": "Google AI",
+          "unit": "1M Tokens",
+          "input_price": 2.0,
+          "cache_input_price": 0.5,
+          "output_price": 12.0,
+          "batch_api_price": "1.00/0.25/6.00"
+        },
+        {
+          "model_name": "Gemini 3.1 Pro (High) (<272k)",
+          "deployment_type": "Google AI",
+          "unit": "1M Tokens",
+          "input_price": 2.0,
+          "cache_input_price": 0.5,
+          "output_price": 12.0,
+          "batch_api_price": "1.00/0.25/6.00"
+        },
+        {
+          "model_name": "Gemini 3.1 Pro (High) (>272k)",
+          "deployment_type": "Google AI",
+          "unit": "1M Tokens",
+          "input_price": 4.0,
+          "cache_input_price": 1.0,
+          "output_price": 18.0,
+          "batch_api_price": "2.00/0.50/9.00"
+        },
+        {
+          "model_name": "Gemini 3.1 Pro (High)",
+          "deployment_type": "Google AI",
+          "unit": "1M Tokens",
+          "input_price": 2.0,
+          "cache_input_price": 0.5,
+          "output_price": 12.0,
+          "batch_api_price": "1.00/0.25/6.00"
+        },
+        {
+          "model_name": "Gemini 3.1 Pro Preview (<272k)",
+          "deployment_type": "Google AI",
+          "unit": "1M Tokens",
+          "input_price": 2.0,
+          "cache_input_price": 0.5,
+          "output_price": 12.0,
+          "batch_api_price": "1.00/0.25/6.00"
+        },
+        {
+          "model_name": "Gemini 3.1 Pro Preview (>272k)",
+          "deployment_type": "Google AI",
+          "unit": "1M Tokens",
+          "input_price": 4.0,
+          "cache_input_price": 1.0,
+          "output_price": 18.0,
+          "batch_api_price": "2.00/0.50/9.00"
+        },
+        {
+          "model_name": "Gemini 3.1 Pro Preview",
+          "deployment_type": "Google AI",
+          "unit": "1M Tokens",
+          "input_price": 2.0,
+          "cache_input_price": 0.5,
+          "output_price": 12.0,
+          "batch_api_price": "1.00/0.25/6.00"
+        },
+        {
+          "model_name": "Claude Sonnet 4.6 (Thinking)",
+          "deployment_type": "Global",
+          "unit": "1M Tokens",
+          "input_price": 3.0,
+          "cache_input_price": 0.3,
+          "output_price": 15.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "Claude Opus 4.6 (Thinking) (<272k)",
+          "deployment_type": "Global",
+          "unit": "1M Tokens",
+          "input_price": 5.0,
+          "cache_input_price": 0.5,
+          "output_price": 25.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "Claude Opus 4.6 (Thinking) (>272k)",
+          "deployment_type": "Global",
+          "unit": "1M Tokens",
+          "input_price": 10.0,
+          "cache_input_price": 1.0,
+          "output_price": 37.5,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "Claude Opus 4.6 (Thinking)",
+          "deployment_type": "Global",
+          "unit": "1M Tokens",
+          "input_price": 5.0,
+          "cache_input_price": 0.5,
+          "output_price": 25.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "GPT-OSS 120B (Medium)",
+          "deployment_type": "Local/OSS",
+          "unit": "1M Tokens",
+          "input_price": 0.0,
+          "cache_input_price": 0.0,
+          "output_price": 0.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "gpt-5.6-sol",
+          "deployment_type": "Global",
+          "unit": "1M Tokens",
+          "input_price": 5.0,
+          "cache_input_price": 0.5,
+          "output_price": 30.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "gpt-5.6-terra",
+          "deployment_type": "Global",
+          "unit": "1M Tokens",
+          "input_price": 2.5,
+          "cache_input_price": 0.25,
+          "output_price": 15.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "gpt-5.6-luna",
+          "deployment_type": "Global",
+          "unit": "1M Tokens",
+          "input_price": 1.0,
+          "cache_input_price": 0.1,
+          "output_price": 6.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "GPT-5.5 (<272k)",
+          "deployment_type": "Global",
+          "unit": "1M Tokens",
+          "input_price": 5.0,
+          "cache_input_price": 0.5,
+          "output_price": 30.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "GPT-5.5 (>272k)",
+          "deployment_type": "Global",
+          "unit": "1M Tokens",
+          "input_price": 10.0,
+          "cache_input_price": 1.0,
+          "output_price": 45.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "GPT-5.5",
+          "deployment_type": "Global",
+          "unit": "1M Tokens",
+          "input_price": 5.0,
+          "cache_input_price": 0.5,
+          "output_price": 30.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "GPT-5.4 (<272k)",
+          "deployment_type": "Global",
+          "unit": "1M Tokens",
+          "input_price": 2.5,
+          "cache_input_price": 0.25,
+          "output_price": 15.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "GPT-5.4 (>272k)",
+          "deployment_type": "Global",
+          "unit": "1M Tokens",
+          "input_price": 5.0,
+          "cache_input_price": 0.5,
+          "output_price": 22.5,
+          "batch_api_price": "1.25/0.13/7.50"
+        },
+        {
+          "model_name": "GPT-5.4-mini",
+          "deployment_type": "Global",
+          "unit": "1M Tokens",
+          "input_price": 0.75,
+          "cache_input_price": 0.08,
+          "output_price": 4.5,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "GPT-5.4",
+          "deployment_type": "Global",
+          "unit": "1M Tokens",
+          "input_price": 2.5,
+          "cache_input_price": 0.25,
+          "output_price": 15.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "GPT-5.3-Codex",
+          "deployment_type": "Global",
+          "unit": "1M Tokens",
+          "input_price": 1.75,
+          "cache_input_price": 0.18,
+          "output_price": 14.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "GPT-5-mini",
+          "deployment_type": "Global",
+          "unit": "1M Tokens",
+          "input_price": 0.25,
+          "cache_input_price": 0.025,
+          "output_price": 2.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "Claude Sonnet 5",
+          "deployment_type": "Global",
+          "unit": "1M Tokens",
+          "input_price": 3.0,
+          "cache_input_price": 0.3,
+          "output_price": 15.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "Claude Sonnet 4.6",
+          "deployment_type": "Global",
+          "unit": "1M Tokens",
+          "input_price": 3.0,
+          "cache_input_price": 0.3,
+          "output_price": 15.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "Claude Sonnet 4.5",
+          "deployment_type": "Global",
+          "unit": "1M Tokens",
+          "input_price": 3.0,
+          "cache_input_price": 0.3,
+          "output_price": 15.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "Claude Haiku 4.5",
+          "deployment_type": "Global",
+          "unit": "1M Tokens",
+          "input_price": 1.0,
+          "cache_input_price": 0.1,
+          "output_price": 5.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "Claude Fable 5",
+          "deployment_type": "Global",
+          "unit": "1M Tokens",
+          "input_price": 10.0,
+          "cache_input_price": 1.0,
+          "output_price": 50.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "Claude Opus 4.8-fast",
+          "deployment_type": "Global",
+          "unit": "1M Tokens",
+          "input_price": 10.0,
+          "cache_input_price": 1.0,
+          "output_price": 50.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "Claude Opus 4.8",
+          "deployment_type": "Global",
+          "unit": "1M Tokens",
+          "input_price": 5.0,
+          "cache_input_price": 0.5,
+          "output_price": 25.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "Claude Opus 4.7",
+          "deployment_type": "Global",
+          "unit": "1M Tokens",
+          "input_price": 5.0,
+          "cache_input_price": 0.5,
+          "output_price": 25.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "Claude Opus 4.6 (<272k)",
+          "deployment_type": "Global",
+          "unit": "1M Tokens",
+          "input_price": 5.0,
+          "cache_input_price": 0.5,
+          "output_price": 25.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "Claude Opus 4.6 (>272k)",
+          "deployment_type": "Global",
+          "unit": "1M Tokens",
+          "input_price": 10.0,
+          "cache_input_price": 1.0,
+          "output_price": 37.5,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "Claude Opus 4.6",
+          "deployment_type": "Global",
+          "unit": "1M Tokens",
+          "input_price": 5.0,
+          "cache_input_price": 0.5,
+          "output_price": 25.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "Claude Opus 4.5",
+          "deployment_type": "Global",
+          "unit": "1M Tokens",
+          "input_price": 5.0,
+          "cache_input_price": 0.5,
+          "output_price": 25.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "Codex Auto Review",
+          "deployment_type": "Global",
+          "unit": "1M Tokens",
+          "input_price": 0.1,
+          "cache_input_price": 0.0,
+          "output_price": 0.1,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "Kimi K2.7 Code",
+          "deployment_type": "Global",
+          "unit": "1M Tokens",
+          "input_price": 0.95,
+          "cache_input_price": 0.19,
+          "output_price": 4.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "MAI-Code-1-Flash",
+          "deployment_type": "Global",
+          "unit": "1M Tokens",
+          "input_price": 0.75,
+          "cache_input_price": 0.075,
+          "output_price": 4.5,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "Gemini 1.5 Pro",
+          "deployment_type": "Google AI",
+          "unit": "1M Tokens",
+          "input_price": 1.25,
+          "cache_input_price": 0.3125,
+          "output_price": 5.0,
+          "batch_api_price": "0.625/0.15625/2.50"
+        },
+        {
+          "model_name": "GLM 5.2 (Cloud)",
+          "deployment_type": "Cloud",
+          "unit": "1M Tokens",
+          "input_price": 0.9086,
+          "cache_input_price": 0.16874,
+          "output_price": 2.8556,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "glm-5.2",
+          "deployment_type": "Cloud",
+          "unit": "1M Tokens",
+          "input_price": 1.12,
+          "cache_input_price": 0.56,
+          "output_price": 3.92,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "kimi-k2.7-code",
+          "deployment_type": "Global",
+          "unit": "1M Tokens",
+          "input_price": 0.95,
+          "cache_input_price": 0.19,
+          "output_price": 4.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "gemma4",
+          "deployment_type": "Local/OSS",
+          "unit": "1M Tokens",
+          "input_price": 0.0,
+          "cache_input_price": 0.0,
+          "output_price": 0.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "qwen3.5",
+          "deployment_type": "Cloud",
+          "unit": "1M Tokens",
+          "input_price": 0.26,
+          "cache_input_price": 0.065,
+          "output_price": 1.56,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "glm-5.1",
+          "deployment_type": "Cloud",
+          "unit": "1M Tokens",
+          "input_price": 1.12,
+          "cache_input_price": 0.56,
+          "output_price": 3.92,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "minimax-m2.7",
+          "deployment_type": "Cloud",
+          "unit": "1M Tokens",
+          "input_price": 0.3,
+          "cache_input_price": 0.075,
+          "output_price": 1.2,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "nemotron-3-super",
+          "deployment_type": "Local/OSS",
+          "unit": "1M Tokens",
+          "input_price": 0.0,
+          "cache_input_price": 0.0,
+          "output_price": 0.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "glm-5",
+          "deployment_type": "Cloud",
+          "unit": "1M Tokens",
+          "input_price": 0.84,
+          "cache_input_price": 0.42,
+          "output_price": 3.08,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "minimax-m2.5",
+          "deployment_type": "Cloud",
+          "unit": "1M Tokens",
+          "input_price": 0.3,
+          "cache_input_price": 0.075,
+          "output_price": 1.2,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "minimax-m3",
+          "deployment_type": "Cloud",
+          "unit": "1M Tokens",
+          "input_price": 0.3,
+          "cache_input_price": 0.075,
+          "output_price": 1.2,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "kimi-k2.6",
+          "deployment_type": "Global",
+          "unit": "1M Tokens",
+          "input_price": 0.95,
+          "cache_input_price": 0.16,
+          "output_price": 4.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "deepseek-v4-flash",
+          "deployment_type": "Cloud",
+          "unit": "1M Tokens",
+          "input_price": 0.14,
+          "cache_input_price": 0.0028,
+          "output_price": 0.28,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "deepseek-v4-pro",
+          "deployment_type": "Cloud",
+          "unit": "1M Tokens",
+          "input_price": 0.435,
+          "cache_input_price": 0.003625,
+          "output_price": 0.87,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "kimi-k2.5",
+          "deployment_type": "Global",
+          "unit": "1M Tokens",
+          "input_price": 0.58,
+          "cache_input_price": 0.1,
+          "output_price": 3.1,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "nemotron-3-ultra",
+          "deployment_type": "Local/OSS",
+          "unit": "1M Tokens",
+          "input_price": 0.0,
+          "cache_input_price": 0.0,
+          "output_price": 0.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "gpt-oss",
+          "deployment_type": "Local/OSS",
+          "unit": "1M Tokens",
+          "input_price": 0.0,
+          "cache_input_price": 0.0,
+          "output_price": 0.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "qwen3-coder",
+          "deployment_type": "Cloud",
+          "unit": "1M Tokens",
+          "input_price": 0.22,
+          "cache_input_price": 0.055,
+          "output_price": 1.8,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "glm-4.7",
+          "deployment_type": "Cloud",
+          "unit": "1M Tokens",
+          "input_price": 0.56,
+          "cache_input_price": 0.28,
+          "output_price": 2.24,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "gemini-3-flash-preview",
+          "deployment_type": "Google AI",
+          "unit": "1M Tokens",
+          "input_price": 0.5,
+          "cache_input_price": 0.125,
+          "output_price": 3.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "minimax-m2.1",
+          "deployment_type": "Cloud",
+          "unit": "1M Tokens",
+          "input_price": 0.3,
+          "cache_input_price": 0.075,
+          "output_price": 1.2,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "deepseek-v3.2",
+          "deployment_type": "Cloud",
+          "unit": "1M Tokens",
+          "input_price": 0.14,
+          "cache_input_price": 0.0028,
+          "output_price": 0.28,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "ministral-3",
+          "deployment_type": "Cloud",
+          "unit": "1M Tokens",
+          "input_price": 0.15,
+          "cache_input_price": 0.0375,
+          "output_price": 0.15,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "devstral-small-2",
+          "deployment_type": "Cloud",
+          "unit": "1M Tokens",
+          "input_price": 0.1,
+          "cache_input_price": 0.025,
+          "output_price": 0.3,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "nemotron-3-nano",
+          "deployment_type": "Local/OSS",
+          "unit": "1M Tokens",
+          "input_price": 0.0,
+          "cache_input_price": 0.0,
+          "output_price": 0.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "deepseek-v3.1",
+          "deployment_type": "Cloud",
+          "unit": "1M Tokens",
+          "input_price": 0.14,
+          "cache_input_price": 0.0028,
+          "output_price": 0.28,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "devstral-2",
+          "deployment_type": "Cloud",
+          "unit": "1M Tokens",
+          "input_price": 0.4,
+          "cache_input_price": 0.1,
+          "output_price": 2.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "mistral-large-3",
+          "deployment_type": "Cloud",
+          "unit": "1M Tokens",
+          "input_price": 0.5,
+          "cache_input_price": 0.125,
+          "output_price": 1.5,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "gemma3",
+          "deployment_type": "Local/OSS",
+          "unit": "1M Tokens",
+          "input_price": 0.0,
+          "cache_input_price": 0.0,
+          "output_price": 0.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "qwen3-coder-next",
+          "deployment_type": "Cloud",
+          "unit": "1M Tokens",
+          "input_price": 0.144,
+          "cache_input_price": 0.036,
+          "output_price": 0.574,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "Cursor Agent",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 3.0,
+          "cache_input_price": 0.3,
+          "output_price": 15.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "cursor-small",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 0.1,
+          "cache_input_price": 0.0,
+          "output_price": 0.1,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "claude-3-5-sonnet",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 3.0,
+          "cache_input_price": 0.3,
+          "output_price": 15.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "claude-3-5-haiku",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 0.8,
+          "cache_input_price": 0.08,
+          "output_price": 4.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "claude-3-opus",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 15.0,
+          "cache_input_price": 1.5,
+          "output_price": 75.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "claude-3-haiku",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 0.25,
+          "cache_input_price": 0.03,
+          "output_price": 1.25,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "gpt-4o",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 2.5,
+          "cache_input_price": 1.25,
+          "output_price": 10.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "gpt-4o-mini",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 0.15,
+          "cache_input_price": 0.075,
+          "output_price": 0.6,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "gpt-4-turbo",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 10.0,
+          "cache_input_price": 5.0,
+          "output_price": 30.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "gpt-4",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 30.0,
+          "cache_input_price": 15.0,
+          "output_price": 60.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "o1-mini",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 3.0,
+          "cache_input_price": 0.0,
+          "output_price": 12.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "o1-preview",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 15.0,
+          "cache_input_price": 0.0,
+          "output_price": 60.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "o1",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 15.0,
+          "cache_input_price": 0.0,
+          "output_price": 60.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "o3-mini",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 1.1,
+          "cache_input_price": 0.0,
+          "output_price": 4.4,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "gemini-1.5-pro",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 1.25,
+          "cache_input_price": 0.3125,
+          "output_price": 5.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "gemini-1.5-flash",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 0.075,
+          "cache_input_price": 0.01875,
+          "output_price": 0.3,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "gemini-2.0-flash",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 0.075,
+          "cache_input_price": 0.01875,
+          "output_price": 0.3,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "gemini-2.5-flash",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 0.075,
+          "cache_input_price": 0.01875,
+          "output_price": 0.3,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "deepseek-chat",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 0.14,
+          "cache_input_price": 0.014,
+          "output_price": 0.28,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "deepseek-coder",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 0.14,
+          "cache_input_price": 0.014,
+          "output_price": 0.28,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "deepseek-v3",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 0.14,
+          "cache_input_price": 0.014,
+          "output_price": 0.28,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "deepseek-r1",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 0.55,
+          "cache_input_price": 0.14,
+          "output_price": 2.19,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "grok-2",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 2.0,
+          "cache_input_price": 0.2,
+          "output_price": 10.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "grok-2-mini",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 0.05,
+          "cache_input_price": 0.005,
+          "output_price": 0.1,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "gpt-5",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 5.0,
+          "cache_input_price": 0.5,
+          "output_price": 30.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "gpt-5-mini",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 0.25,
+          "cache_input_price": 0.025,
+          "output_price": 2.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "gpt-5-fast",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 1.0,
+          "cache_input_price": 0.1,
+          "output_price": 5.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "gpt-5.3-codex",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 1.75,
+          "cache_input_price": 0.175,
+          "output_price": 14.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "gpt-5.4",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 2.5,
+          "cache_input_price": 0.25,
+          "output_price": 15.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "gpt-5.4-mini",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 0.75,
+          "cache_input_price": 0.075,
+          "output_price": 4.5,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "gpt-5.5",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 5.0,
+          "cache_input_price": 0.5,
+          "output_price": 30.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "claude-sonnet-5",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 3.0,
+          "cache_input_price": 0.3,
+          "output_price": 15.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "claude-4-6-sonnet",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 3.0,
+          "cache_input_price": 0.3,
+          "output_price": 15.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "claude-4-5-sonnet",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 3.0,
+          "cache_input_price": 0.3,
+          "output_price": 15.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "claude-4-sonnet",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 3.0,
+          "cache_input_price": 0.3,
+          "output_price": 15.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "claude-4-sonnet-1m",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 3.0,
+          "cache_input_price": 0.3,
+          "output_price": 15.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "claude-4-5-haiku",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 1.0,
+          "cache_input_price": 0.1,
+          "output_price": 5.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "claude-fable-5",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 10.0,
+          "cache_input_price": 1.0,
+          "output_price": 50.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "claude-opus-4-8",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 5.0,
+          "cache_input_price": 0.5,
+          "output_price": 25.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "claude-opus-4-7-fast",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 10.0,
+          "cache_input_price": 1.0,
+          "output_price": 50.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "claude-opus-4-7",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 5.0,
+          "cache_input_price": 0.5,
+          "output_price": 25.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "claude-opus-4-6",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 5.0,
+          "cache_input_price": 0.5,
+          "output_price": 25.0,
+          "batch_api_price": "N/A"
+        },
+        {
+          "model_name": "claude-opus-4-5",
+          "deployment_type": "Cursor",
+          "unit": "1M Tokens",
+          "input_price": 5.0,
+          "cache_input_price": 0.5,
+          "output_price": 25.0,
+          "batch_api_price": "N/A"
+        }
+      ]
+    },
+    {
+      "url": "http://localhost:3003/api/copilot/usage/2026-10-15",
+      "sha256": "8e7b0ce62fb44c5d4cb3e1d05148d611d3322443cf0d7b19905cf05003be1b43",
+      "bytes": null,
+      "json": {
+        "date": "2026-10-15",
+        "summary": {
+          "total_sessions": 2,
+          "total_tokens": 200000,
+          "total_input_tokens": 64000,
+          "total_output_tokens": 11000,
+          "total_cache_read_tokens": 125000,
+          "total_cache_write_tokens": 0,
+          "total_reasoning_tokens": 0,
+          "total_duration_ms": 24100,
+          "total_requests": 3,
+          "total_cost_usd": 0.6345000000000001
+        },
+        "sessions": [
+          {
+            "session_id": "demo-session-b",
+            "session_name": "撰寫測試",
+            "assistant_type": "copilot",
+            "cwd": "/home/demo/project-b",
+            "model": "GPT-5.5",
+            "mode": null,
+            "total_tokens": 158000,
+            "total_input_tokens": 50000,
+            "total_output_tokens": 8000,
+            "total_cache_read_tokens": 100000,
+            "total_cache_write_tokens": 0,
+            "total_reasoning_tokens": 0,
+            "max_turn_no": 1,
+            "timestamp": "2026-10-15 14:30:00",
+            "duration_ms": 15000,
+            "cost_usd": 0.54,
+            "parent_session_id": null,
+            "agent_nickname": null,
+            "agent_role": null,
+            "reasoning_effort": null
+          },
+          {
+            "session_id": "demo-session-a",
+            "session_name": "重構 pricing 模組",
+            "assistant_type": "copilot",
+            "cwd": "/home/demo/project-a",
+            "model": "Claude Sonnet 4.6",
+            "mode": null,
+            "total_tokens": 42000,
+            "total_input_tokens": 14000,
+            "total_output_tokens": 3000,
+            "total_cache_read_tokens": 25000,
+            "total_cache_write_tokens": 0,
+            "total_reasoning_tokens": 0,
+            "max_turn_no": 2,
+            "timestamp": "2026-10-15 09:00:00",
+            "duration_ms": 9100,
+            "cost_usd": 0.0945,
+            "parent_session_id": null,
+            "agent_nickname": null,
+            "agent_role": null,
+            "reasoning_effort": null
+          }
+        ],
+        "raw_entries": [
+          {
+            "timestamp": "2026-10-15 09:00:00",
+            "session_id": "demo-session-a",
+            "session_name": "重構 pricing 模組",
+            "transcript_path": null,
+            "cwd": "/home/demo/project-a",
+            "version": null,
+            "turn_no": 1,
+            "model": "Claude Sonnet 4.6",
+            "model_id": "claude-sonnet-4.6",
+            "tokens": {
+              "input": 10000,
+              "output": 2000,
+              "cache_read": 5000,
+              "cache_write": null,
+              "reasoning": null,
+              "total": 17000
+            },
+            "delta_tokens": {
+              "input": 10000,
+              "output": 2000,
+              "cache_read": 5000,
+              "cache_write": null,
+              "reasoning": null,
+              "total": 17000
+            },
+            "context": null,
+            "cost": {
+              "total_api_duration_ms": 4200.0,
+              "total_duration_ms": null,
+              "total_premium_requests": 1.0
+            },
+            "parent_session_id": null,
+            "agent_nickname": null,
+            "agent_role": null,
+            "reasoning_effort": null
+          },
+          {
+            "timestamp": "2026-10-15 09:05:00",
+            "session_id": "demo-session-a",
+            "session_name": "重構 pricing 模組",
+            "transcript_path": null,
+            "cwd": "/home/demo/project-a",
+            "version": null,
+            "turn_no": 2,
+            "model": "Claude Sonnet 4.6",
+            "model_id": "claude-sonnet-4.6",
+            "tokens": {
+              "input": 14000,
+              "output": 3000,
+              "cache_read": 25000,
+              "cache_write": null,
+              "reasoning": null,
+              "total": 42000
+            },
+            "delta_tokens": {
+              "input": 4000,
+              "output": 1000,
+              "cache_read": 20000,
+              "cache_write": null,
+              "reasoning": null,
+              "total": 25000
+            },
+            "context": null,
+            "cost": {
+              "total_api_duration_ms": 9100.0,
+              "total_duration_ms": null,
+              "total_premium_requests": 2.0
+            },
+            "parent_session_id": null,
+            "agent_nickname": null,
+            "agent_role": null,
+            "reasoning_effort": null
+          },
+          {
+            "timestamp": "2026-10-15 14:30:00",
+            "session_id": "demo-session-b",
+            "session_name": "撰寫測試",
+            "transcript_path": null,
+            "cwd": "/home/demo/project-b",
+            "version": null,
+            "turn_no": 1,
+            "model": "GPT-5.5",
+            "model_id": "gpt-5.5",
+            "tokens": {
+              "input": 50000,
+              "output": 8000,
+              "cache_read": 100000,
+              "cache_write": null,
+              "reasoning": null,
+              "total": 158000
+            },
+            "delta_tokens": {
+              "input": 50000,
+              "output": 8000,
+              "cache_read": 100000,
+              "cache_write": null,
+              "reasoning": null,
+              "total": 158000
+            },
+            "context": null,
+            "cost": {
+              "total_api_duration_ms": 15000.0,
+              "total_duration_ms": null,
+              "total_premium_requests": 1.0
+            },
+            "parent_session_id": null,
+            "agent_nickname": null,
+            "agent_role": null,
+            "reasoning_effort": null
+          }
+        ]
+      }
+    }
+  ],
+  "final_url": "http://localhost:3003/?agent=copilot&tab=daily&date=2026-10-15",
+  "screenshot": {
+    "sha256": "1206f809ad572f1641ffd31c7fff444907252a0292e1f448742114add8da8383",
+    "bytes": 121775,
+    "media_type": "image/png"
+  },
+  "note": "Projection of the ~1 MB capture-browser-scenario Evidence; static asset bodies omitted."
+}

@@ -1,0 +1,21 @@
+{
+  "executable": "/workspace/target/release/joker-token-usage-insights",
+  "arguments": [],
+  "working_directory": "/workspace",
+  "environment": {
+    "PORT": "3011",
+    "INSIGHTS_DIR": "/tmp/fixture/insights",
+    "COPILOT_DIR": "/tmp/fixture/copilot",
+    "CODEX_DIR": "/tmp/fixture/codex",
+    "CLAUDE_DIR": "/tmp/fixture/claude",
+    "CURSOR_DIR": "/tmp/fixture/cursor",
+    "ANTIGRAVITY_DIR": "/tmp/fixture/antigravity",
+    "CURSOR_STATE_DB": "/tmp/fixture/cursor/state.vscdb"
+  },
+  "filesystem_observation_paths": ["/tmp/fixture/insights"],
+  "terminal": { "columns": 120, "rows": 30, "scrollback": 1000 },
+  "events": [ { "type": "signal", "at_ms": 6000, "signal": "SIGINT" } ],
+  "timeout_ms": 15000,
+  "idle_timeout_ms": 15000,
+  "settle_ms": 300
+}

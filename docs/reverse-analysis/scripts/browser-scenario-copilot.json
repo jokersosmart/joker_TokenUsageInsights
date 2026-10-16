@@ -1,0 +1,31 @@
+{
+  "browser": {
+    "mode": "launch",
+    "executable_path": "/usr/local/bin/google-chrome"
+  },
+  "start_url": {
+    "url": "http://localhost:3003/?agent=copilot&tab=daily&date=2026-10-15"
+  },
+  "actions": [
+    {
+      "step_id": "settle",
+      "action": "wait_for_timeout",
+      "duration_ms": 4000
+    }
+  ],
+  "capture": {
+    "events": [
+      "network"
+    ],
+    "at_end": [
+      "url",
+      "screenshot",
+      "accessibility"
+    ],
+    "network": {
+      "request_body": false,
+      "response_body": true,
+      "header_values": false
+    }
+  }
+}

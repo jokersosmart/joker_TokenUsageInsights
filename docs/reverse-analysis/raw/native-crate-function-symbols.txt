@@ -1,0 +1,244 @@
+core::ptr::drop_in_place<alloc::boxed::Box<tokio::runtime::task::core::Cell<joker_token_usage_insights::main::{{closure}}::{{closure}},alloc::sync::Arc<tokio::runtime::scheduler::current_thread::Handle>>>>
+core::ptr::drop_in_place<alloc::boxed::Box<tokio::runtime::task::core::Cell<joker_token_usage_insights::main::{{closure}}::{{closure}},alloc::sync::Arc<tokio::runtime::scheduler::multi_thread::handle::Handle>>>>
+core::ptr::drop_in_place<alloc::boxed::Box<tokio::runtime::task::core::Cell<tokio::runtime::blocking::task::BlockingTask<joker_token_usage_insights::db::get_latest_codex_rate_limit>,tokio::runtime::blocking::schedule::BlockingSchedule>>>
+core::ptr::drop_in_place<alloc::boxed::Box<tokio::runtime::task::core::Cell<tokio::runtime::blocking::task::BlockingTask<joker_token_usage_insights::handlers::daily::get_available_dates::{{closure}}::{{closure}}>,tokio::runtime::blocking::schedule::BlockingSchedule>>>
+core::ptr::drop_in_place<alloc::boxed::Box<tokio::runtime::task::core::Cell<tokio::runtime::blocking::task::BlockingTask<joker_token_usage_insights::handlers::daily::get_session_details::{{closure}}::{{closure}}>,tokio::runtime::blocking::schedule::BlockingSchedule>>>
+core::ptr::drop_in_place<alloc::boxed::Box<tokio::runtime::task::core::Cell<tokio::runtime::blocking::task::BlockingTask<joker_token_usage_insights::handlers::daily::get_usage_details::{{closure}}::{{closure}}>,tokio::runtime::blocking::schedule::BlockingSchedule>>>
+core::ptr::drop_in_place<alloc::boxed::Box<tokio::runtime::task::core::Cell<tokio::runtime::blocking::task::BlockingTask<joker_token_usage_insights::handlers::misc::export_usage_day::{{closure}}::{{closure}}>,tokio::runtime::blocking::schedule::BlockingSchedule>>>
+core::ptr::drop_in_place<alloc::boxed::Box<tokio::runtime::task::core::Cell<tokio::runtime::blocking::task::BlockingTask<joker_token_usage_insights::handlers::misc::import_usage_day::{{closure}}::{{closure}}>,tokio::runtime::blocking::schedule::BlockingSchedule>>>
+core::ptr::drop_in_place<alloc::boxed::Box<tokio::runtime::task::core::Cell<tokio::runtime::blocking::task::BlockingTask<joker_token_usage_insights::handlers::misc::trigger_manual_sync::{{closure}}::{{closure}}>,tokio::runtime::blocking::schedule::BlockingSchedule>>>
+core::ptr::drop_in_place<alloc::boxed::Box<tokio::runtime::task::core::Cell<tokio::runtime::blocking::task::BlockingTask<joker_token_usage_insights::handlers::monthly::get_available_months::{{closure}}::{{closure}}>,tokio::runtime::blocking::schedule::BlockingSchedule>>>
+core::ptr::drop_in_place<alloc::boxed::Box<tokio::runtime::task::core::Cell<tokio::runtime::blocking::task::BlockingTask<joker_token_usage_insights::handlers::monthly::get_monthly_details::{{closure}}::{{closure}}>,tokio::runtime::blocking::schedule::BlockingSchedule>>>
+core::ptr::drop_in_place<alloc::boxed::Box<tokio::runtime::task::core::Cell<tokio::runtime::blocking::task::BlockingTask<joker_token_usage_insights::handlers::yearly::get_available_years::{{closure}}::{{closure}}>,tokio::runtime::blocking::schedule::BlockingSchedule>>>
+core::ptr::drop_in_place<alloc::boxed::Box<tokio::runtime::task::core::Cell<tokio::runtime::blocking::task::BlockingTask<joker_token_usage_insights::handlers::yearly::get_yearly_details::{{closure}}::{{closure}}>,tokio::runtime::blocking::schedule::BlockingSchedule>>>
+core::ptr::drop_in_place<alloc::boxed::Box<tokio::runtime::task::core::Cell<tokio::runtime::blocking::task::BlockingTask<joker_token_usage_insights::main::{{closure}}::{{closure}}::{{closure}}>,tokio::runtime::blocking::schedule::BlockingSchedule>>>
+core::ptr::drop_in_place<(alloc::string::String,alloc::vec::Vec<joker_token_usage_insights::db::UsageEntry>)>
+core::ptr::drop_in_place<(alloc::string::String,alloc::vec::Vec<joker_token_usage_insights::handlers::ModelSessionDetail>)>
+core::ptr::drop_in_place<(alloc::string::String,joker_token_usage_insights::db::CursorSessionMetadata)>
+core::ptr::drop_in_place<alloc::vec::in_place_drop::InPlaceDrop<joker_token_usage_insights::handlers::daily::get_session_details::{{closure}}::LegacyEventWrapper>>
+core::ptr::drop_in_place<alloc::vec::in_place_drop::InPlaceDstDataSrcBufDrop<joker_token_usage_insights::timeline::TimelineItem,joker_token_usage_insights::handlers::daily::get_session_details::{{closure}}::LegacyEventWrapper>>
+core::ptr::drop_in_place<alloc::vec::Vec<(alloc::string::String,joker_token_usage_insights::db::CursorSessionMetadata)>>
+core::ptr::drop_in_place<alloc::vec::Vec<joker_token_usage_insights::db::CursorParsedEntry>>
+core::ptr::drop_in_place<alloc::vec::Vec<joker_token_usage_insights::db::UsageDayExportRecord>>
+core::ptr::drop_in_place<alloc::vec::Vec<(joker_token_usage_insights::db::UsageDayExportRecord,alloc::string::String)>>
+core::ptr::drop_in_place<alloc::vec::Vec<joker_token_usage_insights::db::UsageEntry>>
+core::ptr::drop_in_place<(alloc::vec::Vec<joker_token_usage_insights::db::UsageEntry>,alloc::string::String)>
+core::ptr::drop_in_place<alloc::vec::Vec<(joker_token_usage_insights::db::UsageEntry,alloc::string::String,alloc::string::String)>>
+core::ptr::drop_in_place<alloc::vec::Vec<joker_token_usage_insights::handlers::daily::get_session_details::{{closure}}::LegacyEventWrapper>>
+core::ptr::drop_in_place<alloc::vec::Vec<joker_token_usage_insights::handlers::ModelSessionDetail>>
+core::ptr::drop_in_place<alloc::vec::Vec<joker_token_usage_insights::handlers::MonthlyDailyBreakdown>>
+core::ptr::drop_in_place<alloc::vec::Vec<joker_token_usage_insights::handlers::MonthlyModelSummary>>
+core::ptr::drop_in_place<alloc::vec::Vec<joker_token_usage_insights::handlers::MonthlyProjectSummary>>
+core::ptr::drop_in_place<alloc::vec::Vec<joker_token_usage_insights::handlers::SessionSummary>>
+core::ptr::drop_in_place<alloc::vec::Vec<joker_token_usage_insights::handlers::YearlyMonthlyBreakdown>>
+core::ptr::drop_in_place<alloc::vec::Vec<joker_token_usage_insights::pricing::PricingEntry>>
+core::ptr::drop_in_place<alloc::vec::Vec<joker_token_usage_insights::pricing::PricingRule>>
+core::ptr::drop_in_place<alloc::vec::Vec<joker_token_usage_insights::timeline::TimelineItem>>
+core::ptr::drop_in_place<axum::json::Json<alloc::vec::Vec<joker_token_usage_insights::pricing::PricingEntry>>>
+core::ptr::drop_in_place<axum::json::Json<joker_token_usage_insights::handlers::misc::UsageDayExportResponse>>
+core::ptr::drop_in_place<axum::json::Json<joker_token_usage_insights::handlers::misc::UsageDayImportRequest>>
+core::ptr::drop_in_place<<axum::json::Json<joker_token_usage_insights::handlers::misc::UsageDayImportRequest> as axum_core::extract::FromRequest<()>>::from_request::{{closure}}>
+core::ptr::drop_in_place<axum::json::Json<joker_token_usage_insights::handlers::MonthListResponse>>
+core::ptr::drop_in_place<axum::json::Json<joker_token_usage_insights::handlers::SetupInfoResponse>>
+core::ptr::drop_in_place<axum::json::Json<joker_token_usage_insights::handlers::UsageDetailsResponse>>
+core::ptr::drop_in_place<axum::json::Json<joker_token_usage_insights::handlers::YearlyDetailsResponse>>
+core::ptr::drop_in_place<core::option::Option<joker_token_usage_insights::db::ContextStats>>
+core::ptr::drop_in_place<core::result::Result<alloc::vec::Vec<joker_token_usage_insights::db::UsageDayExportRecord>,alloc::string::String>>
+core::ptr::drop_in_place<core::result::Result<alloc::vec::Vec<(joker_token_usage_insights::db::UsageDayExportRecord,alloc::string::String)>,alloc::string::String>>
+core::ptr::drop_in_place<core::result::Result<alloc::vec::Vec<joker_token_usage_insights::db::UsageDayExportRecord>,serde_json::error::Error>>
+core::ptr::drop_in_place<core::result::Result<alloc::vec::Vec<(joker_token_usage_insights::db::UsageEntry,alloc::string::String,alloc::string::String)>,alloc::string::String>>
+core::ptr::drop_in_place<core::result::Result<core::result::Result<alloc::vec::Vec<(joker_token_usage_insights::db::UsageDayExportRecord,alloc::string::String)>,alloc::string::String>,tokio::runtime::task::error::JoinError>>
+core::ptr::drop_in_place<core::result::Result<core::result::Result<alloc::vec::Vec<joker_token_usage_insights::db::UsageDayExportRecord>,alloc::string::String>,tokio::runtime::task::error::JoinError>>
+core::ptr::drop_in_place<core::result::Result<core::result::Result<alloc::vec::Vec<(joker_token_usage_insights::db::UsageEntry,alloc::string::String,alloc::string::String)>,alloc::string::String>,tokio::runtime::task::error::JoinError>>
+core::ptr::drop_in_place<core::result::Result<joker_token_usage_insights::db::ContextStats,serde_json::error::Error>>
+core::ptr::drop_in_place<core::result::Result<joker_token_usage_insights::db::CostStats,serde_json::error::Error>>
+core::ptr::drop_in_place<core::result::Result<joker_token_usage_insights::db::UsageDayExportRecord,serde_json::error::Error>>
+core::ptr::drop_in_place<core::result::Result<joker_token_usage_insights::db::UsageEntry,serde_json::error::Error>>
+core::ptr::drop_in_place<core::result::Result<joker_token_usage_insights::handlers::misc::UsageDayImportRequest,serde_json::error::Error>>
+core::ptr::drop_in_place<core::result::Result<std::collections::hash::map::HashMap<u32,(joker_token_usage_insights::db::TokenStats,alloc::string::String)>,alloc::string::String>>
+core::ptr::drop_in_place<core::result::Result<(std::collections::hash::map::HashMap<u32,(joker_token_usage_insights::db::TokenStats,alloc::string::String)>,core::option::Option<alloc::string::String>),tokio::runtime::task::error::JoinError>>
+core::ptr::drop_in_place<core::task::poll::Poll<core::result::Result<core::result::Result<alloc::vec::Vec<(joker_token_usage_insights::db::UsageDayExportRecord,alloc::string::String)>,alloc::string::String>,tokio::runtime::task::error::JoinError>>>
+core::ptr::drop_in_place<core::task::poll::Poll<core::result::Result<core::result::Result<alloc::vec::Vec<joker_token_usage_insights::db::UsageDayExportRecord>,alloc::string::String>,tokio::runtime::task::error::JoinError>>>
+core::ptr::drop_in_place<core::task::poll::Poll<core::result::Result<core::result::Result<alloc::vec::Vec<(joker_token_usage_insights::db::UsageEntry,alloc::string::String,alloc::string::String)>,alloc::string::String>,tokio::runtime::task::error::JoinError>>>
+core::ptr::drop_in_place<core::task::poll::Poll<core::result::Result<core::result::Result<joker_token_usage_insights::db::UsageDayImportSummary,alloc::string::String>,tokio::runtime::task::error::JoinError>>>
+core::ptr::drop_in_place<core::task::poll::Poll<core::result::Result<joker_token_usage_insights::db::UsageDayImportSummary,alloc::string::String>>>
+core::ptr::drop_in_place<core::task::poll::Poll<core::result::Result<(std::collections::hash::map::HashMap<u32,(joker_token_usage_insights::db::TokenStats,alloc::string::String)>,core::option::Option<alloc::string::String>),tokio::runtime::task::error::JoinError>>>
+core::ptr::drop_in_place<core::task::poll::Poll<(std::collections::hash::map::HashMap<u32,(joker_token_usage_insights::db::TokenStats,alloc::string::String)>,core::option::Option<alloc::string::String>)>>
+core::ptr::drop_in_place<joker_token_usage_insights::db::CursorParsedEntry>
+core::ptr::drop_in_place<joker_token_usage_insights::db::CursorSessionMetadata>
+core::ptr::drop_in_place<[joker_token_usage_insights::db::UsageDayExportRecord]>
+core::ptr::drop_in_place<joker_token_usage_insights::db::UsageDayExportRecord>
+core::ptr::drop_in_place<(joker_token_usage_insights::db::UsageDayExportRecord,alloc::string::String)>
+core::ptr::drop_in_place<joker_token_usage_insights::db::UsageEntry>
+core::ptr::drop_in_place<(joker_token_usage_insights::db::UsageEntry,alloc::string::String)>
+core::ptr::drop_in_place<(joker_token_usage_insights::db::UsageEntry,alloc::string::String,alloc::string::String)>
+core::ptr::drop_in_place<joker_token_usage_insights::handlers::AssistantSetupStatus>
+core::ptr::drop_in_place<<joker_token_usage_insights::handlers::daily::get_available_dates as axum::handler::Handler<(axum_core::extract::private::ViaParts,axum::extract::path::Path<alloc::string::String>),()>>::call::{{closure}}>
+core::ptr::drop_in_place<joker_token_usage_insights::handlers::daily::get_available_dates::{{closure}}>
+core::ptr::drop_in_place<<joker_token_usage_insights::handlers::daily::get_session_details as axum::handler::Handler<(axum_core::extract::private::ViaParts,axum::extract::path::Path<(alloc::string::String,alloc::string::String)>),()>>::call::{{closure}}>
+core::ptr::drop_in_place<joker_token_usage_insights::handlers::daily::get_session_details::{{closure}}>
+core::ptr::drop_in_place<joker_token_usage_insights::handlers::daily::get_session_details::{{closure}}::{{closure}}>
+core::ptr::drop_in_place<joker_token_usage_insights::handlers::daily::get_session_details::{{closure}}::LegacyEventWrapper>
+core::ptr::drop_in_place<<joker_token_usage_insights::handlers::daily::get_setup_info as axum::handler::Handler<(axum_core::extract::private::ViaParts,axum::extract::path::Path<alloc::string::String>),()>>::call::{{closure}}>
+core::ptr::drop_in_place<joker_token_usage_insights::handlers::daily::get_setup_info::{{closure}}>
+core::ptr::drop_in_place<<joker_token_usage_insights::handlers::daily::get_usage_details as axum::handler::Handler<(axum_core::extract::private::ViaParts,axum::extract::path::Path<(alloc::string::String,alloc::string::String)>),()>>::call::{{closure}}>
+core::ptr::drop_in_place<joker_token_usage_insights::handlers::daily::get_usage_details::{{closure}}>
+core::ptr::drop_in_place<joker_token_usage_insights::handlers::daily::get_usage_details::{{closure}}::{{closure}}>
+core::ptr::drop_in_place<<joker_token_usage_insights::handlers::misc::export_usage_day as axum::handler::Handler<(axum_core::extract::private::ViaParts,axum::extract::path::Path<(alloc::string::String,alloc::string::String)>),()>>::call::{{closure}}>
+core::ptr::drop_in_place<joker_token_usage_insights::handlers::misc::export_usage_day::{{closure}}>
+core::ptr::drop_in_place<joker_token_usage_insights::handlers::misc::export_usage_day::{{closure}}::{{closure}}>
+core::ptr::drop_in_place<<joker_token_usage_insights::handlers::misc::get_pricing as axum::handler::Handler<(axum_core::extract::private::ViaParts,axum::extract::path::Path<alloc::string::String>),()>>::call::{{closure}}>
+core::ptr::drop_in_place<joker_token_usage_insights::handlers::misc::get_pricing::{{closure}}>
+core::ptr::drop_in_place<<joker_token_usage_insights::handlers::misc::get_rate_limit as axum::handler::Handler<(axum_core::extract::private::ViaParts,axum::extract::path::Path<alloc::string::String>),()>>::call::{{closure}}>
+core::ptr::drop_in_place<joker_token_usage_insights::handlers::misc::get_rate_limit::{{closure}}>
+core::ptr::drop_in_place<<joker_token_usage_insights::handlers::misc::import_usage_day as axum::handler::Handler<(axum_core::extract::private::ViaRequest,axum::extract::path::Path<(alloc::string::String,alloc::string::String)>,axum::json::Json<joker_token_usage_insights::handlers::misc::UsageDayImportRequest>),()>>::call::{{closure}}>
+core::ptr::drop_in_place<joker_token_usage_insights::handlers::misc::import_usage_day::{{closure}}>
+core::ptr::drop_in_place<joker_token_usage_insights::handlers::misc::import_usage_day::{{closure}}::{{closure}}>
+core::ptr::drop_in_place<<joker_token_usage_insights::handlers::misc::trigger_manual_sync as axum::handler::Handler<(axum_core::extract::private::ViaParts,axum::extract::path::Path<alloc::string::String>),()>>::call::{{closure}}>
+core::ptr::drop_in_place<joker_token_usage_insights::handlers::misc::trigger_manual_sync::{{closure}}>
+core::ptr::drop_in_place<joker_token_usage_insights::handlers::misc::UsageDayImportRequest>
+core::ptr::drop_in_place<joker_token_usage_insights::handlers::ModelSessionDetail>
+core::ptr::drop_in_place<<joker_token_usage_insights::handlers::monthly::get_available_months as axum::handler::Handler<(axum_core::extract::private::ViaParts,axum::extract::path::Path<alloc::string::String>),()>>::call::{{closure}}>
+core::ptr::drop_in_place<joker_token_usage_insights::handlers::monthly::get_available_months::{{closure}}>
+core::ptr::drop_in_place<<joker_token_usage_insights::handlers::monthly::get_monthly_details as axum::handler::Handler<(axum_core::extract::private::ViaParts,axum::extract::path::Path<(alloc::string::String,alloc::string::String)>),()>>::call::{{closure}}>
+core::ptr::drop_in_place<joker_token_usage_insights::handlers::monthly::get_monthly_details::{{closure}}>
+core::ptr::drop_in_place<joker_token_usage_insights::handlers::monthly::get_monthly_details::{{closure}}::{{closure}}>
+core::ptr::drop_in_place<joker_token_usage_insights::handlers::MonthlyModelSummary>
+core::ptr::drop_in_place<joker_token_usage_insights::handlers::SessionSummary>
+core::ptr::drop_in_place<<joker_token_usage_insights::handlers::yearly::get_available_years as axum::handler::Handler<(axum_core::extract::private::ViaParts,axum::extract::path::Path<alloc::string::String>),()>>::call::{{closure}}>
+core::ptr::drop_in_place<joker_token_usage_insights::handlers::yearly::get_available_years::{{closure}}>
+core::ptr::drop_in_place<<joker_token_usage_insights::handlers::yearly::get_yearly_details as axum::handler::Handler<(axum_core::extract::private::ViaParts,axum::extract::path::Path<(alloc::string::String,alloc::string::String)>),()>>::call::{{closure}}>
+core::ptr::drop_in_place<joker_token_usage_insights::handlers::yearly::get_yearly_details::{{closure}}>
+core::ptr::drop_in_place<joker_token_usage_insights::handlers::yearly::get_yearly_details::{{closure}}::{{closure}}>
+core::ptr::drop_in_place<joker_token_usage_insights::main::{{closure}}>
+core::ptr::drop_in_place<joker_token_usage_insights::main::{{closure}}::{{closure}}>
+core::ptr::drop_in_place<joker_token_usage_insights::pricing::PricingEntry>
+core::ptr::drop_in_place<joker_token_usage_insights::timeline::TimelineItem>
+core::ptr::drop_in_place<tokio::runtime::task::core::Cell<joker_token_usage_insights::main::{{closure}}::{{closure}},alloc::sync::Arc<tokio::runtime::scheduler::current_thread::Handle>>>
+core::ptr::drop_in_place<tokio::runtime::task::core::Cell<joker_token_usage_insights::main::{{closure}}::{{closure}},alloc::sync::Arc<tokio::runtime::scheduler::multi_thread::handle::Handle>>>
+core::ptr::drop_in_place<tokio::runtime::task::core::Cell<tokio::runtime::blocking::task::BlockingTask<joker_token_usage_insights::db::get_latest_codex_rate_limit>,tokio::runtime::blocking::schedule::BlockingSchedule>>
+core::ptr::drop_in_place<tokio::runtime::task::core::Cell<tokio::runtime::blocking::task::BlockingTask<joker_token_usage_insights::handlers::daily::get_available_dates::{{closure}}::{{closure}}>,tokio::runtime::blocking::schedule::BlockingSchedule>>
+core::ptr::drop_in_place<tokio::runtime::task::core::Cell<tokio::runtime::blocking::task::BlockingTask<joker_token_usage_insights::handlers::daily::get_session_details::{{closure}}::{{closure}}>,tokio::runtime::blocking::schedule::BlockingSchedule>>
+core::ptr::drop_in_place<tokio::runtime::task::core::Cell<tokio::runtime::blocking::task::BlockingTask<joker_token_usage_insights::handlers::daily::get_usage_details::{{closure}}::{{closure}}>,tokio::runtime::blocking::schedule::BlockingSchedule>>
+core::ptr::drop_in_place<tokio::runtime::task::core::Cell<tokio::runtime::blocking::task::BlockingTask<joker_token_usage_insights::handlers::misc::export_usage_day::{{closure}}::{{closure}}>,tokio::runtime::blocking::schedule::BlockingSchedule>>
+core::ptr::drop_in_place<tokio::runtime::task::core::Cell<tokio::runtime::blocking::task::BlockingTask<joker_token_usage_insights::handlers::misc::import_usage_day::{{closure}}::{{closure}}>,tokio::runtime::blocking::schedule::BlockingSchedule>>
+core::ptr::drop_in_place<tokio::runtime::task::core::Cell<tokio::runtime::blocking::task::BlockingTask<joker_token_usage_insights::handlers::misc::trigger_manual_sync::{{closure}}::{{closure}}>,tokio::runtime::blocking::schedule::BlockingSchedule>>
+core::ptr::drop_in_place<tokio::runtime::task::core::Cell<tokio::runtime::blocking::task::BlockingTask<joker_token_usage_insights::handlers::monthly::get_available_months::{{closure}}::{{closure}}>,tokio::runtime::blocking::schedule::BlockingSchedule>>
+core::ptr::drop_in_place<tokio::runtime::task::core::Cell<tokio::runtime::blocking::task::BlockingTask<joker_token_usage_insights::handlers::monthly::get_monthly_details::{{closure}}::{{closure}}>,tokio::runtime::blocking::schedule::BlockingSchedule>>
+core::ptr::drop_in_place<tokio::runtime::task::core::Cell<tokio::runtime::blocking::task::BlockingTask<joker_token_usage_insights::handlers::yearly::get_available_years::{{closure}}::{{closure}}>,tokio::runtime::blocking::schedule::BlockingSchedule>>
+core::ptr::drop_in_place<tokio::runtime::task::core::Cell<tokio::runtime::blocking::task::BlockingTask<joker_token_usage_insights::handlers::yearly::get_yearly_details::{{closure}}::{{closure}}>,tokio::runtime::blocking::schedule::BlockingSchedule>>
+core::ptr::drop_in_place<tokio::runtime::task::core::Cell<tokio::runtime::blocking::task::BlockingTask<joker_token_usage_insights::main::{{closure}}::{{closure}}::{{closure}}>,tokio::runtime::blocking::schedule::BlockingSchedule>>
+core::ptr::drop_in_place<tokio::runtime::task::core::CoreStage<tokio::runtime::blocking::task::BlockingTask<joker_token_usage_insights::db::get_latest_codex_rate_limit>>>
+core::ptr::drop_in_place<tokio::runtime::task::core::CoreStage<tokio::runtime::blocking::task::BlockingTask<joker_token_usage_insights::handlers::daily::get_available_dates::{{closure}}::{{closure}}>>>
+core::ptr::drop_in_place<tokio::runtime::task::core::CoreStage<tokio::runtime::blocking::task::BlockingTask<joker_token_usage_insights::handlers::daily::get_session_details::{{closure}}::{{closure}}>>>
+core::ptr::drop_in_place<tokio::runtime::task::core::CoreStage<tokio::runtime::blocking::task::BlockingTask<joker_token_usage_insights::handlers::daily::get_usage_details::{{closure}}::{{closure}}>>>
+core::ptr::drop_in_place<tokio::runtime::task::core::CoreStage<tokio::runtime::blocking::task::BlockingTask<joker_token_usage_insights::handlers::misc::export_usage_day::{{closure}}::{{closure}}>>>
+core::ptr::drop_in_place<tokio::runtime::task::core::CoreStage<tokio::runtime::blocking::task::BlockingTask<joker_token_usage_insights::handlers::misc::import_usage_day::{{closure}}::{{closure}}>>>
+core::ptr::drop_in_place<tokio::runtime::task::core::CoreStage<tokio::runtime::blocking::task::BlockingTask<joker_token_usage_insights::handlers::yearly::get_yearly_details::{{closure}}::{{closure}}>>>
+core::ptr::drop_in_place<tokio::runtime::task::core::Stage<joker_token_usage_insights::main::{{closure}}::{{closure}}>>
+core::ptr::drop_in_place<tokio::runtime::task::core::Stage<tokio::runtime::blocking::task::BlockingTask<joker_token_usage_insights::db::get_latest_codex_rate_limit>>>
+core::ptr::drop_in_place<tokio::runtime::task::core::Stage<tokio::runtime::blocking::task::BlockingTask<joker_token_usage_insights::handlers::daily::get_available_dates::{{closure}}::{{closure}}>>>
+core::ptr::drop_in_place<tokio::runtime::task::core::Stage<tokio::runtime::blocking::task::BlockingTask<joker_token_usage_insights::handlers::daily::get_session_details::{{closure}}::{{closure}}>>>
+core::ptr::drop_in_place<tokio::runtime::task::core::Stage<tokio::runtime::blocking::task::BlockingTask<joker_token_usage_insights::handlers::daily::get_usage_details::{{closure}}::{{closure}}>>>
+core::ptr::drop_in_place<tokio::runtime::task::core::Stage<tokio::runtime::blocking::task::BlockingTask<joker_token_usage_insights::handlers::misc::export_usage_day::{{closure}}::{{closure}}>>>
+core::ptr::drop_in_place<tokio::runtime::task::core::Stage<tokio::runtime::blocking::task::BlockingTask<joker_token_usage_insights::handlers::misc::import_usage_day::{{closure}}::{{closure}}>>>
+core::ptr::drop_in_place<tokio::runtime::task::core::Stage<tokio::runtime::blocking::task::BlockingTask<joker_token_usage_insights::handlers::monthly::get_available_months::{{closure}}::{{closure}}>>>
+core::ptr::drop_in_place<tokio::runtime::task::core::Stage<tokio::runtime::blocking::task::BlockingTask<joker_token_usage_insights::handlers::monthly::get_monthly_details::{{closure}}::{{closure}}>>>
+core::ptr::drop_in_place<tokio::runtime::task::core::Stage<tokio::runtime::blocking::task::BlockingTask<joker_token_usage_insights::handlers::yearly::get_available_years::{{closure}}::{{closure}}>>>
+core::ptr::drop_in_place<tokio::runtime::task::core::Stage<tokio::runtime::blocking::task::BlockingTask<joker_token_usage_insights::handlers::yearly::get_yearly_details::{{closure}}::{{closure}}>>>
+core::ptr::drop_in_place<tokio::task::spawn::spawn_inner<joker_token_usage_insights::main::{{closure}}::{{closure}}>::{{closure}}>
+joker_token_usage_insights::build_cors_layer
+joker_token_usage_insights::db::build_import_token_signature
+joker_token_usage_insights::db::build_usage_entry_import_source_id
+joker_token_usage_insights::db::cursor_content_to_text
+joker_token_usage_insights::db::cursor_model_source_id
+joker_token_usage_insights::db::cursor_tool_signature
+joker_token_usage_insights::db::export_usage_day_entries
+joker_token_usage_insights::db::find_codex_session_files
+joker_token_usage_insights::db::get_antigravity_dir
+joker_token_usage_insights::db::get_available_dates
+joker_token_usage_insights::db::get_available_months
+joker_token_usage_insights::db::get_available_years
+joker_token_usage_insights::db::get_claude_dir
+joker_token_usage_insights::db::get_codex_dir
+joker_token_usage_insights::db::get_copilot_dir
+joker_token_usage_insights::db::get_cursor_dir
+joker_token_usage_insights::db::get_db_conn
+joker_token_usage_insights::db::get_session_assistant_and_transcript
+joker_token_usage_insights::db::get_session_cwd
+joker_token_usage_insights::db::get_session_turns_token_stats
+joker_token_usage_insights::db::get_usage_entries_by_date
+joker_token_usage_insights::db::get_usage_entries_by_month
+joker_token_usage_insights::db::get_usage_entries_by_year
+<joker_token_usage_insights::db::_::<impl serde_core::de::Deserialize for joker_token_usage_insights::db::ClaudeUsage>::deserialize::__FieldVisitor as serde_core::de::Visitor>::visit_str
+<joker_token_usage_insights::db::_::<impl serde_core::de::Deserialize for joker_token_usage_insights::db::CodexTokenUsage>::deserialize::__FieldVisitor as serde_core::de::Visitor>::visit_str
+<joker_token_usage_insights::db::_::<impl serde_core::de::Deserialize for joker_token_usage_insights::db::TokenStats>::deserialize::__FieldVisitor as serde_core::de::Visitor>::visit_str
+<joker_token_usage_insights::db::_::<impl serde_core::de::Deserialize for joker_token_usage_insights::db::UsageEntry>::deserialize::__FieldVisitor as serde_core::de::Visitor>::visit_bytes
+<joker_token_usage_insights::db::_::<impl serde_core::de::Deserialize for joker_token_usage_insights::db::UsageEntry>::deserialize::__FieldVisitor as serde_core::de::Visitor>::visit_str
+joker_token_usage_insights::db::_::<impl serde_core::ser::Serialize for joker_token_usage_insights::db::ContextStats>::serialize
+joker_token_usage_insights::db::_::<impl serde_core::ser::Serialize for joker_token_usage_insights::db::CostStats>::serialize
+joker_token_usage_insights::db::_::<impl serde_core::ser::Serialize for joker_token_usage_insights::db::TokenStats>::serialize
+joker_token_usage_insights::db::_::<impl serde_core::ser::Serialize for joker_token_usage_insights::db::UsageDayExportRecord>::serialize
+joker_token_usage_insights::db::_::<impl serde_core::ser::Serialize for joker_token_usage_insights::db::UsageDayImportSummary>::serialize
+joker_token_usage_insights::db::_::<impl serde_core::ser::Serialize for joker_token_usage_insights::db::UsageEntry>::serialize
+joker_token_usage_insights::db::import_usage_day_entries
+joker_token_usage_insights::db::init_db
+joker_token_usage_insights::db::migrate_old_databases
+joker_token_usage_insights::db::migrate_records
+joker_token_usage_insights::db::parse_cursor_timestamp
+joker_token_usage_insights::db::sync_claude_usage_logs
+joker_token_usage_insights::db::sync_cursor_model_signatures::{{closure}}
+joker_token_usage_insights::db::sync_cursor_session_metadata::{{closure}}
+joker_token_usage_insights::db::sync_cursor_usage_logs
+joker_token_usage_insights::db::sync_hook_usage_logs
+joker_token_usage_insights::db::sync_usage_logs
+<joker_token_usage_insights::db::UsageEntry as core::clone::Clone>::clone
+joker_token_usage_insights::handlers::daily::get_session_details::{{closure}}
+joker_token_usage_insights::handlers::daily::get_session_details::{{closure}}::{{closure}}
+joker_token_usage_insights::handlers::daily::get_session_details::{{closure}}::_::<impl serde_core::ser::Serialize for joker_token_usage_insights::handlers::daily::get_session_details::{{closure}}::LegacyEventWrapper>::serialize
+joker_token_usage_insights::handlers::daily::get_setup_info::{{closure}}
+joker_token_usage_insights::handlers::daily::resolve_claude_transcript_path
+joker_token_usage_insights::handlers::daily::resolve_codex_transcript_path
+joker_token_usage_insights::handlers::daily::resolve_cursor_transcript_path
+joker_token_usage_insights::handlers::_::<impl serde_core::ser::Serialize for joker_token_usage_insights::handlers::AgentBreakdown>::serialize
+joker_token_usage_insights::handlers::_::<impl serde_core::ser::Serialize for joker_token_usage_insights::handlers::AssistantSetupStatus>::serialize
+joker_token_usage_insights::handlers::_::<impl serde_core::ser::Serialize for joker_token_usage_insights::handlers::DateListResponse>::serialize
+joker_token_usage_insights::handlers::_::<impl serde_core::ser::Serialize for joker_token_usage_insights::handlers::DaySummary>::serialize
+joker_token_usage_insights::handlers::_::<impl serde_core::ser::Serialize for joker_token_usage_insights::handlers::ModelSessionDetail>::serialize
+joker_token_usage_insights::handlers::_::<impl serde_core::ser::Serialize for joker_token_usage_insights::handlers::MonthListResponse>::serialize
+joker_token_usage_insights::handlers::_::<impl serde_core::ser::Serialize for joker_token_usage_insights::handlers::MonthlyDailyBreakdown>::serialize
+joker_token_usage_insights::handlers::_::<impl serde_core::ser::Serialize for joker_token_usage_insights::handlers::MonthlyDetailsResponse>::serialize
+joker_token_usage_insights::handlers::_::<impl serde_core::ser::Serialize for joker_token_usage_insights::handlers::MonthlyModelSummary>::serialize
+joker_token_usage_insights::handlers::_::<impl serde_core::ser::Serialize for joker_token_usage_insights::handlers::MonthlyProjectSummary>::serialize
+joker_token_usage_insights::handlers::_::<impl serde_core::ser::Serialize for joker_token_usage_insights::handlers::SessionSummary>::serialize
+joker_token_usage_insights::handlers::_::<impl serde_core::ser::Serialize for joker_token_usage_insights::handlers::SetupInfoResponse>::serialize
+joker_token_usage_insights::handlers::_::<impl serde_core::ser::Serialize for joker_token_usage_insights::handlers::UsageDetailsResponse>::serialize
+joker_token_usage_insights::handlers::_::<impl serde_core::ser::Serialize for joker_token_usage_insights::handlers::YearListResponse>::serialize
+joker_token_usage_insights::handlers::_::<impl serde_core::ser::Serialize for joker_token_usage_insights::handlers::YearlyDetailsResponse>::serialize
+joker_token_usage_insights::handlers::_::<impl serde_core::ser::Serialize for joker_token_usage_insights::handlers::YearlyMonthlyBreakdown>::serialize
+joker_token_usage_insights::handlers::is_supported_assistant
+joker_token_usage_insights::handlers::misc::_::<impl serde_core::ser::Serialize for joker_token_usage_insights::handlers::misc::UsageDayExportResponse>::serialize
+joker_token_usage_insights::handlers::misc::is_valid_date
+joker_token_usage_insights::handlers::monthly::get_monthly_details::{{closure}}
+joker_token_usage_insights::handlers::normalize_assistant_name
+joker_token_usage_insights::handlers::select_session_mode
+joker_token_usage_insights::handlers::select_session_model
+joker_token_usage_insights::handlers::yearly::get_yearly_details::{{closure}}
+joker_token_usage_insights::main
+joker_token_usage_insights::main::{{closure}}
+joker_token_usage_insights::main::{{closure}}::{{closure}}
+joker_token_usage_insights::paths::env_path
+joker_token_usage_insights::paths::find_resource
+joker_token_usage_insights::pricing::calculate_cost
+joker_token_usage_insights::pricing::_::<impl serde_core::ser::Serialize for joker_token_usage_insights::pricing::PricingEntry>::serialize
+joker_token_usage_insights::pricing::load_pricing_rules
+joker_token_usage_insights::pricing::parse_threshold_rule
+joker_token_usage_insights::timeline::claude_text_from_content
+joker_token_usage_insights::timeline::codex_text_from_content
+joker_token_usage_insights::timeline::parse_antigravity_timeline
+joker_token_usage_insights::timeline::parse_claude_timeline
+joker_token_usage_insights::timeline::parse_claude_timeline::{{closure}}
+joker_token_usage_insights::timeline::parse_codex_timeline
+joker_token_usage_insights::timeline::parse_codex_timeline::{{closure}}
+joker_token_usage_insights::timeline::parse_copilot_timeline
+joker_token_usage_insights::timeline::parse_cursor_timeline

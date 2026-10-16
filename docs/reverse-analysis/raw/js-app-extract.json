@@ -1,0 +1,566 @@
+{
+  "evidence_id": "ev_7444eb1dd18f8ed4b256320e9293eeb4ad0c11ff88a75a4350797af6246db8ee",
+  "parent_operation": "analyze_javascript_application",
+  "subject": {
+    "name": "static",
+    "digest": {
+      "sha256": "fbb67ef599ad7d8c212b8bd0fec1062ed3a253414c95700f8bddee3c99ecb430"
+    },
+    "local_path": "/workspace/static",
+    "format": "directory",
+    "architecture": null
+  },
+  "requests": [
+    {
+      "line": 948,
+      "label": "fetch",
+      "properties": {
+        "endpoint": null,
+        "method": "fetch",
+        "operation_kind": "request"
+      },
+      "enclosing_function": null
+    },
+    {
+      "line": 1302,
+      "label": "fetch",
+      "properties": {
+        "endpoint": null,
+        "method": "fetch",
+        "operation_kind": "request"
+      },
+      "enclosing_function": "refreshLiveData"
+    },
+    {
+      "line": 1336,
+      "label": "fetch",
+      "properties": {
+        "endpoint": null,
+        "method": "fetch",
+        "operation_kind": "request"
+      },
+      "enclosing_function": "fetchDates"
+    },
+    {
+      "line": 1405,
+      "label": "fetch",
+      "properties": {
+        "endpoint": null,
+        "method": "fetch",
+        "operation_kind": "request"
+      },
+      "enclosing_function": "loadUsageData"
+    },
+    {
+      "line": 1441,
+      "label": "fetch",
+      "properties": {
+        "endpoint": null,
+        "method": "fetch",
+        "operation_kind": "request"
+      },
+      "enclosing_function": "exportCurrentUsageDay"
+    },
+    {
+      "line": 1514,
+      "label": "fetch",
+      "properties": {
+        "endpoint": null,
+        "method": "fetch",
+        "operation_kind": "request"
+      },
+      "enclosing_function": "importUsageDayFromFile"
+    },
+    {
+      "line": 2421,
+      "label": "fetch",
+      "properties": {
+        "endpoint": null,
+        "method": "fetch",
+        "operation_kind": "request"
+      },
+      "enclosing_function": "openSessionTimeline"
+    },
+    {
+      "line": 2985,
+      "label": "fetch",
+      "properties": {
+        "endpoint": null,
+        "method": "fetch",
+        "operation_kind": "request"
+      },
+      "enclosing_function": "fetchMonths"
+    },
+    {
+      "line": 3041,
+      "label": "fetch",
+      "properties": {
+        "endpoint": null,
+        "method": "fetch",
+        "operation_kind": "request"
+      },
+      "enclosing_function": "fetchYears"
+    },
+    {
+      "line": 3106,
+      "label": "fetch",
+      "properties": {
+        "endpoint": null,
+        "method": "fetch",
+        "operation_kind": "request"
+      },
+      "enclosing_function": "loadYearlyData"
+    },
+    {
+      "line": 3747,
+      "label": "fetch",
+      "properties": {
+        "endpoint": null,
+        "method": "fetch",
+        "operation_kind": "request"
+      },
+      "enclosing_function": "loadMonthlyData"
+    },
+    {
+      "line": 4383,
+      "label": "fetch",
+      "properties": {
+        "endpoint": null,
+        "method": "fetch",
+        "operation_kind": "request"
+      },
+      "enclosing_function": "loadSetupInfo"
+    },
+    {
+      "line": 4658,
+      "label": "fetch",
+      "properties": {
+        "endpoint": null,
+        "method": "fetch",
+        "operation_kind": "request"
+      },
+      "enclosing_function": "fetchPricingRules"
+    }
+  ],
+  "timers": [
+    {
+      "line": 1267,
+      "label": "setInterval",
+      "properties": {
+        "delay_milliseconds": 100,
+        "method": "setInterval"
+      },
+      "enclosing_function": "startLiveRefresh"
+    },
+    {
+      "line": 1277,
+      "label": "setInterval",
+      "properties": {
+        "delay_milliseconds": null,
+        "method": "setInterval"
+      },
+      "enclosing_function": "startLiveRefresh"
+    },
+    {
+      "line": 2729,
+      "label": "setTimeout",
+      "properties": {
+        "delay_milliseconds": 2000,
+        "method": "setTimeout"
+      },
+      "enclosing_function": null
+    },
+    {
+      "line": 4229,
+      "label": "setTimeout",
+      "properties": {
+        "delay_milliseconds": 3000,
+        "method": "setTimeout"
+      },
+      "enclosing_function": "showNotification"
+    },
+    {
+      "line": 4551,
+      "label": "setTimeout",
+      "properties": {
+        "delay_milliseconds": 2000,
+        "method": "setTimeout"
+      },
+      "enclosing_function": null
+    }
+  ],
+  "application_graph_nodes": [
+    {
+      "kind": "javascript-module",
+      "label": "app.js",
+      "properties": {
+        "semantic_role": "source-module",
+        "path": "app.js",
+        "container_sha256": "fbb67ef599ad7d8c212b8bd0fec1062ed3a253414c95700f8bddee3c99ecb430",
+        "logical_module_key": "app.js",
+        "module_format": "esm",
+        "import_relationships": 1,
+        "type_relationships": 0,
+        "export_relationships": 0,
+        "export_names": [],
+        "type_export_names": [],
+        "omitted_export_names": 0
+      },
+      "evidence_state": "observed",
+      "confidence": "exact",
+      "location": {
+        "kind": "source-range",
+        "source": "app.js",
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 4774,
+          "column": 0
+        }
+      }
+    },
+    {
+      "kind": "storage",
+      "label": "local-storage",
+      "properties": {
+        "storage_kind": "local-storage",
+        "name": null,
+        "mechanism": "call:localStorage.setItem"
+      },
+      "evidence_state": "observed",
+      "confidence": "exact",
+      "location": {
+        "kind": "source-range",
+        "source": "app.js",
+        "start": {
+          "line": 378,
+          "column": 2
+        },
+        "end": {
+          "line": 378,
+          "column": 89
+        }
+      }
+    },
+    {
+      "kind": "storage",
+      "label": "theme",
+      "properties": {
+        "storage_kind": "local-storage",
+        "name": "theme",
+        "mechanism": "call:localStorage.setItem"
+      },
+      "evidence_state": "observed",
+      "confidence": "exact",
+      "location": {
+        "kind": "source-range",
+        "source": "app.js",
+        "start": {
+          "line": 4251,
+          "column": 6
+        },
+        "end": {
+          "line": 4251,
+          "column": 45
+        }
+      }
+    },
+    {
+      "kind": "javascript-module",
+      "label": "i18n.js",
+      "properties": {
+        "semantic_role": "source-module",
+        "path": "i18n.js",
+        "container_sha256": "fbb67ef599ad7d8c212b8bd0fec1062ed3a253414c95700f8bddee3c99ecb430",
+        "logical_module_key": "i18n.js",
+        "module_format": "esm",
+        "import_relationships": 0,
+        "type_relationships": 0,
+        "export_relationships": 1,
+        "export_names": [
+          "default"
+        ],
+        "type_export_names": [],
+        "omitted_export_names": 0
+      },
+      "evidence_state": "observed",
+      "confidence": "exact",
+      "location": {
+        "kind": "source-range",
+        "source": "i18n.js",
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 670,
+          "column": 0
+        }
+      }
+    },
+    {
+      "kind": "storage",
+      "label": "local-storage",
+      "properties": {
+        "storage_kind": "local-storage",
+        "name": null,
+        "mechanism": "call:localStorage.getItem"
+      },
+      "evidence_state": "observed",
+      "confidence": "exact",
+      "location": {
+        "kind": "source-range",
+        "source": "app.js",
+        "start": {
+          "line": 373,
+          "column": 16
+        },
+        "end": {
+          "line": 373,
+          "column": 63
+        }
+      }
+    },
+    {
+      "kind": "javascript-module",
+      "label": "i18n.js:default",
+      "properties": {
+        "semantic_role": "export-binding",
+        "module_path": "i18n.js",
+        "relationship_kind": "export",
+        "exported_name": "default",
+        "local_name": "i18n",
+        "imported_name": null,
+        "declared_specifier": null
+      },
+      "evidence_state": "observed",
+      "confidence": "exact",
+      "location": {
+        "kind": "source-range",
+        "source": "i18n.js",
+        "start": {
+          "line": 669,
+          "column": 0
+        },
+        "end": {
+          "line": 669,
+          "column": 20
+        }
+      }
+    },
+    {
+      "kind": "endpoint",
+      "label": "tab",
+      "properties": {
+        "endpoint_kind": "network",
+        "value": "tab",
+        "mechanism": "call:urlParams.get",
+        "interpretation": "candidate"
+      },
+      "evidence_state": "inferred",
+      "confidence": "low",
+      "location": {
+        "kind": "source-range",
+        "source": "app.js",
+        "start": {
+          "line": 186,
+          "column": 15
+        },
+        "end": {
+          "line": 186,
+          "column": 35
+        }
+      }
+    },
+    {
+      "kind": "electron-renderer",
+      "label": "/static/app.js?v=29",
+      "properties": {
+        "mechanism": "html-script-reference",
+        "script_path": "/static/app.js?v=29",
+        "base_href": null,
+        "declared_path": "/static/app.js?v=29",
+        "resolution_context": "html-reference",
+        "limitations": [
+          "The exact HTML resource static/app.js was not found among the selected application files."
+        ],
+        "resolved_path": null,
+        "resolution_status": "not-found"
+      },
+      "evidence_state": "inferred",
+      "confidence": "high",
+      "location": {
+        "kind": "source-range",
+        "source": "index.html",
+        "start": {
+          "line": 1042,
+          "column": 2
+        },
+        "end": {
+          "line": 1042,
+          "column": 50
+        }
+      }
+    },
+    {
+      "kind": "endpoint",
+      "label": "agent",
+      "properties": {
+        "endpoint_kind": "network",
+        "value": "agent",
+        "mechanism": "call:urlParams.get",
+        "interpretation": "candidate"
+      },
+      "evidence_state": "inferred",
+      "confidence": "low",
+      "location": {
+        "kind": "source-range",
+        "source": "app.js",
+        "start": {
+          "line": 182,
+          "column": 17
+        },
+        "end": {
+          "line": 182,
+          "column": 39
+        }
+      }
+    },
+    {
+      "kind": "unknown",
+      "label": "index.html parse scope",
+      "properties": {
+        "inline_script_count": 1,
+        "inline_scripts": [
+          {
+            "script_type": "classic",
+            "location": {
+              "start": {
+                "line": 18,
+                "column": 10
+              },
+              "end": {
+                "line": 21,
+                "column": 2
+              }
+            }
+          }
+        ],
+        "path": "index.html",
+        "operation": "parse-html-inline-scripts",
+        "limitation": "index.html has 1 inline JavaScript body starting at line 18 that was not analyzed; endpoints, storage, imports and other facts in it are absent from the evidence."
+      },
+      "evidence_state": "unavailable",
+      "confidence": "unknown",
+      "location": {
+        "kind": "artifact-path",
+        "path": "index.html"
+      }
+    },
+    {
+      "kind": "endpoint",
+      "label": "date",
+      "properties": {
+        "endpoint_kind": "network",
+        "value": "date",
+        "mechanism": "call:urlParams.get",
+        "interpretation": "candidate"
+      },
+      "evidence_state": "inferred",
+      "confidence": "low",
+      "location": {
+        "kind": "source-range",
+        "source": "app.js",
+        "start": {
+          "line": 137,
+          "column": 18
+        },
+        "end": {
+          "line": 137,
+          "column": 39
+        }
+      }
+    },
+    {
+      "kind": "storage",
+      "label": "lang",
+      "properties": {
+        "storage_kind": "local-storage",
+        "name": "lang",
+        "mechanism": "call:localStorage.getItem"
+      },
+      "evidence_state": "observed",
+      "confidence": "exact",
+      "location": {
+        "kind": "source-range",
+        "source": "app.js",
+        "start": {
+          "line": 248,
+          "column": 18
+        },
+        "end": {
+          "line": 248,
+          "column": 46
+        }
+      }
+    }
+  ],
+  "statistics": {
+    "relevant_files": 3,
+    "nested_asar_containers": 0,
+    "text_bytes_read": 285156,
+    "invalid_utf8_files": 0,
+    "parsed_javascript_files": 2,
+    "visited_ast_nodes": 23398,
+    "findings": 17,
+    "modules": 0,
+    "parse_failures": 0
+  },
+  "renderer_script_references": [
+    {
+      "label": "/static/app.js?v=29",
+      "mechanism": "html-script-reference",
+      "declared_path": "/static/app.js?v=29",
+      "resolution_status": "not-found",
+      "limitations": [
+        "The exact HTML resource static/app.js was not found among the selected application files."
+      ]
+    },
+    {
+      "label": "https://cdn.jsdelivr.net/npm/chart.js",
+      "mechanism": "html-script-reference",
+      "declared_path": "https://cdn.jsdelivr.net/npm/chart.js",
+      "resolution_status": "external",
+      "limitations": [
+        "External HTML references are not mapped to local artifact assets."
+      ]
+    },
+    {
+      "label": "https://cdn.jsdelivr.net/npm/dompurify@3.2.3/dist/purify.min.js",
+      "mechanism": "html-script-reference",
+      "declared_path": "https://cdn.jsdelivr.net/npm/dompurify@3.2.3/dist/purify.min.js",
+      "resolution_status": "external",
+      "limitations": [
+        "External HTML references are not mapped to local artifact assets."
+      ]
+    },
+    {
+      "label": "https://cdn.jsdelivr.net/npm/marked/marked.min.js",
+      "mechanism": "html-script-reference",
+      "declared_path": "https://cdn.jsdelivr.net/npm/marked/marked.min.js",
+      "resolution_status": "external",
+      "limitations": [
+        "External HTML references are not mapped to local artifact assets."
+      ]
+    },
+    {
+      "label": "index.html",
+      "mechanism": "html-script-entrypoint",
+      "declared_path": "index.html",
+      "resolution_status": "resolved",
+      "limitations": []
+    }
+  ]
+}

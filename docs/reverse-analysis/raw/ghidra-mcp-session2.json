@@ -1,0 +1,171 @@
+[
+  {
+    "tool": "procedure_pseudo_code",
+    "arguments": {
+      "procedure": "0x20ac30"
+    },
+    "elapsed_ms": 682118,
+    "evidence_id": "ev_ae9aaee66dcd520d8b2d916153bf3d786f9fc24de9926f162458b84a9ccd8388",
+    "operation": "procedure_pseudo_code",
+    "normalized_result": "\n/* joker_token_usage_insights::pricing::calculate_cost */\n\nundefined8 * __rustcall\njoker_token_usage_insights::pricing::calculate_cost\n          (undefined8 *param_1,long param_2,long param_3,undefined8 param_4,undefined8 param_5,\n          long param_6,long param_7,long param_8)\n\n{\n  undefined8 *puVar1;\n  undefined **ppuVar2;\n  undefined **ppuVar3;\n  undefined1 *__s2;\n  undefined1 *puVar4;\n  undefined8 **__n;\n  undefined8 **ppuVar5;\n  byte bVar6;\n  char cVar7;\n  int iVar8;\n  long lVar9;\n  long lVar10;\n  undefined **local_d0;\n  undefined1 *local_c8;\n  undefined8 **local_c0;\n  undefined8 local_b8;\n  undefined8 local_b0;\n  undefined8 *local_a0;\n  long local_98;\n  ulong local_90;\n  undefined8 *local_88;\n  code *local_80;\n  long local_78;\n  undefined8 local_70;\n  undefined8 local_68;\n  undefined4 local_60;\n  undefined4 uStack_5c;\n  undefined4 uStack_58;\n  undefined4 uStack_54;\n  undefined8 local_50;\n  undefined4 local_48;\n  undefined4 uStack_44;\n  undefined4 uStack_40;\n  undefined4 uStack_3c;\n  undefined8 local_38;\n  \n  local_98 = param_6;\n  local_70 = param_4;\n  local_68 = param_5;\n  parse_threshold_rule(&local_d0,param_4,param_5);\n  __n = local_c0;\n  __s2 = local_c8;\n  ppuVar2 = local_d0;\n  if (local_c0 == (undefined8 **)0x0) {\n    local_88 = &local_70;\n    local_80 = <&T_as_core::fmt::Display>::fmt;\n    local_d0 = &PTR_DAT_005a8798;\n    local_c8 = &DAT_00000001;\n    local_b0 = 0;\n    local_c0 = &local_88;\n    local_b8 = 1;\n    alloc::fmt::format::format_inner(&local_60,&local_d0);\n    param_1[2] = local_50;\n    *(undefined4 *)param_1 = local_60;\n    *(undefined4 *)((long)param_1 + 4) = uStack_5c;\n    *(undefined4 *)(param_1 + 1) = uStack_58;\n    *(undefined4 *)((long)param_1 + 0xc) = uStack_54;\n    puVar1 = param_1;\n  }\n  else {\n    local_a0 = param_1;\n    if (param_3 != 0) {\n      local_90 = param_7 + local_98 + param_8;\n      local_78 = param_3 * 0x10;\n      param_3 = param_3 * 0x30;\n      lVar10 = param_2;\n      do {\n        parse_threshold_rule(&local_d0,*(undefined8 *)(lVar10 + 8),*(undefined8 *)(lVar10 + 0x10));\n        puVar4 = local_c8;\n        ppuVar3 = local_d0;\n        if ((local_c0 == (undefined8 **)0x0) || (local_c0 != __n)) {\nLAB_0020ad27:\n          if (ppuVar3 != (undefined **)0x0) {\n            __rust_dealloc(puVar4,ppuVar3,1);\n          }\n        }\n        else {\n          bVar6 = (byte)local_b8;\n          iVar8 = bcmp(local_c8,__s2,(size_t)__n);\n          if (iVar8 != 0) goto LAB_0020ad27;\n          if (ppuVar3 != (undefined **)0x0) {\n            __rust_dealloc(puVar4,ppuVar3,1);\n          }\n          if ((bVar6 == 2) || (((0x42680 < local_90 ^ bVar6) & 1) == 0)) goto LAB_0020af8a;\n        }\n        lVar10 = lVar10 + 0x30;\n        param_3 = param_3 + -0x30;\n      } while (param_3 != 0);\n      lVar9 = local_78 * 3;\n      do {\n        parse_threshold_rule(&local_d0,*(undefined8 *)(param_2 + 8),*(undefined8 *)(param_2 + 0x10))\n        ;\n        ppuVar5 = local_c0;\n        puVar4 = local_c8;\n        ppuVar3 = local_d0;\n        if (local_c0 == (undefined8 **)0x0) {\nLAB_0020aec0:\n          if (ppuVar3 != (undefined **)0x0) {\n            __rust_dealloc(puVar4,ppuVar3,1);\n          }\n        }\n        else {\n          bVar6 = (byte)local_b8;\n          cVar7 = <&str_as_core::str::pattern::Pattern>::is_contained_in(local_c8,local_c0,__s2,__n)\n          ;\n          if ((cVar7 == '\\0') &&\n             (cVar7 = <&str_as_core::str::pattern::Pattern>::is_contained_in\n                                (__s2,__n,puVar4,ppuVar5), cVar7 == '\\0')) goto LAB_0020aec0;\n          if (ppuVar3 != (undefined **)0x0) {\n            __rust_dealloc(puVar4,ppuVar3,1);\n          }\n          lVar10 = param_2;\n          if ((bVar6 == 2) || (((0x42680 < local_90 ^ bVar6) & 1) == 0)) goto LAB_0020af8a;\n        }\n        param_2 = param_2 + 0x30;\n        lVar9 = lVar9 + -0x30;\n      } while (lVar9 != 0);\n    }\n    local_88 = &local_70;\n    local_80 = <&T_as_core::fmt::Display>::fmt;\n    local_d0 = &PTR_DAT_005a87a8;\n    local_c8 = &DAT_00000001;\n    local_b0 = 0;\n    local_c0 = &local_88;\n    local_b8 = 1;\n    alloc::fmt::format::format_inner(&local_48,&local_d0);\n    local_a0[2] = local_38;\n    *(undefined4 *)local_a0 = local_48;\n    *(undefined4 *)((long)local_a0 + 4) = uStack_44;\n    *(undefined4 *)(local_a0 + 1) = uStack_40;\n    *(undefined4 *)((long)local_a0 + 0xc) = uStack_3c;\n    puVar1 = local_a0;\n  }\njoined_r0x0020adf0:\n  if (ppuVar2 != (undefined **)0x0) {\n    __rust_dealloc(__s2,ppuVar2,1);\n  }\n  return puVar1;\nLAB_0020af8a:\n  local_a0[1] = ((((double)CONCAT44(0x45300000,(int)((ulong)param_7 >> 0x20)) -\n                  1.9342813113834067e+25) +\n                 ((double)CONCAT44(0x43300000,(int)param_7) - 4503599627370496.0)) / 1000000.0) *\n                *(double *)(lVar10 + 0x28) +\n                ((((double)CONCAT44(0x45300000,(int)((ulong)param_8 >> 0x20)) -\n                  1.9342813113834067e+25) +\n                 ((double)CONCAT44(0x43300000,(int)param_8) - 4503599627370496.0)) / 1000000.0) *\n                *(double *)(lVar10 + 0x20) +\n                ((((double)CONCAT44(0x45300000,(int)((ulong)local_98 >> 0x20)) -\n                  1.9342813113834067e+25) +\n                 ((double)CONCAT44(0x43300000,(int)local_98) - 4503599627370496.0)) / 1000000.0) *\n                *(double *)(lVar10 + 0x18);\n  *local_a0 = 0x8000000000000000;\n  puVar1 = local_a0;\n  goto joined_r0x0020adf0;\n}\n\n",
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Pseudocode is Ghidra decompiler output, not original source and not text-equivalent to Hopper output.",
+      "External functions and functions without an analyzable body return null; other decompiler failures remain explicit."
+    ]
+  },
+  {
+    "tool": "procedure_callers",
+    "arguments": {
+      "procedure": "0x20ac30"
+    },
+    "elapsed_ms": 6,
+    "evidence_id": "ev_24b74ed72d3de8c71d0cbd8c9b40762dc9d6c25650bd424eed4eb6e68baab1a7",
+    "operation": "procedure_callers",
+    "normalized_result": [
+      "0x1d6fa0",
+      "0x1fbe50",
+      "0x25233e",
+      "0x254d64"
+    ],
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>."
+    ]
+  },
+  {
+    "tool": "procedure_callees",
+    "arguments": {
+      "procedure": "0x1732f0"
+    },
+    "elapsed_ms": 47,
+    "evidence_id": "ev_a9f5186fa93b5d9efe3b63be3818fe9cab78eec30669b454c7a941fc1ed0bf58",
+    "operation": "procedure_callees",
+    "normalized_result": [
+      "0x149840",
+      "0x155d07",
+      "0x155da0",
+      "0x155e00",
+      "0x1579f0",
+      "0x157b00",
+      "0x157bf0",
+      "0x157ce0",
+      "0x157f90",
+      "0x158db0",
+      "0x159940",
+      "0x159f50",
+      "0x15a090",
+      "0x15bbb0",
+      "0x15bd00",
+      "0x15bde0",
+      "0x15bfa0",
+      "0x15dfd0",
+      "0x1610a0",
+      "0x161550",
+      "0x167bf0",
+      "0x1ae5f0",
+      "0x1ce140",
+      "0x1ce680",
+      "0x204860",
+      "0x204d00",
+      "0x212cc0",
+      "0x234f40",
+      "0x235280",
+      "0x237d70",
+      "0x250400",
+      "0x25adb0",
+      "0x25b180",
+      "0x25b830",
+      "0x25b8e0",
+      "0x261400",
+      "0x2655a0",
+      "0x268690",
+      "0x269240",
+      "0x287ea0",
+      "0x287eb0",
+      "0x290800",
+      "0x292250",
+      "0x2b2900",
+      "0x41f0e0",
+      "0x498090",
+      "0x4987d0",
+      "0x49a950",
+      "0x49d180",
+      "0x49d660",
+      "0x49d7f0",
+      "0x49d990",
+      "0x49e540",
+      "0x49e550",
+      "0x4a19f0",
+      "0x4a87f0",
+      "0x4a8d70",
+      "0x4bfa90",
+      "0x4c0ba0",
+      "0x4ca890",
+      "0x5ce538"
+    ],
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>."
+    ]
+  },
+  {
+    "tool": "procedure_callers",
+    "arguments": {
+      "procedure": "0x1732f0"
+    },
+    "elapsed_ms": 7,
+    "evidence_id": "ev_fdde41c4d35d1443da76d130e97db80893c24821b178d2698d9d90b989c8071d",
+    "operation": "procedure_callers",
+    "normalized_result": [
+      "0x1bc780",
+      "0x1bcf10",
+      "0x1cb270"
+    ],
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>."
+    ]
+  },
+  {
+    "tool": "search_strings",
+    "arguments": {
+      "pattern": "sync_state"
+    },
+    "elapsed_ms": 168,
+    "evidence_id": "ev_d5d31a957d0c69ab1bafffad428f49a93e01ccaac27f072565e71902de61de5e",
+    "operation": "search_strings",
+    "normalized_result": [
+      {
+        "address": "0x4d2947",
+        "value": "CREATE TABLE IF NOT EXISTS sync_state (\n            filename TEXT PRIMARY KEY,\n            last_synced_size INTEGER NOT NULL,\n            last_synced_time INTEGER NOT NULL\n        )"
+      }
+    ],
+    "limitations": [
+      "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+      "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+      "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Only Ghidra-defined string Data is observed; packed or undefined string bytes may be absent. Completeness applies to that inventory, and an empty search does not establish that text is absent from the artifact. If an address is known, use read_bytes and xrefs to inspect bytes and references.",
+      "Regex mode uses Java Pattern semantics. Matcher or compiler stack exhaustion returns a resource constraint without closing the session; literal mode avoids regex recursion and returns complete matching values."
+    ]
+  },
+  {
+    "tool": "close_binary",
+    "arguments": {},
+    "elapsed_ms": 730,
+    "evidence_id": null,
+    "operation": null,
+    "normalized_result": null,
+    "limitations": null
+  }
+]

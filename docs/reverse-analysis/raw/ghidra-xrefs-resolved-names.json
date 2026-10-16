@@ -1,0 +1,280 @@
+{
+  "callers of calculate_cost @0x20ac30": [
+    {
+      "ghidra_address": "0x1d6fa0",
+      "symbol_from_elf_symtab": "<F as axum::handler::Handler<(M,T1),S>>::call::{{closure}}"
+    },
+    {
+      "ghidra_address": "0x1fbe50",
+      "symbol_from_elf_symtab": "joker_token_usage_insights::handlers::monthly::get_monthly_details::{{closure}}"
+    },
+    {
+      "ghidra_address": "0x25233e",
+      "symbol_from_elf_symtab": "joker_token_usage_insights::handlers::yearly::get_yearly_details::{{closure}} (+0x5e)"
+    },
+    {
+      "ghidra_address": "0x254d64",
+      "symbol_from_elf_symtab": "joker_token_usage_insights::handlers::yearly::get_yearly_details::{{closure}} (+0x2a84)"
+    }
+  ],
+  "callers of sync_usage_logs @0x1732f0": [
+    {
+      "ghidra_address": "0x1bc780",
+      "symbol_from_elf_symtab": "<tokio::runtime::blocking::task::BlockingTask<T> as core::future::future::Future>::poll"
+    },
+    {
+      "ghidra_address": "0x1bcf10",
+      "symbol_from_elf_symtab": "<tokio::runtime::blocking::task::BlockingTask<T> as core::future::future::Future>::poll"
+    },
+    {
+      "ghidra_address": "0x1cb270",
+      "symbol_from_elf_symtab": "<F as axum::handler::Handler<(M,T1,T2),S>>::call::{{closure}}"
+    }
+  ],
+  "callees of sync_usage_logs @0x1732f0": [
+    {
+      "ghidra_address": "0x149840",
+      "symbol_from_elf_symtab": "hashbrown::raw::RawTable<T,A>::reserve_rehash"
+    },
+    {
+      "ghidra_address": "0x155d07",
+      "symbol_from_elf_symtab": "alloc::raw_vec::handle_error"
+    },
+    {
+      "ghidra_address": "0x155da0",
+      "symbol_from_elf_symtab": "core::cell::panic_already_borrowed"
+    },
+    {
+      "ghidra_address": "0x155e00",
+      "symbol_from_elf_symtab": "core::cell::panic_already_mutably_borrowed"
+    },
+    {
+      "ghidra_address": "0x1579f0",
+      "symbol_from_elf_symtab": "core::ptr::drop_in_place<rusqlite::error::Error>"
+    },
+    {
+      "ghidra_address": "0x157b00",
+      "symbol_from_elf_symtab": "core::ptr::drop_in_place<serde_json::error::Error>"
+    },
+    {
+      "ghidra_address": "0x157bf0",
+      "symbol_from_elf_symtab": "core::ptr::drop_in_place<serde_json::value::Value>"
+    },
+    {
+      "ghidra_address": "0x157ce0",
+      "symbol_from_elf_symtab": "core::ptr::drop_in_place<rusqlite::statement::Statement>"
+    },
+    {
+      "ghidra_address": "0x157f90",
+      "symbol_from_elf_symtab": "core::ptr::drop_in_place<rusqlite::transaction::Transaction>"
+    },
+    {
+      "ghidra_address": "0x158db0",
+      "symbol_from_elf_symtab": "core::ptr::drop_in_place<core::result::Result<std::fs::Metadata,std::io::error::Error>>"
+    },
+    {
+      "ghidra_address": "0x159940",
+      "symbol_from_elf_symtab": "alloc::str::<impl str>::replace"
+    },
+    {
+      "ghidra_address": "0x159f50",
+      "symbol_from_elf_symtab": "rusqlite::Connection::execute"
+    },
+    {
+      "ghidra_address": "0x15a090",
+      "symbol_from_elf_symtab": "rusqlite::Connection::execute"
+    },
+    {
+      "ghidra_address": "0x15bbb0",
+      "symbol_from_elf_symtab": "joker_token_usage_insights::db::get_antigravity_dir"
+    },
+    {
+      "ghidra_address": "0x15bd00",
+      "symbol_from_elf_symtab": "joker_token_usage_insights::db::get_copilot_dir"
+    },
+    {
+      "ghidra_address": "0x15bde0",
+      "symbol_from_elf_symtab": "joker_token_usage_insights::db::get_codex_dir"
+    },
+    {
+      "ghidra_address": "0x15bfa0",
+      "symbol_from_elf_symtab": "joker_token_usage_insights::db::get_cursor_dir"
+    },
+    {
+      "ghidra_address": "0x15dfd0",
+      "symbol_from_elf_symtab": "joker_token_usage_insights::db::sync_hook_usage_logs"
+    },
+    {
+      "ghidra_address": "0x1610a0",
+      "symbol_from_elf_symtab": "joker_token_usage_insights::db::find_codex_session_files"
+    },
+    {
+      "ghidra_address": "0x161550",
+      "symbol_from_elf_symtab": "joker_token_usage_insights::db::sync_claude_usage_logs"
+    },
+    {
+      "ghidra_address": "0x167bf0",
+      "symbol_from_elf_symtab": "joker_token_usage_insights::db::sync_cursor_usage_logs"
+    },
+    {
+      "ghidra_address": "0x1ae5f0",
+      "symbol_from_elf_symtab": "hashbrown::map::HashMap<K,V,S,A>::insert"
+    },
+    {
+      "ghidra_address": "0x1ce140",
+      "symbol_from_elf_symtab": "rusqlite::statement::Statement::query_row"
+    },
+    {
+      "ghidra_address": "0x1ce680",
+      "symbol_from_elf_symtab": "rusqlite::statement::Statement::query_row"
+    },
+    {
+      "ghidra_address": "0x204860",
+      "symbol_from_elf_symtab": "alloc::str::join_generic_copy"
+    },
+    {
+      "ghidra_address": "0x204d00",
+      "symbol_from_elf_symtab": "alloc::str::join_generic_copy"
+    },
+    {
+      "ghidra_address": "0x212cc0",
+      "symbol_from_elf_symtab": "serde_json::de::from_trait"
+    },
+    {
+      "ghidra_address": "0x234f40",
+      "symbol_from_elf_symtab": "alloc::raw_vec::RawVec<T,A>::grow_one"
+    },
+    {
+      "ghidra_address": "0x235280",
+      "symbol_from_elf_symtab": "alloc::raw_vec::RawVec<T,A>::grow_one"
+    },
+    {
+      "ghidra_address": "0x237d70",
+      "symbol_from_elf_symtab": "<hashbrown::raw::RawIntoIter<T,A> as core::ops::drop::Drop>::drop"
+    },
+    {
+      "ghidra_address": "0x250400",
+      "symbol_from_elf_symtab": "<std::io::Lines<B> as core::iter::traits::iterator::Iterator>::next"
+    },
+    {
+      "ghidra_address": "0x25adb0",
+      "symbol_from_elf_symtab": "<alloc::vec::Vec<T,A> as core::ops::drop::Drop>::drop"
+    },
+    {
+      "ghidra_address": "0x25b180",
+      "symbol_from_elf_symtab": "<alloc::vec::Vec<T,A> as core::ops::drop::Drop>::drop"
+    },
+    {
+      "ghidra_address": "0x25b830",
+      "symbol_from_elf_symtab": "<alloc::vec::into_iter::IntoIter<T,A> as core::ops::drop::Drop>::drop"
+    },
+    {
+      "ghidra_address": "0x25b8e0",
+      "symbol_from_elf_symtab": "<alloc::vec::into_iter::IntoIter<T,A> as core::ops::drop::Drop>::drop"
+    },
+    {
+      "ghidra_address": "0x261400",
+      "symbol_from_elf_symtab": "<alloc::vec::Vec<T> as alloc::vec::spec_from_iter::SpecFromIter<T,I>>::from_iter"
+    },
+    {
+      "ghidra_address": "0x2655a0",
+      "symbol_from_elf_symtab": "core::str::<impl str>::trim_matches"
+    },
+    {
+      "ghidra_address": "0x268690",
+      "symbol_from_elf_symtab": "<core::str::pattern::StrSearcher as core::str::pattern::Searcher>::next"
+    },
+    {
+      "ghidra_address": "0x269240",
+      "symbol_from_elf_symtab": "<alloc::string::String as core::iter::traits::collect::FromIterator<char>>::from_iter"
+    },
+    {
+      "ghidra_address": "0x287ea0",
+      "symbol_from_elf_symtab": "__rust_alloc"
+    },
+    {
+      "ghidra_address": "0x287eb0",
+      "symbol_from_elf_symtab": "__rust_dealloc"
+    },
+    {
+      "ghidra_address": "0x290800",
+      "symbol_from_elf_symtab": "rusqlite::Connection::execute_batch"
+    },
+    {
+      "ghidra_address": "0x292250",
+      "symbol_from_elf_symtab": "rusqlite::inner_connection::InnerConnection::prepare"
+    },
+    {
+      "ghidra_address": "0x2b2900",
+      "symbol_from_elf_symtab": "sqlite3_get_autocommit"
+    },
+    {
+      "ghidra_address": "0x41f0e0",
+      "symbol_from_elf_symtab": "<str as serde_json::value::index::Index>::index_into"
+    },
+    {
+      "ghidra_address": "0x498090",
+      "symbol_from_elf_symtab": "std::sys::os_str::bytes::Slice::to_str"
+    },
+    {
+      "ghidra_address": "0x4987d0",
+      "symbol_from_elf_symtab": "std::fs::OpenOptions::_open"
+    },
+    {
+      "ghidra_address": "0x49a950",
+      "symbol_from_elf_symtab": "std::io::stdio::_eprint"
+    },
+    {
+      "ghidra_address": "0x49d180",
+      "symbol_from_elf_symtab": "std::path::Path::_strip_prefix"
+    },
+    {
+      "ghidra_address": "0x49d660",
+      "symbol_from_elf_symtab": "std::path::Path::file_stem"
+    },
+    {
+      "ghidra_address": "0x49d7f0",
+      "symbol_from_elf_symtab": "std::path::Path::_join"
+    },
+    {
+      "ghidra_address": "0x49d990",
+      "symbol_from_elf_symtab": "std::path::Path::components"
+    },
+    {
+      "ghidra_address": "0x49e540",
+      "symbol_from_elf_symtab": "std::time::SystemTime::now"
+    },
+    {
+      "ghidra_address": "0x49e550",
+      "symbol_from_elf_symtab": "std::time::SystemTime::duration_since"
+    },
+    {
+      "ghidra_address": "0x4a19f0",
+      "symbol_from_elf_symtab": "std::sys::pal::unix::fs::stat"
+    },
+    {
+      "ghidra_address": "0x4a87f0",
+      "symbol_from_elf_symtab": "std::sys::os_str::bytes::Slice::to_string_lossy"
+    },
+    {
+      "ghidra_address": "0x4a8d70",
+      "symbol_from_elf_symtab": "std::sys::random::linux::hashmap_random_keys"
+    },
+    {
+      "ghidra_address": "0x4bfa90",
+      "symbol_from_elf_symtab": "alloc::fmt::format::format_inner"
+    },
+    {
+      "ghidra_address": "0x4c0ba0",
+      "symbol_from_elf_symtab": "<alloc::string::String as core::clone::Clone>::clone"
+    },
+    {
+      "ghidra_address": "0x4ca890",
+      "symbol_from_elf_symtab": "core::str::pattern::StrSearcher::new"
+    },
+    {
+      "ghidra_address": "0x5ce538",
+      "symbol_from_elf_symtab": "?"
+    }
+  ]
+}
